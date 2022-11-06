@@ -10,7 +10,7 @@
 
   <div class="field">
     <%= f.label :"お住まいの地域" %><br />
-    <%= f.select :prefecture_id, Prefecture.all.select(:name) %>
+    <%= f.select :prefecture_id, Prefecture.pluck(:name, :id) %>
   </div>
 
   <div class="field">
