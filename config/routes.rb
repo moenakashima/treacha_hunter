@@ -3,6 +3,11 @@ Rails.application.routes.draw do
 # ルートパス
 root :to =>"public/homes#top"
 
+scope module: :public do
+  resources :users, only:[:index, :show, :edit, :update]
+end
+
+
 # ユーザー用
 # URL /users/sign_in ...
 devise_for :users, skip: [:passwords], controllers: {

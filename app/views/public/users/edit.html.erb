@@ -1,0 +1,22 @@
+<h1>ユーザー編集画面</h1>
+<%= form_with model: @user, url: edit_user_path(@user) do |user| %>
+
+  <div class="field">
+    <%= user.label :"ユーザーネーム" %><br />
+    <%= user.text_field :name, autofocus: true, autocomplete: "name" %>
+  </div>
+
+  <div class="field">
+    <%= user.label :"お住まいの地域" %><br />
+    <%= user.select :prefecture_id, Prefecture.pluck(:name, :id) %>
+  </div>
+
+  <div class="field">
+    <%= user.label :email %><br />
+    <%= user.email_field :email, autocomplete: "email" %>
+  </div>
+
+  <div class="actions">
+    <%= user.submit "update" %>
+  </div>
+<% end %>
