@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2022_11_06_024531) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name", null: false
-    t.integer "prefecture", null: false
+    t.integer "prefecture_id", null: false
     t.string "introduction"
     t.boolean "is_active", default: true, null: false
     t.index ["email"], name: "index_users_on_email", unique: true

@@ -37,7 +37,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       
       # ユーザーネーム、お住まいの都道府県、自己紹介
       t.string :name, null: false
-      t.integer :prefecture, null: false
+      t.integer :prefecture_id, null: false
       t.string :introduction
       
       # ユーザーステータスの設定
