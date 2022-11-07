@@ -8,6 +8,8 @@ class User < ApplicationRecord
 
   has_one_attached :profile_image
 
+  has_many :teas, dependent: :destroy
+
   # 名前、メールアドレス、都道府県、自己紹介にバリデーションを設定
   validates :name, presence: true, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :email, presence: true
