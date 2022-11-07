@@ -22,10 +22,11 @@ class Admin::TeaTypesController < ApplicationController
 
   def update
     @tea_type = TeaType.find(params[:id])
-
-      @tea_type = TeaType.update(tea_type_params)
-
-    redirect_to admin_tea_types_path
+    if @tea_type.update(tea_type_params)
+      redirect_to admin_tea_types_path
+    else
+      render :edit
+    end
   end
 
   def destroy
