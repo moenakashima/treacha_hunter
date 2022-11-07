@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_07_081551) do
+ActiveRecord::Schema.define(version: 2022_11_07_125536) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -60,6 +60,18 @@ ActiveRecord::Schema.define(version: 2022_11_07_081551) do
 
   create_table "tea_types", force: :cascade do |t|
     t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "teas", force: :cascade do |t|
+    t.integer "tea_type_id"
+    t.integer "user_id"
+    t.integer "prefecture_id"
+    t.string "product_name"
+    t.string "seller"
+    t.string "parchased_at"
+    t.text "opinion"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
