@@ -1,2 +1,13 @@
-<h1>Admin::TeaTypes#edit</h1>
-<p>Find me in app/views/admin/tea_types/edit.html.erb</p>
+<h1>お茶の種類編集画面</h1>
+<%= render 'layouts/errors', obj: @tea_type %>
+<%= form_with model: @tea_type, url: admin_tea_type_path(@tea_type) do |form| %>
+
+  <div class="field">
+    <%= form.text_field :name, autofocus: true, autocomplete: "name" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "変更を保存する", class: "btn btn-success" %>
+  </div>
+
+<% end %>

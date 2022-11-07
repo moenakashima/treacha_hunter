@@ -22,7 +22,8 @@ class Admin::TeaTypesController < ApplicationController
 
   def update
     @tea_type = TeaType.find(params[:id])
-    @tea_type = TeaType.update(tea_type_params)
+
+      @tea_type = TeaType.update(tea_type_params)
 
     redirect_to admin_tea_types_path
   end

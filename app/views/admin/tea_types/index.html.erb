@@ -16,7 +16,7 @@
     <tr>
       <td><%= tea_type.name %></td>
       <td><%= link_to "編集する", edit_admin_tea_type_path(tea_type) %></td>
-      <td><%= link_to "削除する", admin_tea_type_path(tea_type) %></td>
+      <td><%= link_to "削除する", admin_tea_type_path(tea_type), method: :delete, data: {confirm: "本当に削除しますか？"} %></td>
     </tr>
     <% end %>
   </tbody>
