@@ -1,0 +1,2 @@
+module Public::TeasHelper
+end

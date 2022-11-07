@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  namespace :public do
+    get 'teas/new'
+    get 'teas/index'
+  end
 # ルートパス
 root :to =>"public/homes#top"
 
