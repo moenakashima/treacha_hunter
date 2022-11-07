@@ -1,22 +1,33 @@
 <h1>ユーザー編集画面</h1>
-<%= form_with model: @user, url: edit_user_path(@user) do |user| %>
+<%= form_with model: @user, url: user_path(@user) do |form| %>
 
   <div class="field">
-    <%= user.label :"ユーザーネーム" %><br />
-    <%= user.text_field :name, autofocus: true, autocomplete: "name" %>
+    <%= form.label :"ユーザーネーム" %><br />
+    <%= form.text_field :name, autofocus: true, autocomplete: "name" %>
   </div>
 
   <div class="field">
-    <%= user.label :"お住まいの地域" %><br />
-    <%= user.select :prefecture_id, Prefecture.pluck(:name, :id) %>
+    <%= form.label :"お住まいの地域" %><br />
+    <%= form.select :prefecture_id, Prefecture.pluck(:name, :id) %>
   </div>
 
   <div class="field">
-    <%= user.label :email %><br />
-    <%= user.email_field :email, autocomplete: "email" %>
+    <%= form.label :"メールアドレス" %><br />
+    <%= form.email_field :email, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :"プロフィール画像" %><br />
+    <%= form.file_field :profile_image, accept: "image/*" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :"自己紹介" %><br />
+    <%= form.text_area :introduction %>
   </div>
 
   <div class="actions">
-    <%= user.submit "update" %>
+    <%= form.submit "変更を保存する" %>
   </div>
+
 <% end %>
