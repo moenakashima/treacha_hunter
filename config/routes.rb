@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :public do
-    get 'teas/new'
-    get 'teas/index'
-  end
 # ルートパス
 root :to =>"public/homes#top"
 
@@ -31,6 +27,7 @@ end
 # URL /users/...
 scope module: :public do
   resources :users, only:[:index, :show, :edit, :update]
+  resources :teas, only:[:show, :update, :edit, :destroy, :new, :create]
 end
 
 

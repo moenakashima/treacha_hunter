@@ -12,10 +12,13 @@ class Public::TeasController < ApplicationController
   def update
   end
 
-  def index
+  def show
   end
   
   def destroy
   end
+  
+  # def ranking
+  # end
   
 end
