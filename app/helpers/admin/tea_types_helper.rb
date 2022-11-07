@@ -1,0 +1,2 @@
+module Admin::TeaTypesHelper
+end

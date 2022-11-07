@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+    get 'tea_types/index'
+    get 'tea_types/edit'
+  end
 # ルートパス
 root :to =>"public/homes#top"
 
