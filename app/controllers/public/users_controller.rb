@@ -20,7 +20,7 @@ class Public::UsersController < ApplicationController
     end
   end
 
-  private
+  privateapp/javascript/stylesheets
 
   def user_params
     params.require(:user).permit(:name,:email,:prefecture_id,:introduction, :profile_image)
