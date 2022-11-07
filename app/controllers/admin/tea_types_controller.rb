@@ -1,14 +1,18 @@
 class Admin::TeaTypesController < ApplicationController
 
   def create
-    @tea_type = TeaType.new
-    @tea_type.save
-    redirect_to request.referer
-
+    @tea_type = TeaType.new(tea_type_params)
+    if @tea_type.save
+      redirect_to admin_tea_types_path
+    else
+      @tea_types = TeaType.all
+      render :index
+    end
   end
 
   def index
     @tea_types = TeaType.all
+    @tea_type = TeaType.new
   end
 
   def edit
@@ -18,7 +22,8 @@ class Admin::TeaTypesController < ApplicationController
 
   def update
     @tea_type = TeaType.find(params[:id])
-    @tea_type = TeaType.update
+    @tea_type = TeaType.update(tea_type_params)
+
     redirect_to admin_tea_types_path
   end
 
@@ -28,4 +33,8 @@ class Admin::TeaTypesController < ApplicationController
     redirect_to request.referer
   end
 
+  private
+    def tea_type_params
+      params.require(:tea_type).permit(:name)
+    end
 end
