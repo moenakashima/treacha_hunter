@@ -7,13 +7,13 @@ class User < ApplicationRecord
   belongs_to :prefecture
 
   has_one_attached :profile_image
-  
+
   # 名前、メールアドレス、都道府県、自己紹介にバリデーションを設定
   validates :name, presence: true, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :email, presence: true
   validates :prefecture_id, presence: true
   validates :introduction, length: { maximum: 50 }
-  
+
   # プロフィール画像が設定されていない場合にデフォルト画像を表示させる
   def get_profile_image(width, height)
     unless profile_image.attached?
@@ -22,5 +22,5 @@ class User < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
-  
+
 end
