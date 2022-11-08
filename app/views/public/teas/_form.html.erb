@@ -12,12 +12,12 @@
 
 <div class="field">
   <%= form.label:"お茶の種類" %><br />
-  <%= form.select :tea_type_id, TeaType.pluck(:name, :id)%>
+  <%= form.select :tea_type_id, TeaType.pluck(:name, :id), include_blank: true %>
 </div>
 
 <div class="field">
   <%= form.label:"産地" %><br />
-  <%= form.select :prefecture_id, Prefecture.pluck(:name, :id) %>
+  <%= form.select :prefecture_id, Prefecture.pluck(:name, :id), include_blank: true %>
 </div>
 
 <div class="field">
