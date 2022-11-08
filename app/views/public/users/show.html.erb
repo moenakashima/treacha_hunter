@@ -2,22 +2,24 @@
 
 <div class="container px-5 px-sm-0">
   <div class="row">
-    <%= image_tag @user.get_profile_image(100,100) %>
-    <table class="table">
-      <tbody>
-        <tr></tr>
-        <tr>
-          <td><%= @user.name %></td>
-          <td><i class="fas fa-cog"></i></td>
-        </tr>
-        <tr>
-          <td>introduction</td>
-          <td><%= @user.introduction %></td>
-        </tr>
-      </tbody>
-    </table>
-    <!--<= link_to で投稿ボタンを実装予定-->
-    <div>見つけたトレチャーの数</div>
-    <div><%= @user.prefecture.name %>在住</div>
+    <div calss="col-3">
+      <%= image_tag @user.get_profile_image(100,100) %>
+      <table class="table">
+        <tbody>
+          <tr></tr>
+          <tr>
+            <td><%= @user.name %></td>
+            <td><i class="fas fa-cog"></i></td>
+          </tr>
+          <tr>
+            <td>introduction</td>
+            <td><%= @user.introduction %></td>
+          </tr>
+        </tbody>
+      </table>
+      <!--<= link_to で投稿ボタンを実装予定-->
+      <div>見つけたトレチャーの数</div>
+      <div><%= @user.prefecture.name %>在住</div>
+    </div>
   </div>
 </div>
