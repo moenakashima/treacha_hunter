@@ -1,2 +1,64 @@
-<h1>Public::Teas#index</h1>
-<p>Find me in app/views/public/teas/index.html.erb</p>
+<h2>投稿詳細</h2>
+
+
+<div class="container px-5 px-sm-0">
+
+  <div class="row">
+    <div calss="col-5">
+      <%= image_tag @tea.get_tea_image(100,100) %>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td><%= @tea.created_at.strftime('%Y/%m/%d') %></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+　　<div class="col-5">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>お茶の種類</td>
+            <td><%= @tea.tea_type_id %></td>
+          </tr>
+
+          <tr>
+            <td>産地</td>
+            <td><%= @tea.prefecture_id %></td>
+          </tr>
+          <tr>
+            <td>商品名</td>
+            <td><%= @tea.product_name %></td>
+          </tr>
+          <tr>
+            <td>販売者</td>
+            <td><%= @tea.seller %></td>
+          </tr>
+          <tr>
+            <td>購入場所</td>
+            <td><%= @tea.parchased_at %></td>
+          </tr>
+          <tr>
+            <td>タグ</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-10">
+       <table class="table">
+        <tbody>
+          <tr>
+            <td><%= @tea.opinion %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
