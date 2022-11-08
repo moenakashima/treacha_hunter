@@ -1,47 +1,47 @@
 <%= form_with model: tea do |form| %>
 
-<dix class="field">
+<div class="field">
   <%= form.label:"投稿画像" %><br />
   <%= form.file_field :tea_image, accept: "image/*" %>
-</dix>
+</div>
 
-<dix class="field">
+<div class="field">
   <%= form.label:"商品名" %><br />
   <%= form.text_field :product_name %>
-</dix>
+</div>
 
-<dix class="field">
+<div class="field">
   <%= form.label:"お茶の種類" %><br />
   <%= form.select :tea_type_id, TeaType.pluck(:name, :id)%>
-</dix>
+</div>
 
-<dix class="field">
+<div class="field">
   <%= form.label:"産地" %><br />
   <%= form.select :prefecture_id, Prefecture.pluck(:name, :id) %>
-</dix>
+</div>
 
-<dix class="field">
+<div class="field">
   <%= form.label:"販売者" %><br />
   <%= form.text_field :seller %>
-</dix>
+</dic>
 
-<dix class="field">
+<div class="field">
   <%= form.label:"購入場所" %><br />
   <%= form.text_field :parchased_at %>
-</dix>
+</div>
 
 <!--<dix class="field">-->
 <!--  <= form.label:"タグ（複数タグOK）" %><br />-->
 <!--  <= form.text_field :tea_tag %>-->
 <!--</dix>-->
 
-<dix class="field">
+<div class="field">
   <%= form.label:"投稿文（おすすめの淹れ方、楽しみ方など）" %><br />
   <%= form.text_area :opinion %>
-</dix>
+</div>
 
-<dix class="field">
+<div class="field">
   <%= form.submit %>
-</dix>
+</div>
 
 <% end %>
