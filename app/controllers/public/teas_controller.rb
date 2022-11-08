@@ -32,6 +32,9 @@ class Public::TeasController < ApplicationController
   end
 
   def destroy
+    @tea = Tea.find(params[:id])
+    @tea.destroy
+    redirect_to user_path(@tea.user)
   end
 
   # def ranking

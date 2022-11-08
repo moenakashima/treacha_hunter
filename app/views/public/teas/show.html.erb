@@ -43,9 +43,18 @@
             <td><%= @tea.parchased_at %></td>
           </tr>
           <tr>
-            <td>タグ</td>
+            <td>#タグ</td>
             <td></td>
           </tr>
+
+         <% if @tea.user_id == current_user.id %>
+          <tr>
+            <td><%= link_to "編集する", edit_tea_path(@tea) %> </td>
+            <td><%= link_to "削除する", tea_path(@tea), method: :delete, data: {confirm: "本当に削除しますか？"} %> </td>
+          </tr>
+        <% else %>
+        <% end %>
+
         </tbody>
       </table>
     </div>
