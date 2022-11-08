@@ -15,9 +15,16 @@ class Public::TeasController < ApplicationController
   end
 
   def edit
+    @tea = Tea.find(params[:id])
   end
 
   def update
+    @tea = Tea.find(params[:id])
+    if @tea.update(tea_params)
+      redirect_to tea_path(@tea)
+    else
+      render :edit
+    end
   end
 
   def show
