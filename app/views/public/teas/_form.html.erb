@@ -30,10 +30,11 @@
   <%= form.text_field :parchased_at %>
 </div>
 
-<!--<dix class="field">-->
-<!--  <= form.label:"タグ（複数タグOK）" %><br />-->
-<!--  <= form.text_field :tea_tag %>-->
-<!--</dix>-->
+<div class="field">
+  <%= form.label:"タグ (,で区切ると複数タグ登録できます)" %>
+  <%= form.text_field :name, value: @tag_list %>
+</div>
+
 
 <div class="field">
   <%= form.label:"投稿文（おすすめの淹れ方、楽しみ方など）" %><br />

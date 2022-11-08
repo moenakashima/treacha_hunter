@@ -68,7 +68,11 @@
           </tr>
           <tr>
             <td>#タグ</td>
-            <td></td>
+            <td>
+              <% @tea_tags.each do |tag| %>
+              <%= "#" %><%= tag.name %>
+              <% end %>
+            </td>
           </tr>
 
          <% if @tea.user_id == current_user.id %>
