@@ -4,11 +4,35 @@
 <div class="container px-5 px-sm-0">
 
   <div class="row">
-    <div class="col-5">
+    <div class="col-2">
+      <table class="table">
+        <tbody>
+          <tr><%= image_tag @tea.user.get_profile_image(100,100) %></tr>
+          <tr>
+            <td>
+              <%= link_to user_path(@tea.user) do %>
+                <%= @tea.user.name %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <th>introduction</th>
+          </tr>
+          <tr>
+            <td><%= @tea.user.introduction %></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row">
+        <%= link_to "HOMEに戻る", root_path %>
+      </div>
+    </div>
+
+    <div class="col-4">
       <table class="table">
         <tbody>
           <tr>
-              <%= image_tag @tea.get_tea_image(500,500) %>
+              <%= image_tag @tea.get_tea_image(400,400) %>
           </tr>
           <tr>
             <td><%= @tea.created_at.strftime('%Y/%m/%d') %></td>
@@ -18,7 +42,7 @@
       </table>
     </div>
 
-　　<div class="col-5">
+　　<div class="col-4">
       <table class="table">
         <tbody>
           <tr>
