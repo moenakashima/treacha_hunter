@@ -31,14 +31,14 @@
 </div>
 
 <div class="field">
-  <%= form.label:"タグ (,で区切ると複数タグ登録できます)" %>
-  <%= form.text_field :name, value: @tag_list %>
+  <%= form.label:"タグ (,で区切ると複数タグ登録できます)" %><br />
+  <%= form.text_area :name, value: @tag_list, :placeholder => "新茶2022,八女茶,深蒸し茶" %>
 </div>
 
 
 <div class="field">
-  <%= form.label:"投稿文（おすすめの淹れ方、楽しみ方など）" %><br />
-  <%= form.text_area :opinion %>
+  <%= form.label:"投稿文" %><br />
+  <%= form.text_area :opinion, :placeholder => "例）おすすめの淹れ方、味の感想、生産者について" %>
 </div>
 
 <div class="field">
