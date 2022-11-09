@@ -61,3 +61,15 @@
 # Prefecture.create(name: '宮崎')
 # Prefecture.create(name: '鹿児島')
 # Prefecture.create(name: '沖縄')
+
+# ジャンルのデータ追加
+# TeaType.create(name: '　')
+# TeaType.create(name: '玉露')
+# TeaType.create(name: 'かぶせ煎茶')
+# TeaType.create(name: '煎茶')
+# TeaType.create(name: '玉緑茶')
+# TeaType.create(name: '釜炒り茶')
+# TeaType.create(name: 'ほうじ茶')
+# TeaType.create(name: '玄米茶')
+# TeaType.create(name: '和紅茶')
+# TeaType.create(name: '白茶')
