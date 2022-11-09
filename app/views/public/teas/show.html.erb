@@ -70,7 +70,10 @@
             <td>#タグ</td>
             <td>
               <% @tea_tags.each do |tag| %>
-              <%= "#" %><%= tag.name %>
+                <%= link_to tag_teas_path(tag_id: tag.id) do %>
+                <%= "#" %><%= tag.name %>
+                <% end %>
+                <%= "" %>
               <% end %>
             </td>
           </tr>
