@@ -34,11 +34,17 @@ end
 # URL /users/...
 scope module: :public do
   resources :users, only:[:index, :show, :edit, :update]
-  resources :teas, only:[:show, :update, :edit, :destroy, :new, :create] 
+  resources :teas, only:[:show, :update, :edit, :destroy, :new, :create] do
+      resource :favorites, only:[:create, :destroy]
+      
+  end
+  
   # タグ検索
   #タグによって絞り込んだ投稿を表示するアクションへのルーティング
   get '/tag/teas', to: 'teas#search_tag'
   get '/search' => "searches#search"
+  
+
 end
 
   
