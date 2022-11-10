@@ -48,4 +48,12 @@ def save_tag(sent_tags)
  end
 end
 
+def self.search(search)
+  if search != nil
+    Tea.where('product_name LIKE(?) or opinion LIKE(?)' , "%#{search}%",  "%#{search}%")
+  else
+    Tea.all
+  end
+end
+
 end

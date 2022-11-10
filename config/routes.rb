@@ -32,8 +32,7 @@ scope module: :public do
   # タグ検索
   #タグによって絞り込んだ投稿を表示するアクションへのルーティング
   get '/tag/teas', to: 'teas#search_tag'
-
-  
+  get '/search' => "searches#search"
 end
 
   
