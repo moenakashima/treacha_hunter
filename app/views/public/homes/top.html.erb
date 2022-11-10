@@ -19,7 +19,9 @@
           <%= tea.user.name %>
           <% end %>
         </td>
-        <td></td>
+        <td id="favorite-<%= tea.id %>">
+          <%= render "public/favorites/favorite", tea: tea %>
+        </td>
       </tr>
 
       <tr>
