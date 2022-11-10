@@ -45,6 +45,8 @@ class Public::TeasController < ApplicationController
   def show
     @tea = Tea.find(params[:id])
     @tea_tags = @tea.tags
+    @tea_comment = TeaComment.new
+    @tea_comments = TeaComment.all
   end
 
   def destroy
