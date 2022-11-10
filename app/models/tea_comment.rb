@@ -1,0 +1,2 @@
+class TeaComment < ApplicationRecord
+end
