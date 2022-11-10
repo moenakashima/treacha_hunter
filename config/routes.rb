@@ -36,6 +36,7 @@ scope module: :public do
   resources :users, only:[:index, :show, :edit, :update]
   resources :teas, only:[:show, :update, :edit, :destroy, :new, :create] do
       resource :favorites, only:[:create, :destroy]
+      resources :tea_comments, only:[:create, :destroy]
       
   end
   
