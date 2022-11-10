@@ -11,6 +11,9 @@ has_many :tea_comments
 has_many :tea_tags, dependent: :destroy
 has_many :tags, through: :tea_tags
 
+# いいね機能
+has_many :favorites, dependent: :destroy
+
 has_one_attached :tea_image
 
 # 感想、商品名、お茶の種類にバリデーションを設定
