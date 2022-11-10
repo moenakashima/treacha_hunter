@@ -16,6 +16,7 @@
   </head>
 
   <body>
+    <p id="notice"><%= notice %></p>
     <div class="d-flex justify-content-center mb-2">
     <% if user_signed_in? %>
       <%= form_with url: search_path, method: :get, local: :true do |f| %>
