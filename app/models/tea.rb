@@ -13,6 +13,8 @@ class Tea < ApplicationRecord
   
   # いいね機能
   has_many :favorites, dependent: :destroy
+  # コメント機能
+  has_many :tea_comments, dependent: :destroy
   
   has_one_attached :tea_image
   

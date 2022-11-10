@@ -12,6 +12,8 @@ class User < ApplicationRecord
   
   # いいね機能
   has_many :favorites, dependent: :destroy
+  # コメント機能
+  has_many :tea_comments, dependent: :destroy
 
   # 名前、メールアドレス、都道府県、自己紹介にバリデーションを設定
   validates :name, presence: true, length: { minimum: 2, maximum: 20 }, uniqueness: true
