@@ -31,9 +31,8 @@ scope module: :public do
   resources :teas, only:[:show, :update, :edit, :destroy, :new, :create] 
   # タグ検索
   #タグによって絞り込んだ投稿を表示するアクションへのルーティング
-  resources :tags, only:[:search_tag] do
-    get 'teas', to: 'teas#search_tag'
-  end
+  get '/tag/teas', to: 'teas#search_tag'
+
   
 end
 

@@ -1,21 +1,22 @@
 <div class="container">
-<h5>タグ<%= @tag.name %>を含む投稿一覧</h5>
-
-<!--タグリスト-->
-<% @tag_list.each do |list|%>
-<%=link_to list.name, tag_teas_path(tag_id: list.id) %>
-<%="(#{list.teas.count})" %><% end %>
-<% @teas.each do |tea| %>
-<!--投稿はカードで囲む-->
-<div class="card">
-  <div class="card-body">
-    <h6 class="card-title">
-      <%= image_tag tea.get_tea_image(100,100) %>
-      <%= tea.prefecture.name %>
-      <%= link_to tea_path(tea.id) do %><%= tea.opinion %>
-      <% end %>
-    </h6>
+  <h5>タグ<%= @tag.name %>を含む投稿一覧</h5>
+  
+  <!--タグリスト-->
+  <% @tag_list.each do |list|%>
+  <%=link_to list.name, tag_teas_path(tag_id: list.id) %>
+  <%="(#{list.teas.count})" %><% end %>
+  <% @teas.each do |tea| %>
+  <!--投稿はカードで囲む-->
+  <div class="card">
+    <div class="card-body">
+      <h6 class="card-title">
+        <%= image_tag tea.get_tea_image(100,100) %>
+        <%= tea.prefecture.name %>
+        <%= link_to tea_path(tea.id) do %><%= tea.opinion %>
+        <% end %>
+      </h6>
+    </div>
   </div>
-</div>
-<% end %>
+  <% end %>
+  <%= link_to "Homeに戻る", root_path %>
 </div>
