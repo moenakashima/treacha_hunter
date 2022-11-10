@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 # ルートパス
 root :to =>"public/homes#top"
 
+get "/about" => "public/homes#about"
+
 
 # ユーザー用devise
 # URL /users/sign_in ...
