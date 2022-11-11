@@ -33,11 +33,13 @@ end
 # ユーザー用
 # URL /users/...
 scope module: :public do
-  resources :users, only:[:index, :show, :edit, :update]
+  resources :users, only:[:index, :show, :edit, :update, :favorite] do
+    get "/favorites" => "users#favorite"
+  end
   resources :teas, only:[:show, :update, :edit, :destroy, :new, :create] do
-      resource :favorites, only:[:create, :destroy]
-      resources :tea_comments, only:[:create, :destroy]
-      
+    resource :favorites, only:[:create, :destroy]
+    resources :tea_comments, only:[:create, :destroy]
+    
   end
   
   # タグ検索
