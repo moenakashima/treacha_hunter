@@ -9,11 +9,11 @@
           <tr>
             <td><%= @user.name %></td>
             <td><i class="fas fa-cog"></i></td>
-            <td><%= link_to "お気に入りリスト", </td>
+            <td><%= link_to "お気に入りリスト", user_favorites_path(@user), class: "btn btn-outline-secondary" %></td>
             <td>
               <% if @user.name != "guestuser" %>
                 <div class='row'>
-                <%= link_to '会員情報編集',edit_user_path(@user),class: "btn btn-outline-secondary" %>
+                <%= link_to '会員情報編集',edit_user_path(@user), class: "btn btn-outline-secondary" %>
                 </div>
               <% end %>
             </td>
