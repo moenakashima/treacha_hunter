@@ -1,1 +1,47 @@
 <h3>ユーザー詳細画面</h3>
+  <div class="field">
+    <%= "プロフィール画像" %><br />
+    <%= image_tag @user.get_profile_image(100,100) %>
+  </div>  
+  
+  <div class="field">
+    <%= "ユーザーID" %><br />
+    <%=  @user.id %>
+  </div>  
+  
+  <div class="field">
+    <%= "登録日" %><br />
+    <%= @user.created_at.strftime('%Y/%m/%d') %>
+  </div>  
+  
+  <div class="field">
+    <%= "ユーザーネーム" %><br />
+    <%= @user.name  %>
+  </div>
+
+  <div class="field">
+    <%= "お住まいの地域" %><br />
+    <%= @user.prefecture.name  %>
+  </div>
+
+  <div class="field">
+    <%= "メールアドレス" %><br />
+    <%= @user.email %>
+  </div>
+  
+  <div class="field">
+    <%= "自己紹介" %><br />
+    <%= @user.introduction %>
+  </div>
+  
+  <div class="field">
+    <%= "会員ステータス" %><br />
+    <%= @user.is_active ? '有効' : '停止中' %>
+
+  </div>
+
+ 
+
+  <div class="actions">
+    <%= link_to "情報編集する", edit_admin_user_path(@user) %>
+  </div>
