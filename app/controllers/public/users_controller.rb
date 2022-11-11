@@ -25,6 +25,11 @@ class Public::UsersController < ApplicationController
       render :edit
     end
   end
+  
+  def favorite
+    @teas = Tea.all
+    
+  end
 
   private
 
