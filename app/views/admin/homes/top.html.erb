@@ -1,0 +1,16 @@
+<h3>ユーザー一覧</h3>
+
+<tbody>
+  
+<% @users.each do |user| %>
+  <tr>
+    <td><%= user.created_at.strftime('%Y/%m/%d') %></td>
+    <td><%= user.id %></td>
+    <td><%= user.name %></td>
+    <td><%= user.teas.count %></td>
+    <td><%= user.is_active %></td>
+    <td><%= link_to "詳細表示", admin_user_path(user), class: "btn btn-secondary" %></td>
+    <td></td>
+  </tr>
+<% end %>
+</tbody>
