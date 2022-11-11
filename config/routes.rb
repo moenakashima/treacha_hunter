@@ -27,7 +27,9 @@ end
 # 管理者用
 # URL /admin/...
 namespace :admin do
+  get "/" => "homes#top"
   resources :tea_types, only:[:index, :create, :edit, :update, :destroy]
+  resources :users, only:[:show, :edit, :update]
 end
 
 # ユーザー用
