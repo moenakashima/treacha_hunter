@@ -1,0 +1,43 @@
+<h5>お気に入りのお茶リスト</h5>
+
+<% @teas.each do |tea| %>
+  <% if tea.favorited_by?(current_user) %>
+  
+  <%= link_to tea_path(tea) do %>
+  <%= image_tag tea.get_tea_image(400,400) %>
+  <% end %>
+  <table class="table">
+    <tbody>
+      <tr>
+        <td>
+          <%= tea.tea_type.name %>
+        </td>
+        <td>
+          <%= tea.prefecture.name %>
+        </td>
+        <td>
+          <%= link_to user_path(tea.user) do %>
+          <%= tea.user.name %>
+          <% end %>
+        </td>
+        <td id="favorite-<%= tea.id %>">
+          <%= render "public/favorites/favorite", tea: tea %>
+        </td>
+      </tr>
+  
+      <tr>
+        <td>
+          <%= tea.created_at.strftime('%Y/%m/%d') %>
+        </td>
+        <td>
+          <%= link_to tea_path(tea) do %>
+           <%= tea.opinion.truncate(15) %>
+          <% end %>
+        </td>
+      </tr>
+      
+    </tbody>
+  </table>
+  <% end %>
+<% end %>
+<%= link_to "マイページに戻る", user_path(current_user), class: "btn btn-info" %>
