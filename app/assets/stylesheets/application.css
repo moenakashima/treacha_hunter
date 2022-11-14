@@ -13,3 +13,6 @@
  *= require_tree .
  *= require_self
  */
+.header-bg-color--extend{
+  background-color: #98c97b;
+}

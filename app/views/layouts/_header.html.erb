@@ -1,5 +1,5 @@
 <header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+  <nav class="navbar navbar-expand-lg navbar-dark header-bg-color--extend">
     <div class="container-fluid">
       <a class="navbar-brand" href="/"><%= image_tag 'treacha_hunter.jpg', size:'125x73', class: 'ml-5 img-fluid' %></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,17 +10,17 @@
         <% if user_signed_in? %>
           <li>
             <%= link_to user_path(current_user),class: 'nav-link text-light' do %>
-              <i class="fas fa-coffee me-1"></i>マイページ
+            <i class="fas fa-home me-1"></i>マイページ
             <% end %>
           </li>
           <li>
             <%=  link_to root_path,class: 'nav-link text-light' do %>
-            <i class="fas fa-home me-1"></i>投稿一覧
+            <i class="fas fa-coffee me-1"></i>投稿一覧
             <% end %>
           </li>
           <li>
             <%=  link_to users_path ,class: 'nav-link text-light' do %>
-            <i class="fas fa-users me-1"></i> トレチャーハンターたち
+            <i class="fas fa-users me-1"></i>トレチャーハンターたち
             <% end %>
           </li>
           <li>
