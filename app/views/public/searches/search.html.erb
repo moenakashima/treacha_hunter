@@ -5,11 +5,15 @@
   <div class="card">
     <div class="card-body">
       <h6 class="card-title">
-        <% @teas.each do |tea| %>
-          <%= image_tag tea.get_tea_image(100,100) %>
-          <%= tea.prefecture.name %>
-          <%= link_to tea_path(tea.id) do %><%= tea.opinion %>
+        <% if @teas %>
+          <% @teas.each do |tea| %>
+            <%= image_tag tea.get_tea_image(100,100) %>
+            <%= tea.prefecture.name %>
+            <%= link_to tea_path(tea.id) do %><%= tea.opinion %>
+            <% end %>
           <% end %>
+        <% else %>
+          検索結果がありません
         <% end %>
       </h6>
     </div>

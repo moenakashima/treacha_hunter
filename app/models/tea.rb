@@ -53,6 +53,7 @@ class Tea < ApplicationRecord
    end
   end
   
+  # 検索窓
   def self.search(search)
     if search != nil
       Tea.where('product_name LIKE(?) or opinion LIKE(?)' , "%#{search}%",  "%#{search}%")

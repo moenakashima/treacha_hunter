@@ -8,10 +8,10 @@ class Tag < ApplicationRecord
   
   def self.search(search)
     if search != '#'
-      tag = Tag.where(name: search)
-      tag[0].teas
+      tag = Tag.find_by(name: search.delete('#'))
+      tag && tag.teas
     else
-      Tea.all
+      nil
     end
   end
 end
