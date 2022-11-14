@@ -1,60 +1,67 @@
 <header class="header header-bg-color--extend">
-  <nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/"><%= image_tag 'treacha_hunter.jpg', size:'125x73', class: 'ml-5 img-fluid' %></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav ms-auto">
-        <% if user_signed_in? %>
-          <li>
-            <%= link_to user_path(current_user),class: 'nav-link text-light' do %>
-            <i class="fas fa-home me-1"></i>マイページ
+  <div class="container">
+    <div class="row">
+      
+      <nav class="col-lg-9 navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/"><%= image_tag 'treacha_hunter.jpg', size:'125x73', class: 'ml-5 img-fluid' %></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ms-auto">
+            <% if user_signed_in? %>
+              <li>
+                <%= link_to user_path(current_user),class: 'nav-link text-light' do %>
+                <i class="fas fa-home me-1"></i>マイページ
+                <% end %>
+              </li>
+              <li>
+                <%=  link_to root_path,class: 'nav-link text-light' do %>
+                <i class="fas fa-coffee me-1"></i>投稿一覧
+                <% end %>
+              </li>
+              <li>
+                <%=  link_to users_path ,class: 'nav-link text-light' do %>
+                <i class="fas fa-users me-1"></i>トレチャーハンターたち
+                <% end %>
+              </li>
+              <li>
+                <%=  link_to destroy_user_session_path ,method: :delete, class: 'nav-link text-light' do %>
+                <i class="fas fa-sign-out-alt me-1"></i>ログアウト
+                <% end %>
+              </li>
+            <% else %>
+              <li>
+                <%= link_to about_path,class: 'nav-link text-light' do %>
+                  <i class="fas fa-coffee me-1"></i>About
+                <% end %>
+              </li>
+              <li>
+                <%= link_to new_user_registration_path,class: 'nav-link text-light' do %>
+                  <i class="fas fa-user-plus me-1"></i>新規登録
+                <% end %>
+              </li>
+              <li>
+                <%= link_to new_user_session_path ,class: 'nav-link text-light' do %>
+                  <i class="fas fa-sign-in-alt me-1"></i>ログイン
+                <% end %>
+              </li>
             <% end %>
-          </li>
-          <li>
-            <%=  link_to root_path,class: 'nav-link text-light' do %>
-            <i class="fas fa-coffee me-1"></i>投稿一覧
-            <% end %>
-          </li>
-          <li>
-            <%=  link_to users_path ,class: 'nav-link text-light' do %>
-            <i class="fas fa-users me-1"></i>トレチャーハンターたち
-            <% end %>
-          </li>
-          <li>
-            <%=  link_to destroy_user_session_path ,method: :delete, class: 'nav-link text-light' do %>
-            <i class="fas fa-sign-out-alt me-1"></i>ログアウト
-            <% end %>
-          </li>
-          <li class="form-group d-flex" >
-            <div class="row">
-            <%= form_with url: search_path, method: :get, local: :true do |f| %>
-              <div class="col"><%= f.text_field :keyword, placeholder: "Search", class: "form-control" %></div>
-              <div class="col"><%= f.submit "検索"%></div>
-            <% end %>
-            </div>
-           </li>
-        <% else %>
-          <li>
-            <%= link_to about_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-coffee me-1"></i>About
-            <% end %>
-          </li>
-          <li>
-            <%= link_to new_user_registration_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-user-plus me-1"></i>新規登録
-            <% end %>
-          </li>
-          <li>
-            <%= link_to new_user_session_path ,class: 'nav-link text-light' do %>
-              <i class="fas fa-sign-in-alt me-1"></i>ログイン
-            <% end %>
-          </li>
-        <% end %>
-        </ul>
+            </ul>
+          </div>
+        </div>
+      </nav>
+   
+      <div class="col-lg-3" >
+      <!--<div class="row">-->
+      <%= form_with url: search_path, method: :get, local: :true do |f| %>
+      <%= f.text_field :keyword, placeholder: "Search"%>
+      <%= f.submit "検索" %>
+      <% end %>
+      <!--</div>-->
       </div>
+      
     </div>
-  </nav>
+  </div>  
 </header>
