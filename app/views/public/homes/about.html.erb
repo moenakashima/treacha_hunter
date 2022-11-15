@@ -1,11 +1,29 @@
-        <div class="row">
-          <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block mb-3 sign_in", method: :post %>
-        </div>
-        
-        <div class="row">
-          <%= link_to 'Log in',new_user_session_path, class: "btn btn-info btn-sm btn-block mb-3 sign_in" %>
-        </div>
-        <div class="row">
-          <%= link_to 'Sign Up',new_user_registration_path, class: "btn btn-success btn-sm btn-block sign_up" %>
-        </div>
-      </div>
+
+  <div class ="main-visual">
+    <div class ="main-visual-content ">
+      <h3>WELCOME TO TREACHA HUNTER!</h3>
+      
+      <h4>トレチャーハンターへ、ようこそ。</h4>
+      
+      <p>
+      ここは、日本茶好きの人が集い、全国の美味しいお茶を紹介し合うサイトです。<br>
+      世界のどこかに隠れたお宝探しをする”トレジャーハンター”になった気分で、<br>
+      日本中の美味しいお茶探しをしてみませんか？</p>
+      <p>あなたがまだ出会っていない極上の一杯に出会えるかも…？しれません。</p>
+      <p>※サイトを利用するには会員登録が必要です。閲覧のみの場合はゲストログインをしてください。</p>
+
+    </div>
+  </div>
+
+<div class="container">
+  <div class= "row">
+  <div class= "d-grid gap-3 col-6 mx-auto">
+    <%= link_to 'トレチャーハントに行く！（ログイン）',new_user_session_path, class: "btn btn-outline-secondary mt-3" %>
+
+    <%= link_to 'トレチャーハンターになる！（新規会員登録）',new_user_registration_path, class: "btn btn-outline-secondary" %>
+
+    <%= link_to 'まずはお試しする（閲覧用）', users_guest_sign_in_path, class: "btn btn-outline-secondary mb-3", method: :post %>
+
+  </div>
+  </div>
+</div>

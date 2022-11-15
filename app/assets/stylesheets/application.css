@@ -14,5 +14,33 @@
  *= require_self
  */
 .header-bg-color--extend{
-  background-color: #98c97b;
+  /*background-color: #98c97b;*/
+}
+
+.body-extend{
+  /*background-color: #98c97b;*/
+}
+
+.main-visual{
+  height: 500px;
+  width: auto;
+  background-image: url(main.JPG);
+  background-size: cover;
+  background-position: center;
+}
+
+.main-visual-content{
+  width: 60%; 
+  height: 500px; /* 親の高さに揃える */
+  background-color: rgba(0, 0, 0, 0.5); 
+  text-align: center; /* 文字を中央揃えにする */
+  padding-top: 105px; /* 上側の内側余白で垂直方向の位置を調整 */
+  color: #fff; /* 文字色を白に変更 */
+
+}
+
+@media screen and (max-width: 768px) {
+  .main-visual-content {
+    width: 100%;
+  }
 }
