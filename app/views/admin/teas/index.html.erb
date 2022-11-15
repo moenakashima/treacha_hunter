@@ -1,0 +1,35 @@
+  <% @teas.each do |tea| %>
+
+  <%= link_to admin_tea_path(tea) do %>
+  <%= image_tag tea.get_tea_image(400,400) %>
+  <% end %>
+  <table class="table">
+    <tbody>
+      <tr>
+        <td>
+          <%= tea.tea_type.name %>
+        </td>
+        <td>
+          <%= tea.prefecture.name %>
+        </td>
+        <td>
+          <%= link_to admin_user_path(tea.user) do %>
+          <%= tea.user.name %>
+          <% end %>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <%= tea.created_at.strftime('%Y/%m/%d') %>
+        </td>
+        <td>
+          <%= link_to admin_tea_path(tea) do %>
+           <%= tea.opinion.truncate(15) %>
+          <% end %>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+  <% end %>

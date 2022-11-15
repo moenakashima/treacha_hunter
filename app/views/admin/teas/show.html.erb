@@ -1,0 +1,93 @@
+<h2>投稿詳細</h2>
+
+<div class="container px-5 px-sm-0">
+
+  <div class="row">
+    <div class="col-2">
+      <table class="table">
+        <tbody>
+          <tr><%= image_tag @tea.user.get_profile_image(100,100) %></tr>
+          <tr>
+            <td>
+              <%= link_to admin_user_path(@tea.user) do %>
+                <%= @tea.user.name %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <th>introduction</th>
+          </tr>
+          <tr>
+            <td><%= @tea.user.introduction %></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row">
+        <%= link_to "HOMEに戻る", admin_root_path %>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <table class="table">
+        <tbody>
+          <tr>
+              <%= image_tag @tea.get_tea_image(400,400) %>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+　　<div class="col-4">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>お茶の種類</td>
+            <td><%= @tea.tea_type.name %></td>
+          </tr>
+
+          <tr>
+            <td>産地</td>
+            <td><%= @tea.prefecture.name %></td>
+          </tr>
+          <tr>
+            <td>商品名</td>
+            <td><%= @tea.product_name %></td>
+          </tr>
+          <tr>
+            <td>販売者</td>
+            <td><%= @tea.seller %></td>
+          </tr>
+          <tr>
+            <td>購入場所</td>
+            <td><%= @tea.parchased_at %></td>
+          </tr>
+          <tr>
+            <td>#タグ</td>
+            <td>
+              <% @tea_tags.each do |tag| %>
+                <%= "#" %><%= tag.name %>
+                <%= "" %>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-10">
+       <table class="table">
+        <tbody>
+          <tr>
+            <td><%= @tea.opinion %></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class= "tea_comment-<%= @tea.id %>">
+        <%= render 'public/tea_comments/tea_comment',  tea: @tea, tea_comment: @tea_comment %>
+      </div>
+    </div>
+  </div>
+
+</div>
