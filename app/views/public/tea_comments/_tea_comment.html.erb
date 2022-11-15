@@ -1,7 +1,7 @@
 <% tea.tea_comments.each do |tea_comment| %>
   <%= tea_comment.comment %>
   <%= tea_comment.user.name %>
-  <% if tea_comment.user == current_user %>
+  <% if tea_comment.user == current_user || admin_signed_in? %>
     <%= form_with models: [@tea, @tea_comment], url: tea_tea_comment_path(tea.id, tea_comment),  method: :delete, local: false do |form| %>
     <%= form.submit 'コメントを削除', class: 'btn btn-danger btn-s-md' %>
     <% end %>
