@@ -1,5 +1,7 @@
 class Admin::TeaTypesController < ApplicationController
-
+  
+  before_action :authenticate_admin!
+  
   def create
     @tea_type = TeaType.new(tea_type_params)
     if @tea_type.save
