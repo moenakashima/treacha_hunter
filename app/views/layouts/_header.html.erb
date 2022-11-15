@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       
-      <nav class="col-lg-9 navbar navbar-expand-lg navbar-dark">
+      <nav class="col-xl-9 navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="/"><%= image_tag 'treacha_hunter.jpg', size:'125x73', class: 'ml-5 img-fluid' %></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,7 +10,29 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ms-auto">
-            <% if user_signed_in? %>
+            <% if admin_signed_in? %>
+              <li>
+                <%= link_to admin_path,class: 'nav-link text-light' do %>
+                <i class="fas fa-home me-1"></i>会員一覧
+                <% end %>
+              </li>
+              <li>
+                <!--投稿ｰ一覧パスに変更予定-->
+                <%=  link_to admin_path,class: 'nav-link text-light' do %>
+                <i class="fas fa-coffee me-1"></i>投稿一覧
+                <% end %>
+              </li>
+              <li>
+                <%=  link_to admin_tea_types_path ,class: 'nav-link text-light' do %>
+                <i class="fas fa-users me-1"></i>ジャンル一覧
+                <% end %>
+              </li>
+              <li>
+                <%=  link_to destroy_admin_session_path ,method: :delete, class: 'nav-link text-light' do %>
+                <i class="fas fa-sign-out-alt me-1"></i>ログアウト
+                <% end %>
+              </li>
+            <% elsif user_signed_in? %>
               <li>
                 <%= link_to user_path(current_user),class: 'nav-link text-light' do %>
                 <i class="fas fa-home me-1"></i>マイページ
@@ -53,7 +75,7 @@
         </div>
       </nav>
    
-      <div class="col-lg-3" >
+      <div class="col-xl-3 justify-content-center align-items-center d-flex" >
       <!--<div class="row">-->
       <%= form_with url: search_path, method: :get, local: :true do |f| %>
       <%= f.text_field :keyword, placeholder: "Search"%>
