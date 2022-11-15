@@ -12,13 +12,12 @@
             <ul class="navbar-nav ms-auto">
             <% if admin_signed_in? %>
               <li>
-                <%= link_to admin_path,class: 'nav-link text-light' do %>
+                <%= link_to admin_root_path,class: 'nav-link text-light' do %>
                 <i class="fas fa-home me-1"></i>会員一覧
                 <% end %>
               </li>
               <li>
-                <!--投稿ｰ一覧パスに変更予定-->
-                <%=  link_to admin_path,class: 'nav-link text-light' do %>
+                <%=  link_to admin_teas_path,class: 'nav-link text-light' do %>
                 <i class="fas fa-coffee me-1"></i>投稿一覧
                 <% end %>
               </li>
@@ -74,16 +73,14 @@
           </div>
         </div>
       </nav>
-   
+     <% if user_signed_in? %>
       <div class="col-xl-3 justify-content-center align-items-center d-flex" >
-      <!--<div class="row">-->
       <%= form_with url: search_path, method: :get, local: :true do |f| %>
       <%= f.text_field :keyword, placeholder: "Search"%>
       <%= f.submit "検索" %>
       <% end %>
-      <!--</div>-->
       </div>
-      
+      <% end %>
     </div>
   </div>  
 </header>
