@@ -22,14 +22,6 @@
   <body class="body-extend">
     <%= render 'layouts/header'  %>
     <p id="notice"><%= notice %></p>
-    <div class="d-flex justify-content-center mb-2">
-    <% if user_signed_in? %>
-      <%= form_with url: search_path, method: :get, local: :true do |f| %>
-          <%= f.text_field :keyword %>
-          <%= f.submit "検索" %>
-      <% end %>
-    <% end %>
-    </div>
     <%= yield %>
     <%= render 'layouts/footer' %>
     <!-- Bootstrap5 JS -->
