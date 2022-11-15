@@ -8,8 +8,10 @@
     <div class="avatar"></div>
 
     <%= form_with model: @user, url: user_session_path do |f| %>
-      <div class="form-box">
+      <div class="form-group mb-2">
         <%= f.text_field :email, autofocus: true, autocomplete: "email", placeholder: "email" %>
+      </div>   
+      <div class="form-gruop">
         <%= f.password_field :password, autocomplete: "current-password",placeholder: "password" %>
       </div>
       <!--% if devise_mapping.rememberable? %>-->
@@ -19,8 +21,7 @@
       <!--  </div>-->
         <%= f.submit "ログイン", class: "btn btn-outline-info btn-block col-12 mt-2" %>
     <% end %>
-    
-    <%= render "public/shared/links" %>
+    <div class="my-2"><%= render "public/shared/links" %></div>
   </div>
   
 </div>

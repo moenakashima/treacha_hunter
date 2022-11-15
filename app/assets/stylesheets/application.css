@@ -73,16 +73,9 @@
     background-image: url(treacha_hunter.jpg);
 }
 
-.form-box input{
-    width: 100%;
-    padding: 10px;
-    text-align: center;
-    height:40px;
-    border: 1px solid #ccc;;
-    background: #fafafa;
-    transition:0.2s ease-in-out;
+.form-group label{
+    margin: 1.5px 0px;
 }
-
 
 /*レスポンシブデザイン　タブレットサイズ以下*/
 
