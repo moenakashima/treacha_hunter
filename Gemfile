@@ -58,3 +58,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # 下記追記したもの
 gem 'devise'
 gem 'net-smtp'
+gem 'kaminari','~> 1.2.1'
