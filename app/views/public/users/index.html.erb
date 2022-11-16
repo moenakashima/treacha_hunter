@@ -1,8 +1,8 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="text-center">トレチャーハンターのなかまたち</div>  
-      <div class="col-10">
-        <table class="table table-hover table-inverse" >
+      <div class="col-10 table-responsive">
+        <table class="table table-inverse" >
           <thead class="thead-light">
             <th>ユーザー画像</th>
             <th>ユーザーネーム</th>
@@ -13,9 +13,9 @@
           <tbody>
             <% @users.each do |user| %>
             <tr>
-              <td style="width:15%">
+              <td class="w-15">
                 <%= link_to user_path(user) do %>
-                  <%= image_tag user.get_profile_image(100,100), style: "width: 100%" %>
+                  <%= image_tag user.get_profile_image(50,50), class: "w-80" %>
                 <% end %>
               </td>
               
@@ -27,8 +27,8 @@
               
               <td><%= user.prefecture.name %></td>
               
-              <td><%= (@d1 - (user.created_at).to_date).to_i %>日</td>
-              <td><%= user.teas.count %>個</td>
+              <td class="text-lg-center text-md-end" ><%= (@d1 - (user.created_at).to_date).to_i %>日</td>
+              <td class="text-lg-center text-md-end"><%= user.teas.count %>個</td>
             </tr>
             <% end %>
           </tbody>

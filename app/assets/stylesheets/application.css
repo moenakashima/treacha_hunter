@@ -77,6 +77,13 @@
     margin: 1.5px 0px;
 }
 
+.w-15{
+  width: 15%;
+}
+
+.w-80{
+  width: 80%;
+}
 /*レスポンシブデザイン　タブレットサイズ以下*/
 
 @media screen and (max-width: 768px) {
@@ -87,7 +94,4 @@
     display: none;
   }
   
-  .show_profile_image{
-    width: 30%;
-  }
 }
