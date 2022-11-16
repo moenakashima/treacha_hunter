@@ -83,4 +83,11 @@
   .main-visual-content {
     width: 100%;
   }
+  .thead-light{
+    display: none;
+  }
+  
+  .show_profile_image{
+    width: 30%;
+  }
 }
