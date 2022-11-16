@@ -66,5 +66,13 @@ class Tea < ApplicationRecord
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
+  
+  # # お茶の種類絞り込み検索
+  # scope :tea_search, -> (search_params) do
+  #   return if search_params.blank?
+  #   room_type_in(search_params[:room_type_in].to_i)
+  #     .tea_type_in(search_params[:tea_type])
+  # end
+  # scope :tea_type_in, -> (tea_type) { where(tea_type: name) if tea_type.present? }
 
 end

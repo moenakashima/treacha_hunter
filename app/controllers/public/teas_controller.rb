@@ -63,6 +63,10 @@ class Public::TeasController < ApplicationController
     #検索されたタグに紐づく投稿を表示
     @teas = @tag.teas.order('created_at DESC')
   end
+  
+  # def search_tea_type
+  #   @teas = Tea.tea_search(teatype_params) 
+  # end
 
   # def ranking
   # end
@@ -71,4 +75,8 @@ class Public::TeasController < ApplicationController
   def tea_params
     params.require(:tea).permit(:product_name, :prefecture_id, :tea_image, :seller, :tea_type_id, :parchased_at, :opinion)
   end
+  
+  # def teatype_params
+  #   params.require(:tea_type_id).permit(:id)
+  # end
 end
