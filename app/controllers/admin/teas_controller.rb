@@ -2,7 +2,7 @@ class Admin::TeasController < ApplicationController
   before_action :authenticate_admin!
   
   def index
-    @teas = Tea.all
+    @teas = Tea.page(params[:page])
   end
   
   def show
