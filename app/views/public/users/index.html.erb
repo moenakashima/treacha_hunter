@@ -13,9 +13,9 @@
           <tbody>
             <% @users.each do |user| %>
             <tr>
-              <td>
+              <td style="width:15%">
                 <%= link_to user_path(user) do %>
-                  <%= image_tag user.get_profile_image(100,100) %>
+                  <%= image_tag user.get_profile_image(100,100), style: "width: 100%" %>
                 <% end %>
               </td>
               
