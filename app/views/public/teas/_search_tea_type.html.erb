@@ -1,6 +1,7 @@
 <%= form_with model: @tea, url: search_tea_type_path, method: :get, local: true do |f| %>
 <p>お茶の種類で絞る</p>
-      <%= f.check_box :tea_type, { multiple: true }, "かぶせ煎茶",nil %>
-      <%= f.label :tea_type,  "かぶせ煎茶" %>
+      <%= f.collection_check_boxes :tea_type, TeaType.all, :name, :name do |b| %>
+      <%= b.label {b.check_box + b.text} %>
+      <% end %>
       <%= f.submit "絞り込む" %>
 <% end %>

@@ -64,9 +64,15 @@ class Public::TeasController < ApplicationController
     @teas = @tag.teas.order('created_at DESC')
   end
   
-  # def search_tea_type
-  #   @teas = Tea.tea_search(teatype_params) 
-  # end
+  def search_tea_type
+    if params[:tea_type].nil?
+      flash[:notice] = "1つ以上選択してください。"
+      redirect_to root_path
+    else
+      @teas = Tea.tea_search(params[:tea_type]).page(params[:page]).order('created_at DESC')
+      render "public/homes/top"
+    end
+  end
 
   # def ranking
   # end
@@ -76,7 +82,5 @@ class Public::TeasController < ApplicationController
     params.require(:tea).permit(:product_name, :prefecture_id, :tea_image, :seller, :tea_type_id, :parchased_at, :opinion)
   end
   
-  # def teatype_params
-  #   params.require(:tea_type_id).permit(:id)
-  # end
+
 end
