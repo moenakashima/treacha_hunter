@@ -1,15 +1,40 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="text-center">トレチャーハンターのなかまたち</div>  
+      <div class="col-10">
+        <table class="table table-hover table-inverse" >
+          <thead class="thead-light">
+            <th>ユーザー画像</th>
+            <th>ユーザーネーム</th>
+            <th>お住まいの地域</th>
+            <th>トレチャーハンター歴</th>
+            <th>見つけたトレチャーの数</th>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+            <tr>
+              <td>
+                <%= link_to user_path(user) do %>
+                  <%= image_tag user.get_profile_image(100,100) %>
+                <% end %>
+              </td>
+              
+              <td>  
+                <%= link_to user_path(user) do %>
+                  <%= user.name %>
+                <% end %>
+              </td>
+              
+              <td><%= user.prefecture.name %></td>
+              
+              <td><%= (@d1 - (user.created_at).to_date).to_i %>日</td>
+              <td><%= user.teas.count %>個</td>
+            </tr>
+            <% end %>
+          </tbody>
+          <div class="row justify-content-center mt-3">
+            <%= paginate @users %>
+          </div>
 
-
-
-<% @users.each do |user| %>
-  <%= link_to user_path(user) do %>
-    <%= image_tag user.get_profile_image(100,100) %>
-  <% end %>
-  <%= user.prefecture.name %>
-
-  <%= link_to user_path(user) do %>
-    <%= user.name %>
-  <% end %>
-
-<% end %>
-<%= paginate @users %>
+  </div>
+</div>
