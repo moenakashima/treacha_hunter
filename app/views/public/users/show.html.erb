@@ -27,9 +27,10 @@
         </tbody>
       </table>
       <div><%= link_to "投稿する", new_tea_path, class: "btn btn-primary" %></div>
-      <div>見つけたトレチャーの数</div>
+      <div>見つけたトレチャーの数<%= @user.teas.count %>個</div>
       <div><%= @user.prefecture.name %>在住</div>
-    
+      <div><%= @hunter_histroy  %>日</div>
+
     </div>
   </div>
 </div>
