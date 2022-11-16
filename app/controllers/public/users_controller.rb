@@ -4,13 +4,13 @@ class Public::UsersController < ApplicationController
   before_action :ensure_guest_user, only: [:edit]
   
   def index
-    @users = User.all
+    @users = User.order('created_at DESC').page(params[:page])
 
   end
 
   def show
     @user = User.find(params[:id])
-    @teas = @user.teas
+    @teas = @user.teas.page(params[:page])
   end
 
   def edit
@@ -27,7 +27,7 @@ class Public::UsersController < ApplicationController
   end
   
   def favorite
-    @teas = Tea.all
+    @teas = Tea.order('created_at DESC').page(params[:page])
     
   end
 
