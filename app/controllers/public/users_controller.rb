@@ -10,7 +10,7 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @teas = @user.teas.page(params[:page])
+    @teas = @user.teas.page(params[:page]).order('created_at DESC')
   end
 
   def edit
