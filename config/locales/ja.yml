@@ -2,7 +2,7 @@ ja:
 activerecord:
   attributes:
     user:
-      prefecture_id: お住まいの地域
+      prefecture: お住まいの地域
       introduction: 自己紹介
       is_active: 会員ステータス
       
@@ -10,14 +10,17 @@ activerecord:
       email: メールアドレス
       
     tea:
-      tea_type_id: お茶の種類
-      user_id: ユーザーネーム
+      tea_type: お茶の種類
+      user: ユーザーネーム
       product_name: 商品名
-      prefecture_id: 産地
+      prefecture: 産地
       parchased_at: 購入場所
       seller: 販売者
       seller: 感想
       
     tea_type:
       name: お茶の種類名
+      
+    tea_comment:
+      comment: コメント
       
