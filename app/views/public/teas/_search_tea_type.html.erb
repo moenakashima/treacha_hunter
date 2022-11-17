@@ -10,25 +10,24 @@
         <h5 class="modal-title" id="exampleModalLabel">お茶の種類で絞る</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <%= form_with model: @tea, url: search_tea_type_path, method: :get, local: true do |f| %>
-        <div class="modal-body" id="search_tea_type" >
+      <%= form_with  url: search_tea_type_path, method: :get, local: true do |f| %>
+        <div class="modal-body">
             <%= f.collection_check_boxes :tea_type, TeaType.all, :name, :name do |b| %>
-            <%= b.label {b.check_box + b.text} %>
+
+              <%= b.check_box class: "search_tea_type" do %>
+              <%= b.check_box + b.text %>
+              <% end %>
+               <%= b.label {b.text} %>
+               
             <% end %>
         </div>
+        
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" id="reset-button">リセット</button>
-          <!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Clear</button>-->
-          <%= f.submit "絞り込む", class: "btn btn-primary" %>
+          <%= f.submit "絞り込む", class: "btn btn-primary", id: "submit-button", disabled: true %>
         </div>
       <% end %>
     </div>
   </div>
 </div>
-<!--<= form_with model: @tea, url: search_tea_type_path, method: :get, local: true do |f| %>-->
-<!--      <= f.collection_check_boxes :tea_type, TeaType.all, :name, :name do |b| %>-->
-<!--      <= b.label {b.check_box + b.text} %>-->
-<!--      < end %>-->
-<!--      <= f.submit "絞り込む" %>-->
-<!--< end %>-->
 
