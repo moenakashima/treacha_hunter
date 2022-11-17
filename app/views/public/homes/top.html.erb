@@ -1,9 +1,16 @@
 <div class="container">
+
+  <% if @search_teas %> 
+    <div class="row">
+      <%= @search_teas.join(" + ")  %>
+    </div>
+  <% end %>
+
   <div class="row row-cols-md-auto row-cols-xxl-3 justify-content-center">
 
     <% @teas.each do |tea| %>
       <div class="col mb-4">   
-        
+         
         <%= link_to tea_path(tea) do %>
           <%= image_tag tea.get_tea_image(400,300) %>
         <% end %>
@@ -31,39 +38,3 @@
   <%= paginate @teas %>
   </div>
 </div>
-
-
-
-  <!--<table class="table">-->
-  <!--  <tbody>-->
-  <!--    <tr>-->
-  <!--      <td>-->
-  <!--        %= tea.tea_type.name %>-->
-  <!--      </td>-->
-  <!--      <td>-->
-  <!--        %= tea.prefecture.name %>-->
-  <!--      </td>-->
-  <!--      <td>-->
-  <!--        %= link_to user_path(tea.user) do %>-->
-  <!--        %= tea.user.name %>-->
-  <!--        % end %>-->
-  <!--      </td>-->
-  <!--      <td id="favorite-%= tea.id %>">-->
-  <!--        %= render "public/favorites/favorite", tea: tea %>-->
-  <!--      </td>-->
-  <!--    </tr>-->
-
-  <!--    <tr>-->
-  <!--      <td>-->
-  <!--        %= tea.created_at.strftime('%Y/%m/%d') %>-->
-  <!--      </td>-->
-  <!--      <td>-->
-  <!--        %= link_to tea_path(tea) do %>-->
-  <!--         %= tea.opinion.truncate(15) %>-->
-  <!--        % end %>-->
-  <!--      </td>-->
-  <!--    </tr>-->
-
-  <!--  </tbody>-->
-  <!--</table>-->
-  <!--% end %>-->
