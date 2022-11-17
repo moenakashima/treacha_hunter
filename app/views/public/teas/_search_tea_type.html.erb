@@ -1,6 +1,6 @@
 <!-- Button trigger modal -->
-<div type="icon" data-bs-toggle="modal" data-bs-target="#TeaTypeModal">
-<i class="fas fa-filter"></i>
+<div type="icon" data-bs-toggle="modal" data-bs-target="#TeaTypeModal" class="nav-link text-dark">
+<i class="fas fa-filter me-1"></i>絞り込み
 </div>
 <!-- Modal -->
 <div class="modal fade" id="TeaTypeModal" tabindex="-1" aria-labelledby="TeaTypeModalLabel" aria-hidden="true">
@@ -11,24 +11,24 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <%= form_with model: @tea, url: search_tea_type_path, method: :get, local: true do |f| %>
-        <div class="modal-body">
+        <div class="modal-body" id="search_tea_type" >
             <%= f.collection_check_boxes :tea_type, TeaType.all, :name, :name do |b| %>
             <%= b.label {b.check_box + b.text} %>
             <% end %>
         </div>
         <div class="modal-footer">
-          <button type="button" id="reset-button">リセット</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Clear</button>
+          <button type="button" class="btn btn-secondary" id="reset-button">リセット</button>
+          <!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Clear</button>-->
           <%= f.submit "絞り込む", class: "btn btn-primary" %>
         </div>
       <% end %>
     </div>
   </div>
 </div>
-<%= form_with model: @tea, url: search_tea_type_path, method: :get, local: true do |f| %>
-      <%= f.collection_check_boxes :tea_type, TeaType.all, :name, :name do |b| %>
-      <%= b.label {b.check_box + b.text} %>
-      <% end %>
-      <%= f.submit "絞り込む" %>
-<% end %>
+<!--<= form_with model: @tea, url: search_tea_type_path, method: :get, local: true do |f| %>-->
+<!--      <= f.collection_check_boxes :tea_type, TeaType.all, :name, :name do |b| %>-->
+<!--      <= b.label {b.check_box + b.text} %>-->
+<!--      < end %>-->
+<!--      <= f.submit "絞り込む" %>-->
+<!--< end %>-->
 
