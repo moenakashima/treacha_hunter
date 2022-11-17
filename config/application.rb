@@ -14,6 +14,9 @@ module TreachaHunter
     # 日本語の設定
     config.i18n.default_locale = :ja
     
+    # 日本のタイムゾーンに設定
+    config.time_zone = 'Asia/Tokyo'
+    
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
