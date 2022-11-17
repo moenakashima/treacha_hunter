@@ -1,9 +1,27 @@
-<% tea.tea_comments.each do |tea_comment| %>
-  <%= tea_comment.comment %>
-  <%= tea_comment.user.name %>
-  <% if tea_comment.user == current_user || admin_signed_in? %>
-    <%= form_with models: [@tea, @tea_comment], url: tea_tea_comment_path(tea.id, tea_comment),  method: :delete, local: false do |form| %>
-    <%= form.submit 'コメントを削除', class: 'btn btn-danger btn-s-md' %>
+<table class="table table-sm table-borderless">
+  <tbody>
+    <% tea.tea_comments.each do |tea_comment| %>    
+      <tr>
+        <td>
+          <%= tea_comment.comment %>
+          &nbsp;
+          <%= link_to user_path(tea_comment.user) do %>
+          <%= tea_comment.user.name %>
+          <% end %>         
+          &nbsp;
+          <%= tea_comment.created_at.strftime('%Y年%-m月%-d日') %>
+        </td>
+        <td>
+          <% if tea_comment.user == current_user || admin_signed_in? %>
+            <%= form_with models: [@tea, @tea_comment], url: tea_tea_comment_path(tea.id, tea_comment),  method: :delete, local: false do |form| %>
+            <%= form.submit '削除', class: 'btn btn-link' %>
+            <% end %>
+          <% end %>            
+        </td>
+      </tr>
     <% end %>
-  <% end %>
-<% end %>
+  </tbody>
+</table>
+<!--非同期かが効かなくなる-->
+<!--%= paginate @tea_comments %>-->
+
