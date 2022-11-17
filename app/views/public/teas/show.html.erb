@@ -1,10 +1,7 @@
-<h2>投稿詳細</h2>
-
-
 <div class="container">
   <div class="row justify-content-center">
-    
-  <div class="col-md-2 col-10">
+  <h4 class="text-center mb-5">投稿詳細</h4>  
+  <div class="col-lg-2 col-10 ">
        <table class="table">
         <tbody>
           <tr><%= image_tag @tea.user.get_profile_image(100,100) %></tr>
@@ -22,11 +19,11 @@
       </table>
     </div>
     
-    <div class="col-md-4 col-10">
+    <div class="col-lg-4 col-10">
       <table class="table">
         <tbody>
-          <tr class="w-15%">
-              <%= image_tag @tea.get_tea_image(400,400), class: "w-100" %>
+          <tr>
+              <%= image_tag @tea.get_tea_image(300,300) %>
           </tr>
           <tr>
             <td><%= @tea.created_at.strftime('%Y/%m/%d') %></td>
@@ -38,7 +35,7 @@
       </table>
     </div>
     
-    <div class="col-md-4 col-10 table-responsive justify-content-center">
+    <div class="col-lg-4 col-10 table-responsive">
       <table class="table">
         <tbody>
           <tr>
@@ -74,8 +71,8 @@
           </tr>
           <% if @tea.user_id == current_user.id %>
           <tr>
-            <td><%= link_to "編集する", edit_tea_path(@tea) %> </td>
-            <td><%= link_to "削除する", tea_path(@tea), method: :delete, data: {confirm: "本当に削除しますか？"} %> </td>
+            <td><%= link_to "編集する", edit_tea_path(@tea), class: "btn btn-outline-secondary" %> </td>
+            <td><%= link_to "削除する", tea_path(@tea), method: :delete, class: "btn btn-outline-danger",data: {confirm: "本当に削除しますか？"} %> </td>
           </tr>
           <% else %>
           <% end %>
@@ -96,14 +93,18 @@
         </tbody>
       </table>
   
-      <div>
+      <div class="row">
+        <div class="col-10">
         <%= form_with model: @tea_comment, url: tea_tea_comments_path(@tea.id), local: false do |form| %>
-        <%= form.text_field :comment, rows: "5" ,class: 'form-control form-control-lg mb-3' %>
-        <%= form.submit 'コメントする' , class: 'btn btn-primary', id: "submit" %>
+          <%= form.text_field :comment, rows: "5" ,class: 'form-control' %>
+        </div>
+        <div class="col-10 col-xl-2">
+          <%= form.submit 'コメントする' , class: 'btn btn-primary mt-1', id: "submit" %>
+        </div>
         <% end %>
       </div>
       
-      <div class= "tea_comment-<%= @tea.id %>">
+      <div id="tea_comment-<%= @tea.id %>" class="table-responsive" >
         <%= render 'public/tea_comments/tea_comment',  tea: @tea, tea_comment: @tea_comment %>
       </div>
     </div>
