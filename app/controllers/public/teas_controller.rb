@@ -46,7 +46,8 @@ class Public::TeasController < ApplicationController
     @tea = Tea.find(params[:id])
     @tea_tags = @tea.tags
     @tea_comment = TeaComment.new
-    @tea_comments = TeaComment.all
+    # @tea_comments = TeaComment.all.order('created_at DESC')
+    # @tea_comments = TeaComment.page(params[:page])
   end
 
   def destroy
