@@ -66,13 +66,11 @@ class Public::TeasController < ApplicationController
   end
   
   def search_tea_type
-    if params[:tea_type].nil?
-      flash[:notice] = "1つ以上選択してください。"
-      redirect_to root_path
-    else
       @teas = Tea.tea_search(params[:tea_type]).page(params[:page]).order('created_at DESC')
+      # 配列に空白がある場合は削除する
+      @search_teas = params[:tea_type].reject(&:blank?)
+      
       render "public/homes/top"
-    end
   end
 
   # def ranking
