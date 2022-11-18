@@ -20,7 +20,7 @@
 .main-visual{
   height: 500px;
   width: auto;
-  background-image: url(main.JPG);
+  background-image: image-url(main.JPG);
   background-size: cover;
   background-position: center;
 }
@@ -66,7 +66,7 @@
     border-radius: 100%;
     border: 2px solid #aaa;
     background-size: cover;
-    background-image: url(treacha_hunter.jpg);
+    background-image: image-url(treacha_hunter.jpg);
 }
 
 .form-group label{
