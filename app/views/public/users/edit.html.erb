@@ -1,34 +1,49 @@
-<h1>ユーザー編集画面</h1>
-<%= render 'layouts/errors', obj: @user %>
-<%= form_with model: @user, url: user_path(@user) do |form| %>
-
-  <div class="field">
-    <%= form.label :"ユーザーネーム" %><br />
-    <%= form.text_field :name, autofocus: true, autocomplete: "name" %>
+<div class="container">
+  
+  <div class="row">
+    <h5 class="text-center mb-5"><%= @user.name %>さんのユーザー編集画面</h5>
   </div>
+  
+  <%= render 'layouts/errors', obj: @user %>
+  
 
-  <div class="field">
-    <%= form.label :"お住まいの地域" %><br />
-    <%= form.select :prefecture_id, Prefecture.pluck(:name, :id) %>
+  <div class="row d-flex justify-content-center">
+    <div class="col-12 col-lg-7">
+    <%= form_with model: @user, url: user_path(@user) do |form| %>
+      <div class="table-responsive">
+        <table class="table table-light align-middle table-borderless text-nowrap">
+          <tbody>
+            <tr class="from-group">
+              <td><%= form.label :"ユーザーネーム" %></td>
+              <td><%= form.text_field :name, autofocus: true, autocomplete: "name", class: "form-control" %></td>
+            </tr>
+            <tr class="from-group">
+              <td><%= form.label :"お住まいの地域" %></td>
+              <td><%= form.select :prefecture_id, Prefecture.pluck(:name, :id), class: "form-control" %></td>
+            </tr>
+            <tr class="from-group">
+              <td><%= form.label :"メールアドレス" %></td>
+              <td><%= form.email_field :email, autocomplete: "email", class: "form-control" %></td>
+            </tr>
+            <tr class="from-group">
+              <td><%= form.label :"プロフィール画像", for: "formFile", class: "form-label" %></td>
+              <td><%= form.file_field :profile_image, accept: "image/*", class: "form-control", type: "file",  id: "formFile" %></td>
+            </tr>
+            <tr class="from-group">
+              <td><%= form.label :"自己紹介" %></td>
+              <td><%= form.text_area :introduction, class: "form-control" %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="actions d-flex justify-content-evenly mb-5">
+        <%= form.submit "変更を保存する", class: "btn btn-outline-success" %>
+        <%= link_to user_path(@user), class: "btn btn-outline-secondary" do %>
+          保存せずに戻る
+        <% end %> 
+      </div>
+    <% end %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :"メールアドレス" %><br />
-    <%= form.email_field :email, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= form.label :"プロフィール画像" %><br />
-    <%= form.file_field :profile_image, accept: "image/*" %>
-  </div>
-
-  <div class="field">
-    <%= form.label :"自己紹介" %><br />
-    <%= form.text_area :introduction %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit "変更を保存する" %>
-  </div>
-
-<% end %>
+  
+</div>
