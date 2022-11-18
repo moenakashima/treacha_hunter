@@ -1,75 +1,101 @@
-
-<div class="container px-5 px-sm-0">
-  <div class="row">
-    <div calss="col-3">
-      <%= image_tag @user.get_profile_image(100,100), class: "show_profile_image" %>
-      <table class="table">
-        <tbody>
-          <tr></tr>
-          <tr>
-            <td><%= @user.name %></td>
-            <td><i class="fas fa-cog"></i></td>
-            <td><%= link_to "お気に入りリスト", user_favorites_path(@user), class: "btn btn-outline-secondary" %></td>
-            <td>
-              <% if @user.name != "guestuser" %>
-                <div class='row'>
-                <%= link_to '会員情報編集',edit_user_path(@user), class: "btn btn-outline-secondary" %>
-                </div>
-              <% end %>
-            </td>
-            <td><%= link_to destroy_user_session_path, method: :delete, class: 'btn btn-primary' do %>ログアウト<% end %></td>
-
-          </tr>
-          <tr>
-            <td>introduction</td>
-            <td><%= @user.introduction %></td>
-          </tr>
-        </tbody>
-      </table>
-      <div><%= link_to "投稿する", new_tea_path, class: "btn btn-primary" %></div>
-      <div>見つけたトレチャーの数<%= @user.teas.count %>個</div>
-      <div><%= @user.prefecture.name %>在住</div>
-      <div><%= @hunter_histroy  %>日</div>
-
-    </div>
+<div class="container">
+  
+  <div class="row ">
+    <h5 class="text-center">ユーザー詳細</h5>
   </div>
+  
+  <div class="row row-cols-md-auto row-cols-xxl-3 justify-content-center">
+    
+    <div class="col-lg-3 col-10">
+         <table class="table table-borderless table-light">
+          <tbody>
+            <tr>
+              <td class="d-flex justify-content-center"><%= image_tag @user.get_profile_image(100,100) %></td>
+            </tr>
+            <tr>
+              <td class="d-flex justify-content-between">
+                
+                <%= @user.name %>
+
+                <div class="dropdown">
+                  <a class="dropdown-toggle link-secondary text-decoration-none" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-cog"></i>
+                  </a>
+                  
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li class="dropdown-item">
+                      <%= link_to user_favorites_path(@user), class: "link-dark text-decoration-none" do %>
+                        <i class="far fa-heart me-3"></i>お気に入り
+                      <% end %>
+                    </li>
+                    
+                    <li class="dropdown-item">
+                      <%= link_to edit_user_path(@user), class: "link-dark text-decoration-none" do %>
+                        <i class="far fa-edit me-3"></i>登録情報編集
+                      <% end %>
+                    </li>
+                    
+                    <li class="dropdown-item">
+                      <%= link_to destroy_user_session_path, class: "link-dark text-decoration-none", method: :delete do %>
+                        <i class="fas fa-sign-out-alt me-3"></i>ログアウト
+                      <% end %>
+                    </li>
+                  </ul>
+                </div>
+                
+              </td>
+            </tr>
+            <tr>
+              <td>ハンター歴：<%= @hunter_histroy  %>日</td>
+            </tr>
+            <tr>
+              <td>集めたトレチャー：<%= @user.teas.count %>個</td>
+            </tr>
+            <tr>
+              <td><%= @user.prefecture.name %>在住</td>
+            </tr>
+            <tr>
+              <td>自己紹介：<%= @user.introduction %></td>
+            </tr>
+            <tr>
+              <td><%= link_to "投稿する", new_tea_path, class: "btn d-grid btn-outline-dark" %></td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+    
+    <div class="col-lg-9 col-10">
+      <div class="row row-cols-md-auto row-cols-xxl-3 justify-content-center">
+        <% @teas.each do |tea| %>
+          <div class="col mb-4">   
+            <%= link_to tea_path(tea) do %>
+              <%= image_tag tea.get_tea_image(250,200) %>
+            <% end %> 
+            <div class="row">
+              <div class="col-8 pt-2">
+                <%= tea.tea_type.name %>
+                (<%= tea.prefecture.name %>)
+                &nbsp;
+                <%= link_to user_path(tea.user) do %>
+                  <%= tea.user.name %>
+                <% end %>
+              </div>
+              <div id="favorite-<%= tea.id %>" class="col-3">
+                <%= render "public/favorites/favorite", tea: tea %>
+              </div>
+            </div>
+            <%= tea.created_at.strftime('%Y/%m/%d') %>
+            <%= link_to tea_path(tea) do %>
+              <%= tea.opinion.truncate(15) %>
+            <% end %>
+          </div>   
+        <% end %>
+        <% if @teas %> 
+        <%= paginate @teas %>
+        <% end %> 
+        </div>
+      </div>
+      
+  </div>
+
 </div>
-<% @teas.each do |tea| %>
-
-<%= link_to tea_path(tea) do %>
-<%= image_tag tea.get_tea_image(400,400) %>
-<% end %>
-<table class="table">
-  <tbody>
-    <tr>
-      <td>
-        <%= tea.tea_type.name %>
-      </td>
-      <td>
-        <%= tea.prefecture.name %>
-      </td>
-      <td>
-        <%= link_to user_path(tea.user) do %>
-        <%= tea.user.name %>
-        <% end %>
-      </td>
-      <td id="favorite-<%= tea.id %>">
-        <%= render "public/favorites/favorite", tea: tea %>
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        <%= tea.created_at.strftime('%Y/%m/%d') %>
-      </td>
-      <td>
-        <%= link_to tea_path(tea) do %>
-         <%= tea.opinion.truncate(15) %>
-        <% end %>
-      </td>
-    </tr>
-
-  </tbody>
-</table>
-<% end %>
-<%= paginate @teas %>
