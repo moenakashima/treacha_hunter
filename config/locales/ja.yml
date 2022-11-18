@@ -17,6 +17,7 @@ ja:
         parchased_at: 購入場所
         seller: 販売者
         opinion: 投稿文
+        tea_image: 投稿画像
         
       tea_type:
         name: お茶の種類名

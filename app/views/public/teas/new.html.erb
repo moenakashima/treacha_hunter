@@ -1,4 +1,8 @@
-<h2>新規投稿フォーム</h2>
-<%= render 'layouts/errors', obj: @tea %>
-<%= render "form", tea: @tea %>
-
+<div class="container">
+  
+  <div class="row">
+    <h5 class="text-center mb-5">新規投稿フォーム</h5>
+  </div>
+  <%= render 'layouts/errors', obj: @tea %>
+  <%= render "form", tea: @tea  %>
+</div>
