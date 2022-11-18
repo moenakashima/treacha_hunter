@@ -1,26 +1,26 @@
 ja:
-activerecord:
-  attributes:
-    user:
-      prefecture: お住まいの地域
-      introduction: 自己紹介
-      is_active: 会員ステータス
-      
-    admin:
-      email: メールアドレス
-      
-    tea:
-      tea_type: お茶の種類
-      user: ユーザーネーム
-      product_name: 商品名
-      prefecture: 産地
-      parchased_at: 購入場所
-      seller: 販売者
-      seller: 感想
-      
-    tea_type:
-      name: お茶の種類名
-      
-    tea_comment:
-      comment: コメント
-      
+  activerecord:
+    attributes:
+      user:
+        prefecture: お住まいの地域
+        introduction: 自己紹介
+        is_active: 会員ステータス
+        
+      admin:
+        email: メールアドレス
+        
+      tea:
+        tea_type: お茶の種類
+        user: ユーザーネーム
+        product_name: 商品名
+        prefecture: 産地
+        parchased_at: 購入場所
+        seller: 販売者
+        opinion: 投稿文
+        
+      tea_type:
+        name: お茶の種類名
+        
+      tea_comment:
+        comment: コメント
+        
