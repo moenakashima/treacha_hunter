@@ -1,4 +1,5 @@
 class Public::TeasController < ApplicationController
+  
 
   def create
     @tea = Tea.new(tea_params)
@@ -22,6 +23,9 @@ class Public::TeasController < ApplicationController
   def edit
     @tea = Tea.find(params[:id])
     @tag_list = @tea.tags.pluck(:name).join(',')
+    if @tea.user_id != current_user.id
+      redirect_to root_path
+    end
   end
 
   def update
