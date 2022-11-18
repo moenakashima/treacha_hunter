@@ -55,7 +55,7 @@ class Tea < ApplicationRecord
     if search != nil
       Tea.where('product_name LIKE(?) or opinion LIKE(?)' , "%#{search}%",  "%#{search}%")
     else
-      Tea.all
+      redirect_to root_path
     end
   end
   
