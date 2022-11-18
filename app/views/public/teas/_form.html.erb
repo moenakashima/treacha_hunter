@@ -1,48 +1,53 @@
-<%= form_with model: tea do |form| %>
+<div class="row d-flex justify-content-center">
+  <div class="col-12 col-lg-7">
 
-<div class="field">
-  <%= form.label:"投稿画像" %><br />
-  <%= form.file_field :tea_image, accept: "image/*" %>
+  <%= form_with model: tea do |form| %>
+  <div class="table-responsive">
+    <table class="table table-light align-middle table-borderless text-nowrap">
+      <tbody>
+        <tr><td colspan="2" class="text-danger">*は入力必須項目です</td></tr>
+        <tr class="from-group">
+          <td><%= form.label:"投稿画像*", for: "formFile", class: "form-label"  %></td>
+          <td><%= form.file_field :tea_image, accept: "image/*", class: "form-control", type: "file",  id: "formFile" %></td>
+        </tr>
+        <tr class="from-group">
+          <td><%= form.label:"商品名*" %></td>
+          <td><%= form.text_field :product_name, class: "form-control" %></td>
+        </tr>  
+        <tr class="from-group">
+          <td><%= form.label:"お茶の種類*" %></td>
+          <td><%= form.select :tea_type_id, TeaType.pluck(:name, :id) %></td>
+        </tr>  
+        <tr class="from-group">
+          <td><%= form.label:"産地" %></td>
+          <td><%= form.select :prefecture_id, Prefecture.pluck(:name, :id) %></td>
+        </tr>  
+        <tr class="from-group">
+          <td><%= form.label:"販売者" %></td>
+          <td><%= form.text_field :seller, class: "form-control"  %></td>
+        </tr>  
+        <tr class="from-group">
+          <td><%= form.label:"購入場所" %></td>
+          <td><%= form.text_field :parchased_at, class: "form-control"  %></td>
+        </tr>  
+        <tr class="from-group">
+          <td><%= form.label:"タグ (,で区切ると複数タグ登録できます)" %></td>
+          <td><%= form.text_area :name, value: @tag_list, :placeholder => "新茶2022,八女茶,深蒸し茶", class: "form-control"  %></td>
+        </tr>  
+        <tr class="from-group">
+          <td><%= form.label:"投稿文(500文字まで)" %></td>
+          <td><%= form.text_area :opinion, :placeholder => "例）おすすめの淹れ方、味の感想、生産者について", class: "form-control", rows: "3" %></td>
+        </tr>  
+      </tbody>
+    </table>
+  </div>
+  <div class="actions d-flex justify-content-evenly mb-5">
+    <%= form.submit "投稿する", class: "btn btn-outline-success" %>
+    <%= link_to user_path(current_user), class: "btn btn-outline-secondary" do %>
+      投稿せずに戻る
+    <% end %> 
+  </div>
+  <% end %>
+  
+  </div>
 </div>
-
-<div class="field">
-  <%= form.label:"商品名" %><br />
-  <%= form.text_field :product_name %>
-</div>
-
-<div class="field">
-  <%= form.label:"お茶の種類" %><br />
-  <%= form.select :tea_type_id, TeaType.pluck(:name, :id) %>
-</div>
-
-<div class="field">
-  <%= form.label:"産地" %><br />
-  <%= form.select :prefecture_id, Prefecture.pluck(:name, :id) %>
-</div>
-
-<div class="field">
-  <%= form.label:"販売者" %><br />
-  <%= form.text_field :seller %>
-</dic>
-
-<div class="field">
-  <%= form.label:"購入場所" %><br />
-  <%= form.text_field :parchased_at %>
-</div>
-
-<div class="field">
-  <%= form.label:"タグ (,で区切ると複数タグ登録できます)" %><br />
-  <%= form.text_area :name, value: @tag_list, :placeholder => "新茶2022,八女茶,深蒸し茶" %>
-</div>
-
-
-<div class="field">
-  <%= form.label:"投稿文" %><br />
-  <%= form.text_area :opinion, :placeholder => "例）おすすめの淹れ方、味の感想、生産者について" %>
-</div>
-
-<div class="field">
-  <%= form.submit %>
-</div>
-
-<% end %>
