@@ -1,45 +1,47 @@
 <div class="container">
   <div class="row justify-content-center">
     
-    <div class="text-center">トレチャーハンターのなかまたち</div>  
+    <div class="row ">
+      <h5 class="text-center mb-5">トレチャーハンターのなかまたち</h5>
+    </div>
     
-      <div class="col-10 table-responsive">
-        <table class="table table-inverse" >
-          <thead class="thead-light">
-            <th>ユーザー画像</th>
-            <th>ユーザーネーム</th>
-            <th>お住まいの地域</th>
-            <th>トレチャーハンター歴</th>
-            <th>見つけたトレチャーの数</th>
-          </thead>
-          <tbody>
-            <% @users.each do |user| %>
-            <tr>
-              <td class="w-15">
-                <%= link_to user_path(user) do %>
-                  <%= image_tag user.get_profile_image(50,50), class: "w-80" %>
-                <% end %>
-              </td>
-              
-              <td>  
-                <%= link_to user_path(user) do %>
-                  <%= user.name %>
-                <% end %>
-              </td>
-              
-              <td><%= user.prefecture.name %></td>
-              
-              <td class="text-lg-center text-md-end" ><%= (@d1 - (user.created_at).to_date).to_i %>日</td>
-              <td class="text-lg-center text-md-end"><%= user.teas.count %>個</td>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
-        
-        <div class="row justify-content-center mt-3">
-          <%= paginate @users %>
-        </div>
+    <div class="col-10 table-responsive">
+      <table class="table table-inverse" >
+        <thead class="thead-light">
+          <th>ユーザー画像</th>
+          <th>ユーザーネーム</th>
+          <th>お住まいの地域</th>
+          <th>トレチャーハンター歴</th>
+          <th>見つけたトレチャーの数</th>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+          <tr>
+            <td class="w-15">
+              <%= link_to user_path(user) do %>
+                <%= image_tag user.get_profile_image(50,50), class: "w-80" %>
+              <% end %>
+            </td>
+            
+            <td>  
+              <%= link_to user_path(user) do %>
+                <%= user.name %>
+              <% end %>
+            </td>
+            
+            <td><%= user.prefecture.name %></td>
+            
+            <td class="text-lg-center text-md-end" ><%= (@d1 - (user.created_at).to_date).to_i %>日</td>
+            <td class="text-lg-center text-md-end"><%= user.teas.count %>個</td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      
+      <div class="row justify-content-center mt-3">
+        <%= paginate @users %>
       </div>
+    </div>
 
 
   </div>
