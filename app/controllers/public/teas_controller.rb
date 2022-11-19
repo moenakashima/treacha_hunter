@@ -69,11 +69,11 @@ class Public::TeasController < ApplicationController
   end
   
   def search_tea_type
-      @teas = Tea.tea_search(params[:tea_type]).page(params[:page]).order('created_at DESC')
-      # 配列に空白がある場合は削除する
-      @search_teas = params[:tea_type].reject(&:blank?)
-      
-      render "public/homes/top"
+    @teas = Tea.tea_search(params[:tea_type]).page(params[:page]).order('created_at DESC')
+    # 配列に空白がある場合は削除する
+    @search_teas = params[:tea_type].reject(&:blank?)
+    
+    render "public/homes/top"
   end
 
 
