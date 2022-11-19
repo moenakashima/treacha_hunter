@@ -1,44 +1,109 @@
-<h5>お気に入りのお茶リスト</h5>
+<div class="container">
+  
+  <div class="row ">
+    <h5 class="text-center mb-5"><%= @user.name %>さんのお気に入りのお茶リスト</h5>
+  </div>
+  
+  <div class="row row-cols-md-auto row-cols-xxl-3 justify-content-center">
+    
+    <div class="col-lg-3 col-md-5 col-10">
+       <table class="table table-borderless table-light">
+        <tbody>
+          <tr>
+            <td class="d-flex justify-content-center"><%= image_tag @user.get_profile_image(100,100) %></td>
+          </tr>
+          <tr>
+            <td class="d-flex justify-content-between">
+              
+              <%= @user.name %>
 
-<% @teas.each do |tea| %>
-  <% if tea.favorited_by?(current_user) %>
-  
-  <%= link_to tea_path(tea) do %>
-  <%= image_tag tea.get_tea_image(400,400) %>
-  <% end %>
-  <table class="table">
-    <tbody>
-      <tr>
-        <td>
+              <div class="dropdown">
+                <a class="dropdown-toggle link-secondary text-decoration-none" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fas fa-cog"></i>
+                </a>
+                
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <li class="dropdown-item">
+                    <%= link_to user_favorites_path(@user), class: "link-dark text-decoration-none" do %>
+                      <i class="far fa-heart me-3"></i>お気に入り
+                    <% end %>
+                  </li>
+                  
+                  <li class="dropdown-item">
+                    <%= link_to edit_user_path(@user), class: "link-dark text-decoration-none" do %>
+                      <i class="far fa-edit me-3"></i>登録情報編集
+                    <% end %>
+                  </li>
+                  
+                  <li class="dropdown-item">
+                    <%= link_to destroy_user_session_path, class: "link-dark text-decoration-none", method: :delete do %>
+                      <i class="fas fa-sign-out-alt me-3"></i>ログアウト
+                    <% end %>
+                  </li>
+                </ul>
+              </div>
+              
+            </td>
+          </tr>
+          <tr>
+            <td>ハンター歴：<%= @hunter_histroy  %>日</td>
+          </tr>
+          <tr>
+            <td>集めたトレチャー：<%= @user.teas.count %>個</td>
+          </tr>
+          <tr>
+            <td><%= @user.prefecture.name %>在住</td>
+          </tr>
+          <tr>
+            <td>自己紹介：<%= @user.introduction %></td>
+          </tr>
+          <tr>
+            <td><%= link_to "投稿する", new_tea_path, class: "btn d-grid btn-outline-dark" %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col mb-4"> 
+    <% @teas.each do |tea| %>
+      <% if tea.favorited_by?(current_user) %>     
+    <%= link_to tea_path(tea) do %>
+    <%= image_tag tea.get_tea_image(300,250) %>
+    <% end %>
+    
+      <div class="row">
+        <div class="col-8 pt-2">
           <%= tea.tea_type.name %>
-        </td>
-        <td>
-          <%= tea.prefecture.name %>
-        </td>
-        <td>
+          (<%= tea.prefecture.name %>)
+          &nbsp;
           <%= link_to user_path(tea.user) do %>
-          <%= tea.user.name %>
+            <%= tea.user.name %>
           <% end %>
-        </td>
-        <td id="favorite-<%= tea.id %>">
+        </div>
+       
+        <div id="favorite-<%= tea.id %>" class="col-3">
           <%= render "public/favorites/favorite", tea: tea %>
-        </td>
-      </tr>
-  
-      <tr>
-        <td>
-          <%= tea.created_at.strftime('%Y/%m/%d') %>
-        </td>
-        <td>
-          <%= link_to tea_path(tea) do %>
-           <%= tea.opinion.truncate(15) %>
-          <% end %>
-        </td>
-      </tr>
+        </div>
+        
+      </div>        
+    
+      <%= tea.created_at.strftime('%Y/%m/%d') %>
       
-    </tbody>
-  </table>
-  <% end %>
-<% end %>
-<%= paginate @teas %>
-<%= link_to "マイページに戻る", user_path(current_user), class: "btn btn-info" %>
+      <%= link_to tea_path(tea) do %>
+        <%= tea.opinion.truncate(15) %>
+      <% end %>
+
+    <% end %>
+    <% end %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <p class="text-center">
+      <% if @teas && @teas.count > 9 %> 
+      <%= paginate @teas %>
+      <% end %> 
+    </p>
+  </div>
+  
+</div>
