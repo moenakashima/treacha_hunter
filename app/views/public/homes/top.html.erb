@@ -5,9 +5,21 @@
       <h5 class="text-center mb-5">お茶の種類「<%= @search_teas.join(" + ")  %>」</h5>
     </div>
   <% end %>
-
+  
+  <% if @tag %> 
+    <div class="row justify-content-center">
+      <h5 class="text-center mb-5">「#<%= @tag.name %>」を含む投稿一覧</h5>
+    </div>
+  <% end %>
+  
+  <% if params[:keyword] != nil %> 
+    <div class="row justify-content-center">
+      <h5 class="text-center mb-5">「<%= params[:keyword] %>」を含む投稿一覧</h5>
+    </div>
+  <% end %>
+  
   <div class="row row-cols-md-auto row-cols-xxl-3 justify-content-center">
-
+  <% if @teas != nil && @teas.count > 0 %>
     <% @teas.each do |tea| %>
       <div class="col mb-4">   
          
@@ -34,8 +46,14 @@
           <%= tea.opinion.truncate(15) %>
         <% end %>
       </div>
+      <% end %>
+    <% else %>
+    <div class="row justify-content-center">
+      <h5 class="text-center mb-5">検索結果がありません</h5>
+    </div>
     <% end %>
-  <% if @teas %> 
+    
+  <% if @teas && @teas.count > 9 %> 
   <%= paginate @teas %>
   <% end %> 
   </div>
