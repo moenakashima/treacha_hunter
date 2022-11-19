@@ -4,7 +4,6 @@ class Public::TeaCommentsController < ApplicationController
     @tea_comment = current_user.tea_comments.new(comment_params)
     @tea_comment.tea_id = @tea.id
     @tea_comment.save
-  
   end
 
   def destroy
