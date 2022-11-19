@@ -53,7 +53,7 @@ class Tea < ApplicationRecord
   # 検索窓
   def self.search(search)
     if search != nil
-      Tea.where('product_name LIKE(?) or opinion LIKE(?)' , "%#{search}%",  "%#{search}%")
+      Tea.joins(:prefecture).where('product_name LIKE(?) or opinion LIKE(?) or prefectures.name LIKE(?)' , "%#{search}%",  "%#{search}%", "#{search}%")
     else
       render "public/homes/top"
     end

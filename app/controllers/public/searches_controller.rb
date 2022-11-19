@@ -6,7 +6,7 @@ class Public::SearchesController < ApplicationController
     elsif params[:keyword] == ""
       render "public/homes/top"
     else
-      @teas = Tea.search(params[:keyword])&.order('created_at DESC')&.page(params[:page])
+      @teas = Tea.search(params[:keyword])&.order('teas.created_at DESC')&.page(params[:page])
       render "public/homes/top"
     end
   end
