@@ -38,7 +38,20 @@ class Public::UsersController < ApplicationController
   end
   
   def favorite
-    @teas = Tea.order('created_at DESC').page(params[:page])
+    @user  = User.find(params[:user_id])
+    if @user.id != current_user.id
+       redirect_to user_path(@user), notice: '他ハンターのお気に入りリストは確認できません。'
+       
+    else
+      @teas = Tea.order('created_at DESC').page(params[:page])
+    
+    # 参加して何日経ったのかを’ハンター歴’として表示するための日付計算       
+      @d1 = Date.today
+      @d2 = (@user.created_at).to_date
+    # 今日の日付と参加日の差分を計算し文字列で取得    
+      @hunter_histroy = (@d1 - @d2).to_i
+     
+    end
     
   end
 
