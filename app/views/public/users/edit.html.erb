@@ -13,23 +13,23 @@
       <div class="table-responsive">
         <table class="table table-light align-middle table-borderless text-nowrap">
           <tbody>
-            <tr class="from-group">
+            <tr class="form-group">
               <td><%= form.label :"ユーザーネーム" %></td>
               <td><%= form.text_field :name, autofocus: true, autocomplete: "name", class: "form-control" %></td>
             </tr>
-            <tr class="from-group">
+            <tr class="form-group">
               <td><%= form.label :"お住まいの地域" %></td>
               <td><%= form.select :prefecture_id, Prefecture.pluck(:name, :id), class: "form-control" %></td>
             </tr>
-            <tr class="from-group">
+            <tr class="form-group">
               <td><%= form.label :"メールアドレス" %></td>
               <td><%= form.email_field :email, autocomplete: "email", class: "form-control" %></td>
             </tr>
-            <tr class="from-group">
+            <tr class="form-group">
               <td><%= form.label :"プロフィール画像", for: "formFile", class: "form-label" %></td>
               <td><%= form.file_field :profile_image, accept: "image/*", class: "form-control", type: "file",  id: "formFile" %></td>
             </tr>
-            <tr class="from-group">
+            <tr class="form-group">
               <td><%= form.label :"自己紹介" %></td>
               <td><%= form.text_area :introduction, class: "form-control" %></td>
             </tr>
