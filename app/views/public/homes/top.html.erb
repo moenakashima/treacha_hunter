@@ -52,9 +52,13 @@
       <h5 class="text-center mb-5">検索結果がありません</h5>
     </div>
     <% end %>
-    
-  <% if @teas && @teas.count > 9 %> 
-  <%= paginate @teas %>
-  <% end %> 
+
+
   </div>
+  <div class="row"> 
+    <div class="d-flex justify-content-center mb-5">
+      <%= paginate @teas %>
+    </div>
+  </div> 
+
 </div>
