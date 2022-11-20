@@ -1,36 +1,60 @@
-  <% @teas.each do |tea| %>
-
-  <%= link_to admin_tea_path(tea) do %>
-  <%= image_tag tea.get_tea_image(400,400) %>
-  <% end %>
-  <table class="table">
-    <tbody>
-      <tr>
-        <td>
-          <%= tea.tea_type.name %>
-        </td>
-        <td>
-          <%= tea.prefecture.name %>
-        </td>
-        <td>
-          <%= link_to admin_user_path(tea.user) do %>
-          <%= tea.user.name %>
+<div class="container">
+  <div class="row">
+    <h5 class="text-center mb-5">投稿一覧</h5>
+  </div>
+  
+  <div class="row justify-content-center">
+    <div class="col-10 table-responsive-md">
+      <table class= "table table-hover table-inverse text-nowrap">
+        <thead>
+          <tr>
+            <th>投稿日</th>
+            <th>投稿画像</th>
+            <th>投稿者</th>
+            <th>投稿文</th>
+            <th>お気に入り数</th>
+            <th>コメント数</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @teas.each do |tea| %>
+          <tr>
+            <td>
+              <%= tea.created_at.strftime('%Y/%m/%d') %>
+            </td>
+            <td>
+              <%= link_to admin_tea_path(tea) do %>
+              <%= image_tag tea.get_tea_image(50,50) %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to admin_user_path(tea.user) do %>
+              <%= tea.user.name %>
+              <% end %>
+            </td>
+            <td>          
+              <%= link_to admin_tea_path(tea) do %>
+              <%= tea.opinion.truncate(15) %>
+              <% end %>
+            </td>
+            <td>
+              <%= tea.favorites.count %>
+            </td>
+            <td>
+              <%= tea.tea_comments.count %>
+            </td>
+          </tr>
           <% end %>
-        </td>
-      </tr>
+        </tbody>
+      </table>
+      
+    </div>
+  </div>
+  
+  <div class="row"> 
+    <div class="d-flex justify-content-center mb-5">
+      <%= paginate @teas %>
+    </div>
+  </div> 
 
-      <tr>
-        <td>
-          <%= tea.created_at.strftime('%Y/%m/%d') %>
-        </td>
-        <td>
-          <%= link_to admin_tea_path(tea) do %>
-           <%= tea.opinion.truncate(15) %>
-          <% end %>
-        </td>
-      </tr>
-
-    </tbody>
-  </table>
-  <% end %>
-  <%= paginate @teas %>
+</div>
