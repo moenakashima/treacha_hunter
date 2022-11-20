@@ -1,52 +1,75 @@
-<h1>ユーザー編集画面</h1>
-<%= render 'layouts/errors', obj: @user %>
-<%= form_with model: @user, url: admin_user_path(@user) do |form| %>
-
-  <div class="field">
-    <%= "プロフィール画像" %><br />
-    <%= image_tag @user.get_profile_image(100,100) %>
-  </div>  
+<div class="container">
   
-  <div class="field">
-    <%= "ユーザーID" %><br />
-    <%=  @user.id %>
-  </div>  
-  
-  <div class="field">
-    <%= "登録日" %><br />
-    <%= @user.created_at.strftime('%Y/%m/%d') %>
-  </div>  
-  
-  <div class="field">
-    <%= form.label :"ユーザーネーム" %><br />
-    <%= form.text_field :name, autofocus: true, autocomplete: "name" %>
-  </div>
-
-  <div class="field">
-    <%= form.label :"お住まいの地域" %><br />
-    <%= form.select :prefecture_id, Prefecture.pluck(:name, :id) %>
-  </div>
-
-  <div class="field">
-    <%= form.label :"メールアドレス" %><br />
-    <%= form.email_field :email, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= "自己紹介" %><br />
-    <%= @user.introduction %>
+  <div class="row">
+    <h5 class="text-center mb-5"><%= @user.name %>さんのユーザー編集画面</h5>
   </div>
   
-  <div class="field">
-    <%= form.label "会員ステータス" , class: "col-sm-2 control-label"%>
-    <%= form.radio_button :is_active, :true %>
-    <%= form.label :is_active, "有効", value: true %>
-    <%= form.radio_button :is_active,  :false %>
-    <%= form.label :is_active, "停止中", value: false %>
-  </div>
+  <%= render 'layouts/errors', obj: @user %>
+  
+  <div class="row d-flex justify-content-center">
+    
+    <div class="col-12 col-lg-7">
+      
+    <%= form_with model: @user, url: admin_user_path(@user) do |form| %>
+    
+      <div class="table-responsive">
+        <table class="table table-light align-middle table-borderless text-nowrap">
+          <tbody>
+            <tr class="form-group">
+              <td><%= "プロフィール画像" %></td>
+              <td><%= image_tag @user.get_profile_image(100,100) %></td>
+            </tr>
+            
+            <tr class="form-group">
+              <td><%= "ユーザーID" %></td>
+              <td><%=  @user.id %></td>
+            </tr>
+  
+            <tr class="form-group">
+              <td><%= "登録日" %></td>
+              <td><%= @user.created_at.strftime('%Y/%m/%d') %></td>
+            </tr>
+  
+            <tr class="form-group">
+              <td><%= form.label :"ユーザーネーム" %></td>
+              <td><%= form.text_field :name, autofocus: true, autocomplete: "name", class: "form-control" %></td>
+            </tr>
+            
+            <tr class="form-group">
+              <td><%= form.label :"お住まいの地域" %></td>
+              <td><%= form.select :prefecture_id, Prefecture.pluck(:name, :id), class: "form-control" %></td>
+            </tr>
+            
+            <tr class="form-group">
+              <td><%= form.label :"メールアドレス" %></td>
+              <td><%= form.email_field :email, autocomplete: "email", class: "form-control" %></td>
+            </tr>
+            
+            <tr class="form-group">
+              <td><%= "自己紹介" %></td>
+              <td><%= @user.introduction %></td>
+            </tr>
 
-  <div class="actions">
-    <%= form.submit "変更を保存する" %>
-  </div>
-
-<% end %>
+            <tr clas="form-group">
+              <td><%= form.label "会員ステータス" , class: "col-sm-2 control-label"%></td>
+              <td><%= form.radio_button :is_active, :true %>
+                <%= form.label :is_active, "有効", value: true %>
+                <%= form.radio_button :is_active,  :false %>
+                <%= form.label :is_active, "停止中", value: false %>
+              </td>
+            </tr>
+          </tbody>
+          </table>
+        </div>
+          
+      <div class="actions d-flex justify-content-evenly mb-5">
+        <%= form.submit "変更を保存する", class: "btn btn-outline-success" %>
+        <%= link_to admin_user_path(@user), class: "btn btn-outline-secondary" do %>
+          保存せずに戻る
+        <% end %> 
+      </div>      
+    <% end %>      
+  </div>         
+</div>         
+     
+      
