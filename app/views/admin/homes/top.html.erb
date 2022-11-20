@@ -1,17 +1,45 @@
-<h3>ユーザー一覧</h3>
-
-<tbody>
+<div class="container">
+  <div class="row justify-content-center">
+    
+    <div class="row">
+      <h5 class="text-center mb-5">ユーザー一覧</h5>
+    </div>
   
-<% @users.each do |user| %>
-  <tr>
-    <td><%= user.created_at.strftime('%Y/%m/%d') %></td>
-    <td><%= user.id %></td>
-    <td><%= user.name %></td>
-    <td><%= user.teas.count %></td>
-    <td><%= user.is_active %></td>
-    <td><%= link_to "詳細表示", admin_user_path(user), class: "btn btn-secondary" %></td>
-    <td></td>
-  </tr>
-<% end %>
-</tbody>
-<%= paginate @users %>
+    <div class="col-10 table-responsive">
+      <table class="table table-inverse" >
+        <thead class="thead-light text-center">
+          <th>登録日</th>
+          <th>ID</th>
+          <th>ユーザー名</th>
+          <th>投稿数</th>
+          <th>ステータス</th>
+          <th></th>
+        </thead>
+
+        <tbody>
+          
+        <% @users.each do |user| %>
+          <tr class="text-center">
+            <td><%= user.created_at.strftime('%Y/%m/%d')%></td>
+            <td><%= user.id %></td>
+            <td><%= user.name %></td>
+            <td><%= user.teas.count %></td>
+            <td><%= user.is_active ? '有効' : '停止中' %></td>
+            <td><%= link_to "詳細表示", admin_user_path(user), class: "btn btn-secondary" %></td>
+            <td></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class=row>
+      <div class= text-center>
+      <% if @users %>
+      <%= paginate @users %>
+      <% end %>
+      </div>
+    </div>
+    
+  </div>
+</div>
