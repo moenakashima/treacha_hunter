@@ -1,47 +1,61 @@
-<h3>ユーザー詳細画面</h3>
-  <div class="field">
-    <%= "プロフィール画像" %><br />
-    <%= image_tag @user.get_profile_image(100,100) %>
-  </div>  
+<div class="container">
   
-  <div class="field">
-    <%= "ユーザーID" %><br />
-    <%=  @user.id %>
-  </div>  
-  
-  <div class="field">
-    <%= "登録日" %><br />
-    <%= @user.created_at.strftime('%Y/%m/%d') %>
-  </div>  
-  
-  <div class="field">
-    <%= "ユーザーネーム" %><br />
-    <%= @user.name  %>
+  <div class="row ">
+    <h5 class="text-center mb-5">ユーザー詳細</h5>
   </div>
-
-  <div class="field">
-    <%= "お住まいの地域" %><br />
-    <%= @user.prefecture.name  %>
+  <div class="row justify-content-center">
+    
+    <div class="col-10 table-responsive">
+      <table class="table table-light">
+        <thead>
+          <th></th>
+          <th></th>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="2" class="text-center"><%= image_tag @user.get_profile_image(100,100) %></td>
+          </tr>
+          <tr>
+            <td><%= "ユーザーID" %></td>
+            <td><%=  @user.id %></td>
+          </tr>
+          
+          <tr>
+            <td><%= "登録日" %></td>
+            <td><%= @user.created_at.strftime('%Y/%m/%d') %></td>
+          </tr>
+          
+          <tr>
+            <td><%= "ユーザー名" %></td>
+            <td><%= @user.name %></td>
+          </tr>
+          
+          <tr>
+            <td><%= "お住まいの地域" %></td>
+            <td><%= @user.prefecture.name %></td>
+          </tr>
+          
+          <tr>
+            <td><%= "メールアドレス" %></td>
+            <td><%= @user.email %></td>
+          </tr>
+          
+          <tr>
+            <td><%= "自己紹介" %></td>
+            <td><%= @user.introduction %></td>
+          </tr>
+          
+          <tr>
+            <td><%= "会員ステータス" %></td>
+            <td><%= @user.is_active ? '有効' : '停止中' %></td>
+          </tr>
+        </tbody>
+        <tfooter>
+          <td colspan="2" class="text-end"><%= link_to "情報編集する", edit_admin_user_path(@user), class: "btn btn-outline-secondary" %></td>
+        </tfooter>
+      </table>
+    </div>
+          
   </div>
-
-  <div class="field">
-    <%= "メールアドレス" %><br />
-    <%= @user.email %>
-  </div>
-  
-  <div class="field">
-    <%= "自己紹介" %><br />
-    <%= @user.introduction %>
-  </div>
-  
-  <div class="field">
-    <%= "会員ステータス" %><br />
-    <%= @user.is_active ? '有効' : '停止中' %>
-
-  </div>
-
+</div>
  
-
-  <div class="actions">
-    <%= link_to "情報編集する", edit_admin_user_path(@user) %>
-  </div>
