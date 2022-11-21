@@ -1,24 +1,45 @@
-<%= render 'layouts/errors', obj: @tea_type %>
-<%= form_with model: @tea_type, url: admin_tea_types_path(@tea_type) do |form| %>
-
-  <%= form.text_field :name %>
-
-  <%= form.submit "お茶の種類を追加する" %>
-
-<% end %>
-
-<h3>お茶の種類一覧</h3>
-
-
-<table>
-  <tbody>
-    <% @tea_types.each do |tea_type| %>
-    <tr>
-      <td><%= tea_type.name %></td>
-      <td><%= link_to "編集する", edit_admin_tea_type_path(tea_type) %></td>
-      <td><%= link_to "削除する", admin_tea_type_path(tea_type), method: :delete, data: {confirm: "本当に削除しますか？"} %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
-
+<div class="container">
+  
+  <div class="row">
+    <h5 class="text-center mb-4">お茶の種類一覧・登録</h5>
+  </div>
+  <%= render 'layouts/errors', obj: @tea_type %>
+  <div class=row>
+    <div class="text-center" >
+      <%= form_with model: @tea_type, url: admin_tea_types_path(@tea_type) do |form| %>
+      <%= form.text_field :name %>
+      <%= form.submit "新規登録", class: "btn btn-outline-primary mb-3" %>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="row justify-content-center">
+    <div class="col-8 table-responsive-md">
+      <table class= "table table-hover table-inverse text-nowrap table-sm">
+        <thead>
+          <tr class="text-center">
+            <th>ID</th>
+            <th>種類名</th>
+            <th colspan="2"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @tea_types.each do |tea_type| %>
+          <tr class="text-center">
+            <td>
+              <%= tea_type.id %>
+            </td>
+            <td>
+              <%= tea_type.name %>
+            </td>
+            <td>
+              <%= link_to "編集する", edit_admin_tea_type_path(tea_type), class: "btn btn-sm btn-outline-success" %>&nbsp;
+              <%= link_to "削除する", admin_tea_type_path(tea_type), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-sm btn-outline-danger" %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

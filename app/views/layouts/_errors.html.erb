@@ -1,9 +1,10 @@
 <!--バリデーションエラーのテンプレート-->
 <% if obj.errors.any? %>
-  <div id="error_explanation">
-    <h3>
+<div class="row justify-content-center" >
+  <div id="error_explanation" class="col-10">
+    <h4>
       <%= obj.errors.count %>件のエラーが発生しました。
-    </h3>
+    </h4>
 
     <ul>
       <% obj.errors.full_messages.each do |message| %>
@@ -11,4 +12,5 @@
       <% end %>
     </ul>
   </div>
+</div>
 <% end %>
