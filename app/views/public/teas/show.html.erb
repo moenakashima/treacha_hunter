@@ -6,101 +6,101 @@
     <div class="col-lg-3 col-8">
       <%= render "public/users/info", user: @user %>
     </div>
-      
-      <div class="col-lg-4 col-10">
-        <table class="table table-borderless">
-          <tbody>
-            <tr>
-              <td><%= image_tag @tea.get_tea_image(300,300) %></td>
-            </tr>
-            <tr>
-              <td><%= @tea.created_at.strftime('%Y/%m/%d') %></td>
-              <td id="favorite-<%= @tea.id %>">
-                <%= render "public/favorites/favorite", tea: @tea %>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      
-      <div class="col-lg-4 col-10 table-responsive">
-        <table class="table">
-          <tbody>
-            <tr>
-              <td>お茶の種類</td>
-              <td><%= @tea.tea_type.name %></td>
-            </tr>
-            <tr>
-              <td>産地</td>
-              <td><%= @tea.prefecture.name %></td>
-            </tr>
-            <tr>
-              <td>商品名</td>
-              <td><%= @tea.product_name %></td>
-            </tr>
-            <tr>
-              <td>販売者</td>
-              <td><%= @tea.seller %></td>
-            </tr>
-            <tr>
-              <td>購入場所</td>
-              <td><%= @tea.parchased_at %></td>
-            </tr>
-            <tr>
-              <td>#タグ</td>
-              <td>
-                <% @tea_tags.each do |tag| %>
-                  <%= link_to search_tea_tag_path(tag_id: tag.id) do %>
-                  <%= "#" %><%= tag.name %>
-                  <% end %>
-                  <%= "" %>
-                <% end %>
-              </td>
-            </tr>
-            <% if @tea.user_id == current_user.id %>
-            <tr>
-              <td><%= link_to "編集する", edit_tea_path(@tea), class: "btn btn-outline-secondary" %> </td>
-              <td><%= link_to "削除する", tea_path(@tea), method: :delete, class: "btn btn-outline-danger",data: {confirm: "本当に削除しますか？"} %> </td>
-            </tr>
-            <% else %>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-      
-    </div>
     
-    <div class="row justify-content-center">
-      
-      <div class="col-8">
-        <div class="table-responsive"> 
-           <table class="table table-borderless">
+    <div class="col-lg-8">
+      <div class="row justify-content-center" >
+        <div class="col-md-5 col-10">
+          <table class="table table-borderless">
             <tbody>
+              <tr class="text-center">
+                <td><%= image_tag @tea.get_tea_image(300,350), class: "tea-image-w" %></td>
+              </tr>
               <tr>
-                <td><%= @tea.opinion %></td>
+                <td class="d-flex justify-content-evenly">
+                  <snap class="mt-2"><%= @tea.created_at.strftime('%Y/%m/%d') %></snap>
+                  <snap id="favorite-<%= @tea.id %>">
+                  <%= render "public/favorites/favorite", tea: @tea %>
+                  </snap>
+                </td>
               </tr>
             </tbody>
           </table>
         </div>
-    
-        <div class="row">
-          <div class="col-10">
-          <%= form_with model: @tea_comment, url: tea_tea_comments_path(@tea.id), local: false do |form| %>
-            <%= form.text_field :comment, rows: "5" ,class: 'form-control' %>
-          </div>
-          <div class="col-10 col-xl-2">
-            <%= form.submit 'コメントする' , class: 'btn btn-primary mt-1', id: "submit" %>
-          </div>
-          <% end %>
+      
+        <div class="col-10 col-md-5 table-responsive">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>お茶の種類</td>
+                <td><%= @tea.tea_type.name %></td>
+              </tr>
+              <tr>
+                <td>産地</td>
+                <td><%= @tea.prefecture.name %></td>
+              </tr>
+              <tr>
+                <td>商品名</td>
+                <td><%= @tea.product_name %></td>
+              </tr>
+              <tr>
+                <td>販売者</td>
+                <td><%= @tea.seller %></td>
+              </tr>
+              <tr>
+                <td>購入場所</td>
+                <td><%= @tea.parchased_at %></td>
+              </tr>
+              <tr>
+                <td>#タグ</td>
+                <td>
+                  <% @tea_tags.each do |tag| %>
+                    <%= link_to search_tea_tag_path(tag_id: tag.id) do %>
+                    <%= "#" %><%= tag.name %>
+                    <% end %>
+                    <%= "" %>
+                  <% end %>
+                </td>
+              </tr>
+              <% if @tea.user_id == current_user.id %>
+              <tr>
+                <td><%= link_to "編集する", edit_tea_path(@tea), class: "btn btn-outline-secondary text-nowrap" %> </td>
+                <td><%= link_to "削除する", tea_path(@tea), method: :delete, class: "btn btn-outline-danger text-nowrap",data: {confirm: "本当に削除しますか？"} %> </td>
+              </tr>
+              <% else %>
+              <% end %>
+            </tbody>
+          </table>
         </div>
-        
-        <div id="tea_comment-<%= @tea.id %>" class="table-responsive" >
-          <%= render 'public/tea_comments/tea_comment', tea_comment: @tea_comment, tea: @tea %>
+      
+        <div class="col-10"> 
+           <%= @tea.opinion %>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+    
+  <div class="row justify-content-center">
+    
+    <div class="col-8">
+      <div class="row">
+        <div class="col-10">
+        <%= form_with model: @tea_comment, url: tea_tea_comments_path(@tea.id), local: false do |form| %>
+          <%= form.text_field :comment, rows: "5" ,class: 'form-control' %>
+        </div>
+        <div class="col-10 col-xl-2">
+          <%= form.submit 'コメントする' , class: 'btn btn-primary mt-1', id: "submit" %>
+        </div>
+        <% end %>
+      </div>
       
+      <div id="tea_comment-<%= @tea.id %>" class="table-responsive" >
+        <%= render 'public/tea_comments/tea_comment', tea_comment: @tea_comment, tea: @tea %>
+      </div>
     </div>
     
+  </div>
+  
 </div>
 
   

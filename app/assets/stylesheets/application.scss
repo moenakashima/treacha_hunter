@@ -101,6 +101,12 @@
   .card-w{
    width: 48%;
   } 
+  
+  .tea-image-w{
+  height: 200px;
+  max-width: 100%;
+  object-fit: cover;
+  }
 }
 
 /* スマートフォンサイズ（425px）以下の際に適用される設定 */
