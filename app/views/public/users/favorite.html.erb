@@ -1,5 +1,6 @@
 <div class="container">
   
+  
   <div class="row ">
     <h5 class="text-center mb-5"><%= @user.name %>さんのお気に入りのお茶リスト</h5>
   </div>
@@ -64,46 +65,50 @@
       </table>
     </div>
 
-    <div class="col mb-4"> 
-    <% @teas.each do |tea| %>
-      <% if tea.favorited_by?(current_user) %>     
-    <%= link_to tea_path(tea) do %>
-    <%= image_tag tea.get_tea_image(300,250) %>
-    <% end %>
-    
-      <div class="row">
-        <div class="col-8 pt-2">
-          <%= tea.tea_type.name %>
-          (<%= tea.prefecture.name %>)
-          &nbsp;
-          <%= link_to user_path(tea.user) do %>
-            <%= tea.user.name %>
-          <% end %>
-        </div>
-       
-        <div id="favorite-<%= tea.id %>" class="col-3">
-          <%= render "public/favorites/favorite", tea: tea %>
-        </div>
-        
-      </div>        
-    
-      <%= tea.created_at.strftime('%Y/%m/%d') %>
-      
-      <%= link_to tea_path(tea) do %>
-        <%= tea.opinion.truncate(15) %>
-      <% end %>
+    <div class="col-lg-9 col-md-7 col-10 mb-4">
+      <div class="row row-cols-md-auto row-cols-xxl-3 justify-content-center">
+        <% @teas.each do |tea| %>
+          <% if tea.favorited_by?(current_user) %>
+            <div class="col mb-4">
+              
+              <%= link_to tea_path(tea) do %>
+              <%= image_tag tea.get_tea_image(250,200) %>
+              <% end %>               
 
-    <% end %>
-    <% end %>
+              <div class="row">
+                <div class="col-8 pt-2">
+                  <%= tea.tea_type.name %>
+                  (<%= tea.prefecture.name %>)
+                  &nbsp;
+                  <%= link_to user_path(tea.user) do %>
+                    <%= tea.user.name %>
+                  <% end %>
+                </div>
+    
+                <div id="favorite-<%= tea.id %>" class="col-3">
+                  <%= render "public/favorites/favorite", tea: tea %>
+                </div>
+              </div>
+                <%= tea.created_at.strftime('%Y/%m/%d') %>
+                &nbsp;
+                <%= link_to tea_path(tea) do %>
+                  <%= tea.opinion.truncate(15) %>
+                <% end %>
+            </div>    
+            
+          <% end %>
+        <% end %>
+      </div>
     </div>
-  </div>
+    
+    <div class="row"> 
+      <div class="col-10 d-flex justify-content-center mb-5">
+        <% if @teas %> 
+        <%= paginate @teas %>
+        <% end %> 
+      </div>
+    </div>
   
-  <div class="row">
-    <p class="text-center">
-      <% if @teas && @teas.count > 9 %> 
-      <%= paginate @teas %>
-      <% end %> 
-    </p>
-  </div>
-  
-</div>
+  </div>      
+</div>      
+     
