@@ -7,10 +7,10 @@
   <div class="row row-cols-md-auto row-cols-xxl-3 justify-content-center">
     
     <div class="col-lg-3 col-md-5 col-10">
-         <table class="table table-borderless table-light">
+         <table border="3" sellspacing="10" class="table table-borderless table-light">
           <tbody>
             <tr>
-              <td class="d-flex justify-content-center"><%= image_tag @user.get_profile_image(100,100) %></td>
+              <td class="mt-2 d-flex justify-content-center"><%= image_tag @user.get_profile_image(100,100) %></td>
             </tr>
             <tr>
               <td class="d-flex justify-content-between">
@@ -18,7 +18,7 @@
                 <%= @user.name %>
 
                 <div class="dropdown">
-                  <a class="dropdown-toggle link-secondary text-decoration-none" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                  <a class="me-2 dropdown-toggle link-secondary text-decoration-none" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fas fa-cog"></i>
                   </a>
                   
@@ -58,7 +58,7 @@
               <td>自己紹介：<%= @user.introduction %></td>
             </tr>
             <tr>
-              <td><%= link_to "投稿する", new_tea_path, class: "btn d-grid btn-outline-dark" %></td>
+              <td><%= link_to "投稿する", new_tea_path, class: "mb-2 btn d-grid btn-outline-dark" %></td>
             </tr>
           </tbody>
         </table>
@@ -69,7 +69,7 @@
         <% @teas.each do |tea| %>
           <div class="col mb-4">   
             <%= link_to tea_path(tea) do %>
-              <%= image_tag tea.get_tea_image(250,200) %>
+              <%= image_tag tea.get_tea_image(250,200), class: "border border-secondary rounded-2" %>
             <% end %> 
             <div class="row">
               <div class="col-8 pt-2">

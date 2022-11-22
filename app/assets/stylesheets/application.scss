@@ -21,42 +21,47 @@
 }
 
 .login-container{
-    position: relative;
-    width: 300px;
-    margin: 40px auto;
-    padding: 20px 40px 40px;
-    text-align: center;
-    background: #fff;
-    border: 1px solid #ccc;
+  position: relative;
+  width: 300px;
+  margin: 40px auto;
+  padding: 20px 40px 40px;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #ccc;
 }
 
 
 .login-container::before,.login-container::after{
-    content: "";
-    position: absolute;
-    width: 100%;height: 100%;
-    top: 3.5px;left: 0;
-    background: #fff;
-    z-index: -1;
-    -webkit-transform: rotateZ(4deg);
-    -moz-transform: rotateZ(4deg);
-    -ms-transform: rotateZ(4deg);
-    border: 1px solid #ccc;
+  content: "";
+  position: absolute;
+  width: 100%;height: 100%;
+  top: 3.5px;left: 0;
+  background: #fff;
+  z-index: -1;
+  -webkit-transform: rotateZ(4deg);
+  -moz-transform: rotateZ(4deg);
+  -ms-transform: rotateZ(4deg);
+  border: 1px solid #ccc;
 }
 
 
 .avatar{
-    width: 100px;height: 100px;
-    margin: 10px auto 30px;
-    border-radius: 100%;
-    border: 2px solid #aaa;
-    background-size: cover;
-    background-image: image-url("login-image.png");
+  width: 100px;height: 100px;
+  margin: 10px auto 30px;
+  border-radius: 100%;
+  border: 2px solid #aaa;
+  background-size: cover;
+  background-image: image-url("login-image.png");
 }
 
 .form-group label{
-    margin: 1.5px 0px;
+  margin: 1.5px 0px;
 }
+
+.card-w{
+  width: 30%;
+}
+
 
 .w-15{
   width: 15%;
@@ -68,14 +73,39 @@
 .w-100{
   width: 100%;
 }
-/*レスポンシブデザイン　タブレットサイズ以下*/
 
-@media screen and (max-width: 768px) {
+.tea-image-w{
+  height: 200px;
+  max-width: 80%;
+  object-fit: cover;
+}
+/*レスポンシブデザイン*/
+
+/* タブレット横置きサイズ（1024px）以下の際に適用される設定 */
+@media screen and (max-width:1024px) {
+ .card-w{
+   width: 40%;
+ } 
+}
+
+/* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
+@media screen and (max-width:768px) {
   .main-visual-content {
     width: 100%;
   }
+  
   .thead-light{
     display: none;
   }
   
+  .card-w{
+   width: 48%;
+  } 
+}
+
+/* スマートフォンサイズ（425px）以下の際に適用される設定 */
+@media screen and (max-width:425px) {
+ .card-w{
+   width: 90%;
+ } 
 }
