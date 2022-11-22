@@ -51,6 +51,12 @@ class Public::TeasController < ApplicationController
     @tea_tags = @tea.tags
     @tea_comment = TeaComment.new
     @user = @tea.user
+    
+    # 参加して何日経ったのかを’ハンター歴’として表示するための日付計算       
+    @d1 = Date.today
+    @d2 = (@user.created_at).to_date
+    # 今日の日付と参加日の差分を計算し文字列で取得    
+    @hunter_histroy = (@d1 - @d2).to_i
     # @tea_comments = TeaComment.all.order('created_at DESC')
     # @tea_comments = TeaComment.page(params[:page])
   end

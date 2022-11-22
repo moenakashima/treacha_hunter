@@ -8,8 +8,8 @@
     <tr>
       <td class="d-flex justify-content-between">
         
-        <%= link_to user_path(user) do %>
-          <%= user.name %>
+        <%= link_to user_path(user), class: "link-dark" do%>
+          <i class="fas fa-user me-2"></i><%= user.name %>
         <% end %>
         
         <div class="dropdown">
@@ -42,23 +42,25 @@
     </tr>
     
     <tr>
-      <td>ハンター歴：<%= @hunter_histroy  %>日</td>
+      <td><i class="fas fa-binoculars me-2"></i>ハンター歴：<%= @hunter_histroy  %>日</td>
     </tr>
     
     <tr>
-      <td>集めたトレチャー：<%= user.teas.count %>個</td>
+      <td><i class="far fa-gem me-2"></i>集めたトレチャー：<%= user.teas.count %>個</td>
     </tr>
     
     <tr>
-      <td><%= user.prefecture.name %>在住</td>
+      <td><i class="fas fa-map-pin me-3"></i><%= user.prefecture.name %>在住</td>
     </tr>
     
     <tr>
-      <td>自己紹介：<%= user.introduction %></td>
+      <td><i class="far fa-comment me-1"></i><%= user.introduction %></td>
     </tr>
     
     <tr>
-      <td><%= link_to "投稿する", new_tea_path, class: "btn d-grid btn-outline-dark" %></td>
+      <td>
+        <%= link_to "投稿する", new_tea_path, class: "btn d-grid btn-outline-dark" %>
+      </td>
     </tr>
     
     <tr>
