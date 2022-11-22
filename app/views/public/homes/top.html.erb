@@ -57,7 +57,9 @@
   </div>
   <div class="row"> 
     <div class="d-flex justify-content-center mb-5">
+      <% if @teas %> 
       <%= paginate @teas %>
+      <% end %> 
     </div>
   </div> 
 

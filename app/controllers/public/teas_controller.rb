@@ -64,7 +64,7 @@ class Public::TeasController < ApplicationController
     #検索されたタグを受け取る 
     @tag = Tag.find(params[:tag_id])
     #検索されたタグに紐づく投稿を表示
-    @teas = @tag.teas.order('created_at DESC')
+    @teas = @tag.teas.order('teas.created_at DESC').page(params[:page])
     render "public/homes/top"
   end
   
