@@ -40,8 +40,7 @@ class Public::UsersController < ApplicationController
   def favorite
     @user  = User.find(params[:user_id])
     if @user.id != current_user.id
-       redirect_to user_path(@user), notice: '他ハンターのお気に入りリストは確認できません。'
-       
+      redirect_to user_path(current_user.id)
     else
       @teas = Tea.order('created_at DESC').page(params[:page])
     

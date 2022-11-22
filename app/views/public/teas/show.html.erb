@@ -4,27 +4,8 @@
     <h4 class="text-center mb-5">投稿詳細</h4>  
    
     <div class="col-lg-3 col-8">
-         <table class="table table-borderless table-light">
-          <tbody>
-            <tr class="text-center">
-              <td><%= image_tag @tea.user.get_profile_image(100,100), class: "w-50 mt-2" %></td>
-            </tr>
-            <tr>
-              <td>
-                <%= link_to user_path(@tea.user) do %>
-                  <%= @tea.user.name %>
-                <% end %>
-              </td>
-            </tr>
-            <tr>
-              <td>自己紹介：<%= @tea.user.introduction %></td>
-            </tr>
-            <tr>
-              <td><%= link_to "HOMEに戻る", root_path, class: "btn btn-outline-dark" %></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <%= render "public/users/info", user: @user %>
+    </div>
       
       <div class="col-lg-4 col-10">
         <table class="table table-borderless">

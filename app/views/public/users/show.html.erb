@@ -1,67 +1,13 @@
 <div class="container">
   
   <div class="row ">
-    <h5 class="text-center mb-5">ユーザー詳細</h5>
+    <h5 class="text-center mb-5"><%= @user.name %>さんのページ</h5>
   </div>
   
   <div class="row row-cols-md-auto row-cols-xxl-3 justify-content-center">
     
     <div class="col-lg-3 col-md-5 col-10">
-         <table border="3" sellspacing="10" class="table table-borderless table-light">
-          <tbody>
-            <tr>
-              <td class="mt-2 d-flex justify-content-center"><%= image_tag @user.get_profile_image(100,100) %></td>
-            </tr>
-            <tr>
-              <td class="d-flex justify-content-between">
-                
-                <%= @user.name %>
-
-                <div class="dropdown">
-                  <a class="me-2 dropdown-toggle link-secondary text-decoration-none" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fas fa-cog"></i>
-                  </a>
-                  
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <li class="dropdown-item">
-                      <%= link_to user_favorites_path(@user), class: "link-dark text-decoration-none" do %>
-                        <i class="far fa-heart me-3"></i>お気に入り
-                      <% end %>
-                    </li>
-                    
-                    <li class="dropdown-item">
-                      <%= link_to edit_user_path(@user), class: "link-dark text-decoration-none" do %>
-                        <i class="far fa-edit me-3"></i>登録情報編集
-                      <% end %>
-                    </li>
-                    
-                    <li class="dropdown-item">
-                      <%= link_to destroy_user_session_path, class: "link-dark text-decoration-none", method: :delete do %>
-                        <i class="fas fa-sign-out-alt me-3"></i>ログアウト
-                      <% end %>
-                    </li>
-                  </ul>
-                </div>
-                
-              </td>
-            </tr>
-            <tr>
-              <td>ハンター歴：<%= @hunter_histroy  %>日</td>
-            </tr>
-            <tr>
-              <td>集めたトレチャー：<%= @user.teas.count %>個</td>
-            </tr>
-            <tr>
-              <td><%= @user.prefecture.name %>在住</td>
-            </tr>
-            <tr>
-              <td>自己紹介：<%= @user.introduction %></td>
-            </tr>
-            <tr>
-              <td><%= link_to "投稿する", new_tea_path, class: "mb-2 btn d-grid btn-outline-dark" %></td>
-            </tr>
-          </tbody>
-        </table>
+      <%= render "public/users/info", user: @user %>
     </div>
     
     <div class="col-lg-9 col-10">

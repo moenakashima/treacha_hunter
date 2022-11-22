@@ -50,6 +50,7 @@ class Public::TeasController < ApplicationController
     @tea = Tea.find(params[:id])
     @tea_tags = @tea.tags
     @tea_comment = TeaComment.new
+    @user = @tea.user
     # @tea_comments = TeaComment.all.order('created_at DESC')
     # @tea_comments = TeaComment.page(params[:page])
   end
