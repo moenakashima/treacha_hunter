@@ -3,45 +3,24 @@
   <div class="row ">
     <h5 class="text-center mb-5"><%= @user.name %>さんのページ</h5>
   </div>
-  
-  <div class="row row-cols-md-auto row-cols-xxl-3 justify-content-center">
-    
-    <div class="col-lg-3 col-md-5 col-10">
+  <div class="row justify-content-center">
+
+    <div class="col-lg-3 col-10">
       <%= render "public/users/info", user: @user %>
     </div>
     
     <div class="col-lg-9 col-10">
-      <div class="row row-cols-md-auto row-cols-xxl-3 justify-content-center">
-        <% @teas.each do |tea| %>
-          <div class="col mb-4">   
-            <%= link_to tea_path(tea) do %>
-              <%= image_tag tea.get_tea_image(250,200), class: "border border-secondary rounded-2" %>
-            <% end %> 
-            <div class="row">
-              <div class="col-8 pt-2">
-                <%= tea.tea_type.name %>
-                (<%= tea.prefecture.name %>)
-                &nbsp;
-                <%= link_to user_path(tea.user) do %>
-                  <%= tea.user.name %>
-                <% end %>
-              </div>
-              <div id="favorite-<%= tea.id %>" class="col-3">
-                <%= render "public/favorites/favorite", tea: tea %>
-              </div>
-            </div>
-            <%= tea.created_at.strftime('%Y/%m/%d') %>
-            <%= link_to tea_path(tea) do %>
-              <%= tea.opinion.truncate(15) %>
-            <% end %>
-          </div>   
-        <% end %>
+      <%= render "public/teas/teas", teas: @teas %>
         
-        <% if @teas %> 
-        <%= paginate @teas %>
-        <% end %> 
+      <div class="row justify-content-center"> 
+        <div class="col-10 mb-5">
+          <% if @teas %> 
+          <%= paginate @teas %>
+          <% end %> 
         </div>
       </div>
+        
+    </div>
       
   </div>
 
