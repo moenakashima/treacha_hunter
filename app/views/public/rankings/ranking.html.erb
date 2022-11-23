@@ -6,45 +6,7 @@
   
   <div class="row">
       <% if @tea_favorite_ranking %>
-      <% @tea_favorite_ranking.each.with_index(1) do |tea, i| %>
-        <div class="card card-w mx-auto mt-4 shadow-lg">
-          <%= link_to tea_path(tea) do %>
-            <%= image_tag tea.get_tea_image(200,250), class: "card-img-top" %>
-          <% end %>
-          <div class="card-body">
-          
-            <div class="row">
-              <div class="col-4">
-                <%= link_to user_path(tea.user) do %>
-                <%= image_tag tea.user.get_profile_image(100,100), class: "w-80 mt-3 rounded-circle" %>     
-                <% end %><br>
-                <snap style="font-size: 50%;"><i class="fas fa-user me-2"></i><%= tea.user.name %></snap>
-              </div>
-              <div class="col-6">
-                
-                <p class="card-title">
-                  <strong>
-                  <%= tea.tea_type.name %>&nbsp;
-                  (<%= tea.prefecture.name %>)
-                  </strong>
-                </p>
-
-                <p class="card-text">
-                  <%= tea.created_at.strftime('%Y/%m/%d') %><br>
-                  <%= link_to tea_path(tea), class: "link-dark"  do %>
-                    <%= tea.opinion.truncate(30) %>
-                  <% end %>
-                </p>
-              </div> 
-              <div id="favorite-<%= tea.id %>" class="col-1">
-                <%= render "public/favorites/favorite", tea: tea %>
-              </div>
-            </div> 
-            
-          </div> 
-            
-        </div>       
-      <% end %>
+        <%= render "public/teas/tea_card", teas: @tea_favorite_ranking %>
       <% else %>
       <div class="row justify-content-center">
         <h5 class="text-center mb-5">ランキングはありません</h5>
