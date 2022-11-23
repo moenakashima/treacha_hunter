@@ -1,7 +1,9 @@
+// アプリ全体の背景色設定
 .body--extend{
   background-color: #fafafa;
 }
 
+// アバウトページの画像設定
 .main-visual{
   height: 500px;
   width: auto;
@@ -10,6 +12,7 @@
   background-position: center;
 }
 
+// アバウトページの画像上の文字設定
 .main-visual-content{
   width: 60%; 
   height: 500px; /* 親の高さに揃える */
@@ -20,6 +23,7 @@
 
 }
 
+// ここから／／ログイン／新規登録のレイアウト設定
 .login-container{
   position: relative;
   width: 300px;
@@ -58,15 +62,14 @@
   margin: 1.5px 0px;
 }
 
+// ここまで／／ログイン／新規登録のレイアウト設定
+
+// トップページの1つの投稿に対する表示幅を指定
 .card-w{
   width: 30%;
 }
 
-
-.w-15{
-  width: 15%;
-}
-
+// トップページのプロフィール画像サイズ設定
 .w-80{
   width: 80%;
 }
@@ -74,12 +77,27 @@
   width: 100%;
 }
 
+// 投稿画像の大きさを要素幅に対する％で指定
 .tea-image-w{
   height: 200px;
   max-width: 90%;
   object-fit: cover;
 }
-/*レスポンシブデザイン*/
+
+// 都道府県リストパディング削除
+ul.prefecture-list{
+  padding: 0;
+}
+
+// 都道府県リストを短い高さで表示し先頭の・を削除
+ul.prefecture-list li{
+  list-style: none;
+  display: inline-block;
+  
+}
+
+
+/*ここからレスポンシブデザインの設定*/
 
 /* タブレット横置きサイズ（1024px）以下の際に適用される設定 */
 @media screen and (max-width:1024px) {
