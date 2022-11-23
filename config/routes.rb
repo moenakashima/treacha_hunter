@@ -48,11 +48,11 @@ scope module: :public do
     
   end
   
-  #タグ検索
-  #タグによって絞り込んだ投稿を表示するアクションへのルーティング
+  #検索機能
   get '/search_tea_tag', to: 'teas#search_tag'
   get '/search_tea_type', to: 'teas#search_tea_type'
   get '/search' => "searches#search"
+  get '/sort_by_prefecture' => "users#sort_by_prefecture"
   
 
 end
