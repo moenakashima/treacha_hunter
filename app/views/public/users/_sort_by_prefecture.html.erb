@@ -1,0 +1,29 @@
+<table border="3" sellspacing="10" class="table table-sm table-light table-borderless">
+  <thead>
+    <th class="text-center">都道府県で絞る</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="text-center">
+        <%= form_with  url: sort_by_prefecture_path, method: :get, local: true do |f| %>
+         <ul class="prefecture-list">
+            <%= f.collection_check_boxes :prefecture, Prefecture.all, :name, :name do |b| %>
+           
+              <li>
+                <%= b.check_box do %>
+                <%= b.check_box + b.text%>
+                <% end %>
+                
+                <%= b.label {b.text} %>
+              </li>
+             
+            <% end %>
+          </ul>
+          <%= f.submit "絞り込む", class: "btn btn-sm btn-outline-secondary", id: "submit-button" %>
+      
+          
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>
