@@ -38,4 +38,14 @@ class User < ApplicationRecord
     end
   end
 
+ # ユーザー地域絞り込み検索
+  scope :user_sort, -> (sort_params) do
+    return if sort_params.blank?
+    prefecture_ids = []
+    sort_params.each do |name|
+    prefecture_ids << Prefecture.where(name: name).pluck(:id)
+    end
+    where(prefecture_id: prefecture_ids.flatten!)
+  end
+
 end
