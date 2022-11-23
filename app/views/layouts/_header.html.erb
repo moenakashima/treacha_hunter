@@ -48,13 +48,13 @@
                 <% end %>
               </li>
               <li>
-                <%=  link_to destroy_user_session_path ,method: :delete, class: 'nav-link text-dark' do %>
-                <i class="fas fa-sign-out-alt me-1"></i>ログアウト
-                <% end %>
+               <!--絞り込み検索機能-->
+                <%= render "public/teas/search_tea_type" %>
               </li>
               <li>
-                <!--絞り込み検索機能-->
-                <%= render "public/teas/search_tea_type" %>
+                <%=  link_to destroy_user_session_path ,method: :delete, class: 'nav-link text-dark' do %>
+                  <i class="fas fa-sign-out-alt me-1"></i>ログアウト
+                <% end %>
               </li>
             <% else %>
               <li>
