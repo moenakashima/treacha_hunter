@@ -39,13 +39,15 @@ end
 # ユーザー用
 # URL /users/...
 scope module: :public do
+  # ランキング機能
+  get '/teas/ranking' => "rankings#ranking"
+  
   resources :users, only:[:index, :show, :edit, :update, :favorite] do
     get "/favorites" => "users#favorite"
   end
   resources :teas, only:[:show, :update, :edit, :destroy, :new, :create] do
     resource :favorites, only:[:create, :destroy]
     resources :tea_comments, only:[:create, :destroy]
-    
   end
   
   #検索機能
@@ -54,6 +56,8 @@ scope module: :public do
   get '/search' => "searches#search"
   get '/sort_by_prefecture' => "users#sort_by_prefecture"
   
+  # ランキング機能
+  get '/teas/ranking' => "rankings#ranking"
 
 end
 
