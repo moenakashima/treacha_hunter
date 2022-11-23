@@ -54,7 +54,7 @@
                 <td>#タグ</td>
                 <td>
                   <% @tea_tags.each do |tag| %>
-                    <%= link_to search_tea_tag_path(tag_id: tag.id) do %>
+                    <%= link_to search_tea_tag_path(tag_id: tag.id), class: "link-dark" do %>
                     <%= "#" %><%= tag.name %>
                     <% end %>
                     <%= "" %>
