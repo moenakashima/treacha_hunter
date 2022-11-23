@@ -52,6 +52,17 @@ class Public::UsersController < ApplicationController
       @hunter_histroy = (@d1 - @d2).to_i
     
   end
+  
+  def sort_by_prefecture
+    @d1 = Date.today
+    @users = User.user_sort(params[:prefecture].reject(&:blank?)).page(params[:page]).order('created_at DESC')
+    # 配列に空白がある場合は削除する
+    @sorted_users = params[:prefecture].reject(&:blank?)
+    
+    render "public/users/index"
+  end
+  
+  
 
   private
 
