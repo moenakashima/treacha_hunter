@@ -5,7 +5,7 @@
         <td>
           <%= tea_comment.comment %>
           &nbsp;
-          <%= link_to user_path(tea_comment.user) do %>
+          <%= link_to user_path(tea_comment.user), class: "link-dark" do %>
           <%= tea_comment.user.name %>
           <% end %>         
           &nbsp;
@@ -14,7 +14,7 @@
         <td>
           <% if tea_comment.user == current_user || admin_signed_in? %>
             <%= form_with models: [@tea, @tea_comment], url: tea_tea_comment_path(tea.id, tea_comment),  method: :delete, local: false do |form| %>
-            <%= form.submit '削除', class: 'btn btn-link' %>
+            <%= form.submit '削除', class: 'btn btn-sm btn-outline-secondary' %>
             <% end %>
           <% end %>            
         </td>
