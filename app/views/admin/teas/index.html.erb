@@ -5,53 +5,7 @@
   
   <div class="row justify-content-center">
     <div class="col-10 table-responsive-md">
-      <table class= "table table-hover table-inverse text-nowrap">
-        <thead>
-          <tr>
-            <th>投稿ID</th>
-            <th>投稿日</th>
-            <th>投稿画像</th>
-            <th>投稿者</th>
-            <th>投稿文</th>
-            <th>お気に入り数</th>
-            <th>コメント数</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @teas.each do |tea| %>
-          <tr>
-            <td class="text-center">
-              <%= tea.id %>
-            </td>
-            <td>
-              <%= tea.created_at.strftime('%Y/%m/%d') %>
-            </td>
-            <td>
-              <%= link_to admin_tea_path(tea) do %>
-              <%= image_tag tea.get_tea_image(50,50) %>
-              <% end %>
-            </td>
-            <td>
-              <%= link_to admin_user_path(tea.user), class: "link-dark" do %>
-              <%= tea.user.name %>
-              <% end %>
-            </td>
-            <td>          
-              <%= link_to admin_tea_path(tea), class: "link-dark" do %>
-              <%= tea.opinion.truncate(15) %>
-              <% end %>
-            </td>
-            <td class="text-center">
-              <%= tea.favorites.count %>
-            </td>
-            <td class="text-center">
-              <%= tea.tea_comments.count %>
-            </td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
-      
+      <%= render 'admin/teas/teas', teas: @teas %>
     </div>
   </div>
   
