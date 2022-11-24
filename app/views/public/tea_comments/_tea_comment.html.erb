@@ -14,7 +14,7 @@
         <td>
           <% if tea_comment.user == current_user || admin_signed_in? %>
             <%= form_with models: [@tea, @tea_comment], url: tea_tea_comment_path(tea.id, tea_comment),  method: :delete, local: false do |form| %>
-            <%= form.submit '削除', class: 'btn btn-sm btn-outline-secondary' %>
+            <%= form.submit '削除', class: 'btn btn-sm btn-outline-secondary',data: {confirm: "本当に削除しますか？"} %>
             <% end %>
           <% end %>            
         </td>
