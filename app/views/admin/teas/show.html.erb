@@ -2,112 +2,90 @@
   <div class="row justify-content-center">
    
     <h4 class="text-center mb-5">投稿詳細</h4>  
-   
+      
     <div class="col-lg-3 col-8">
-         <table class="table table-borderless table-light">
-          <tbody>
-            <tr class="text-center">
-              <td><%= image_tag @tea.user.get_profile_image(100,100), class: "w-50 mt-2" %></td>
-            </tr>
-            <tr>
-              <td>
-                <%= link_to admin_user_path(@tea.user) do %>
-                  <%= @tea.user.name %>
-                <% end %>
-              </td>
-            </tr>
-            <tr>
-              <td>自己紹介：<%= @tea.user.introduction %></td>
-            </tr>
-            <tr>
-              <td><%= link_to "HOMEに戻る", admin_root_path, class: "btn btn-outline-dark" %></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      
-      <div class="col-lg-4 col-10">
-        <table class="table table-borderless">
-          <tbody>
-            <tr>
-              <td><%= image_tag @tea.get_tea_image(300,300) %></td>
-            </tr>
-            <tr>
-              <td><%= @tea.created_at.strftime('%Y/%m/%d') %></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      
-      <div class="col-lg-4 col-10 table-responsive">
-        <table class="table">
-          <tbody>
-            <tr>
-              <td>お茶の種類</td>
-              <td><%= @tea.tea_type.name %></td>
-            </tr>
-            <tr>
-              <td>産地</td>
-              <td><%= @tea.prefecture.name %></td>
-            </tr>
-            <tr>
-              <td>商品名</td>
-              <td><%= @tea.product_name %></td>
-            </tr>
-            <tr>
-              <td>販売者</td>
-              <td><%= @tea.seller %></td>
-            </tr>
-            <tr>
-              <td>購入場所</td>
-              <td><%= @tea.parchased_at %></td>
-            </tr>
-            <tr>
-              <td>#タグ</td>
-              <td>
-                <% @tea_tags.each do |tag| %>
-                  <%= link_to search_tea_tag_path(tag_id: tag.id) do %>
-                  <%= "#" %><%= tag.name %>
-                  <% end %>
-                  <%= "" %>
-                <% end %>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      
+      <%= render "public/users/info", user: @user %>
     </div>
-    
-    <div class="row justify-content-center">
-      
-      <div class="col-8">
-        <div class="table-responsive"> 
-           <table class="table table-borderless">
+  
+    <div class="col-lg-8">
+      <div class="row justify-content-center" >
+        <div class="col-md-5 col-10">
+          <table class="table table-borderless">
             <tbody>
               <tr>
-                <td><%= @tea.opinion %></td>
+                <td><%= image_tag @tea.get_tea_image(300,350), class: "tea-image-w" %></td>
+              </tr>
+              <tr>
+                <td><%= @tea.created_at.strftime('%Y/%m/%d') %></td>
               </tr>
             </tbody>
           </table>
         </div>
     
-        <div class="row">
-          <div class="col-10">
-          <%= form_with model: @tea_comment, url: tea_tea_comments_path(@tea.id), local: false do |form| %>
-            <%= form.text_field :comment, rows: "5" ,class: 'form-control', :placeholder => "管理者はコメントできません。"  %>
-          </div>
-          <div class="col-10 col-xl-2">
-            <%= form.submit 'コメントする' , class: 'btn btn-primary mt-1', id: "submit", disabled: true %>
-          </>
-          <% end %>
+        <div class="col-10 col-md-5 table-responsive">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>お茶の種類</td>
+                <td><%= @tea.tea_type.name %></td>
+              </tr>
+              <tr>
+                <td>産地</td>
+                <td><%= @tea.prefecture.name %></td>
+              </tr>
+              <tr>
+                <td>商品名</td>
+                <td><%= @tea.product_name %></td>
+              </tr>
+              <tr>
+                <td>販売者</td>
+                <td><%= @tea.seller %></td>
+              </tr>
+              <tr>
+                <td>購入場所</td>
+                <td><%= @tea.parchased_at %></td>
+              </tr>
+              <tr>
+                <td>#タグ</td>
+                <td>
+                  <% @tea_tags.each do |tag| %>
+                    <%= link_to search_tea_tag_path(tag_id: tag.id), class: "link-dark" do %>
+                    <%= "#" %><%= tag.name %>
+                    <% end %>
+                    <%= "" %>
+                  <% end %>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        
-        <div id="tea_comment-<%= @tea.id %>" class="table-responsive" >
-          <%= render 'public/tea_comments/tea_comment', tea_comment: @tea_comment, tea: @tea %>
+    
+        <div class="col-10"> 
+        <%= @tea.opinion %>
         </div>
       </div>
+    </div>
+  </div>
+    
+  <div class="row justify-content-center">
+    
+    <div class="col-8">
+      <div class="row">
+        <div class="col-10">
+        <%= form_with model: @tea_comment, url: tea_tea_comments_path(@tea.id), local: false do |form| %>
+          <%= form.text_field :comment, rows: "5" ,class: 'form-control', :placeholder => "管理者はコメントできません。"  %>
+        </div>
+        <div class="col-10 col-xl-2">
+          <%= form.submit 'コメントする' , class: 'btn btn-primary mt-1', id: "submit", disabled: true %>
+        </div>
+        <% end %>
+      </div>
       
+      <div id="tea_comment-<%= @tea.id %>" class="table-responsive" >
+        <%= render 'public/tea_comments/tea_comment', tea_comment: @tea_comment, tea: @tea %>
+      </div>
     </div>
     
+  </div>
+  
 </div>

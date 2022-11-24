@@ -8,6 +8,7 @@ class Admin::TeasController < ApplicationController
   def show
     @tea = Tea.find(params[:id])
     @tea_tags = @tea.tags
+    @user = @tea.user
     @tea_comment = TeaComment.new
     @tea_comments = TeaComment.all.order('created_at DESC')
   end
