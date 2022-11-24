@@ -2,7 +2,7 @@ class Admin::TeasController < ApplicationController
   before_action :authenticate_admin!
   
   def index
-    @teas = Tea.page(params[:page]).order('created_at DESC')
+    @teas = Tea.page(params[:page]).per(10).order('created_at DESC')
   end
   
   def show

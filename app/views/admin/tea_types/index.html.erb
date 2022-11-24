@@ -41,5 +41,13 @@
         </tbody>
       </table>
     </div>
+    <div class="row"> 
+      <div class="d-flex justify-content-center mb-5">
+        <% if @tea_types %>
+        <%= paginate @tea_types, theme: 'bootstrap-5' %>
+        <% end %>
+      </div>
+    </div> 
+
   </div>
 </div>

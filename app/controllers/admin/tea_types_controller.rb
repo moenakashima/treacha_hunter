@@ -7,14 +7,14 @@ class Admin::TeaTypesController < ApplicationController
     if @tea_type.save
       redirect_to admin_tea_types_path
     else
-      @tea_types = TeaType.all
+      @tea_types = TeaType.page(params[:page]).per(20)
       render :index
     end
   end
 
   def index
-    @tea_types = TeaType.all
     @tea_type = TeaType.new
+    @tea_types = TeaType.page(params[:page]).per(20)
   end
 
   def edit
