@@ -2,7 +2,7 @@
   <% teas.each do |tea| %>
     <div class="col mb-4 text-center">   
       <%= link_to tea_path(tea) do %>
-        <%= image_tag tea.get_tea_image(250,200), class: "border border-secondary rounded-2" %>
+        <%= image_tag tea.get_tea_image(250,200), class: "img-size border border-secondary rounded-2" %>
       <% end %> 
       <div class="row justify-content-center">
         <div class="col-9 pt-2">

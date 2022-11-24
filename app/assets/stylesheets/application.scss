@@ -84,6 +84,18 @@
   object-fit: cover;
 }
 
+// 画像サイズをトリミングしてアスペクト比は固定(_tea_card)
+.card-link{
+  height: 200px;
+  object-fit: cover;
+}
+
+// 画像サイズをトリミングしてアスペクト比は固定(_tea)
+.img-size{
+height: 180px;
+width: 260px;
+object-fit: cover;
+}
 
 // 都道府県リストパディング削除
 ul.prefecture-list{
