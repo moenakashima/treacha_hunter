@@ -22,7 +22,6 @@ class Tea < ApplicationRecord
   validates :opinion, length: { maximum: 500 }
   validates :product_name, presence: true
   validates :tea_image, presence: true
-  validates :tea_type, presence: true
   
   # 画像のサイズ指定の可変化設定
   def get_tea_image(width, height)

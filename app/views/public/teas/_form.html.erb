@@ -15,7 +15,7 @@
           <td><%= form.text_field :product_name, class: "form-control" %></td>
         </tr>  
         <tr class="from-group">
-          <td><%= form.label:"お茶の種類*" %></td>
+          <td><%= form.label:"お茶の種類" %></td>
           <td><%= form.select :tea_type_id, TeaType.pluck(:name, :id) %></td>
         </tr>  
         <tr class="from-group">
@@ -31,7 +31,7 @@
           <td><%= form.text_field :parchased_at, class: "form-control"  %></td>
         </tr>  
         <tr class="from-group">
-          <td><%= form.label:"タグ (,で区切ると複数タグ登録できます)" %></td>
+          <td><%= form.label:"タグ (,で区切ると複数タグ登録できます)" %><br><%= form.label:"※半角コンマ「, 」で区切ってください" , class: "text-danger" %></td>
           <td><%= form.text_area :name, value: @tag_list, :placeholder => "新茶2022,八女茶,深蒸し茶", class: "form-control"  %></td>
         </tr>  
         <tr class="from-group">
