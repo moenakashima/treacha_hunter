@@ -28,12 +28,12 @@
               <% end %>
             </td>
             <td>
-              <%= link_to admin_user_path(tea.user) do %>
+              <%= link_to admin_user_path(tea.user), class: "link-dark" do %>
               <%= tea.user.name %>
               <% end %>
             </td>
             <td>          
-              <%= link_to admin_tea_path(tea) do %>
+              <%= link_to admin_tea_path(tea), class: "link-dark" do %>
               <%= tea.opinion.truncate(15) %>
               <% end %>
             </td>
