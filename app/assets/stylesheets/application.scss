@@ -96,6 +96,16 @@ ul.prefecture-list li{
   
 }
 
+.pagination a{
+  color: #606060;
+}
+.pagination a:hover{
+  color: #606060;
+}
+.pagination .active .page-link{
+  background-color: #909090;
+  border-color: #909090;
+}
 
 /*ここからレスポンシブデザインの設定*/
 

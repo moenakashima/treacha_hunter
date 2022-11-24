@@ -58,8 +58,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # 下記追記したもの
 gem 'devise'
 gem 'net-smtp'
-gem 'kaminari','~> 1.2.1'
 gem 'rails-i18n'
+gem 'kaminari'
+gem 'bootstrap5-kaminari-views', '~> 0.0.1'
 
 # テストデプロイ
 gem 'dotenv-rails'
