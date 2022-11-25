@@ -1,3 +1,4 @@
+
 $(function(){
   $('#reset-button').on('click', function(){
     B = document.getElementsByName('tea_type[]')
@@ -31,4 +32,4 @@ function isCheck(){
         $('#submit-button').prop("disabled", true);
     };
  
-}
+};
