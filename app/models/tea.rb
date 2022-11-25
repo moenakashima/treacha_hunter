@@ -13,8 +13,9 @@ class Tea < ApplicationRecord
   
   # いいね機能
   has_many :favorites, dependent: :destroy
-  # コメント機能
-  has_many :tea_comments, dependent: :destroy
+  
+  # コメント機能(新着順に表示)
+  has_many :tea_comments, -> { order(created_at: :desc) }, dependent: :destroy
   
   has_one_attached :tea_image
   
@@ -28,7 +29,7 @@ class Tea < ApplicationRecord
     tea_image.variant(resize_to_limit: [width, height]).processed
   end
   
-  #複数タグを保存するためのsaae_tagを定義
+  #複数タグを保存するためのsave_tagを定義
   def save_tag(sent_tags)
     # タグが存在していれば、タグの名前を配列として全て取得
     current_tags = self.tags.pluck(:name) unless self.tags.nil?
@@ -49,8 +50,9 @@ class Tea < ApplicationRecord
    end
   end
   
-  # 検索窓
+  # 検索窓でのサーチアクションを定義（キーワード検索）
   def self.search(search)
+    # nilでない限り、商品名、投稿文の曖昧検索と産地の前方一致検索を行う
     if search != nil
       Tea.joins(:prefecture).where('product_name LIKE(?) or opinion LIKE(?) or prefectures.name LIKE(?)' , "%#{search}%",  "%#{search}%", "#{search}%")
     else
