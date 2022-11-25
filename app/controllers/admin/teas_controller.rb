@@ -9,6 +9,7 @@ class Admin::TeasController < ApplicationController
     @tea = Tea.find(params[:id])
     @tea_tags = @tea.tags
     @user = @tea.user
+    
     # 参加して何日経ったのかを’ハンター歴’として表示するための日付計算       
     @d1 = Date.today
     @d2 = (@user.created_at).to_date
