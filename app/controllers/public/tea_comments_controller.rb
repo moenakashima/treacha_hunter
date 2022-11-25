@@ -1,4 +1,5 @@
 class Public::TeaCommentsController < ApplicationController
+  
   def create
     @tea = Tea.find(params[:tea_id])
     @tea_comment = current_user.tea_comments.new(comment_params)

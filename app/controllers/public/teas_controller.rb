@@ -1,6 +1,5 @@
 class Public::TeasController < ApplicationController
   
-
   def create
     @tea = Tea.new(tea_params)
     @tea.user_id = current_user.id
@@ -32,9 +31,9 @@ class Public::TeasController < ApplicationController
     @tea = Tea.find(params[:id])
     if @tea.update(tea_params)
       tag_list = params[:tea][:name].split(',')
-      # このtea_idに紐づいていたタグを@oldに入れる
+      # このtea_idに紐づいていたタグを@old_tagsに入れる
       @old_tags = TeaTag.where(tea_id: @tea.id)
-      # それらを取り出し、消す。消し終わる
+      # それらを取り出し、消す。終わる
       @old_tags.each do |relation|
       relation.delete
       end
@@ -65,6 +64,7 @@ class Public::TeasController < ApplicationController
     redirect_to user_path(@tea.user)
   end
   
+  # タグ検索機能
   def search_tag
     #検索されたタグを受け取る 
     @tag = Tag.find(params[:tag_id])
@@ -73,6 +73,7 @@ class Public::TeasController < ApplicationController
     render "public/homes/top"
   end
   
+  # お茶の種類絞り込み機能
   def search_tea_type
     @teas = Tea.tea_search(params[:tea_type]).page(params[:page]).order('created_at DESC')
     # 配列に空白がある場合は削除する

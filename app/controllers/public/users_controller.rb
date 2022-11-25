@@ -11,7 +11,7 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @teas = @user.teas.page(params[:page]).order('created_at DESC')
+    @teas = @user.teas.page(params[:page])
        
   # 参加して何日経ったのかを’ハンター歴’として表示するための日付計算       
     @d1 = Date.today
@@ -37,6 +37,7 @@ class Public::UsersController < ApplicationController
     end
   end
   
+  # ユーザーのお気に入り（ブックマーク）のお茶を取得
   def favorite
     @user  = User.find(params[:user_id])
     if @user.id != current_user.id
