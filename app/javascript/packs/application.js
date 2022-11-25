@@ -4,6 +4,8 @@
 // that code so it'll be compiled.
 
 import Rails from "@rails/ujs"
+// ターボリンク無効化
+// import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
@@ -12,3 +14,5 @@ import '@fortawesome/fontawesome-free/js/all'
 
 Rails.start()
 ActiveStorage.start()
+// ターボリンク無効化
+// Turbolinks.start() 
