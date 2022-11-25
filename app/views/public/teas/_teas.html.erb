@@ -1,5 +1,5 @@
 <div class="row row-cols-md-2 row-cols-xxl-3 justify-content-evenly">
-  <% teas.each do |tea| %>
+  <% teas.reverse_each do |tea| %>
     <div class="col mb-4 text-center">   
       <%= link_to tea_path(tea) do %>
         <%= image_tag tea.get_tea_image(250,200), class: "img-size border border-secondary rounded-2" %>
@@ -9,7 +9,7 @@
           <%= tea.tea_type.name %>
           (<%= tea.prefecture.name %>)
           &nbsp;
-          <%= link_to user_path(tea.user), class: "link-dark"  do %>
+          <%= link_to user_path(tea.user), class: "link-dark" do %>
             <%= tea.user.name %>
           <% end %>
         </div>
@@ -18,7 +18,7 @@
         </div>
       </div>
       <%= tea.created_at.strftime('%Y/%m/%d') %>
-      <%= link_to tea_path(tea), class: "link-dark"  do %>
+      <%= link_to tea_path(tea), class: "link-dark" do %>
         <%= tea.opinion.truncate(15) %>
       <% end %>
     </div>   
