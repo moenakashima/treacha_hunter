@@ -6,7 +6,10 @@ class Tag < ApplicationRecord
   
   validates :name, uniqueness: true, presence: true
   
+  
+  # 検索窓でのサーチアクション定義（タグ検索）
   def self.search(search)
+   # 「#」はデータベースに保存されていないため検索時に取り除いて完全一致で検索し、それに紐ずく投稿を取得
     if search != '#'
       tag = Tag.find_by(name: search.delete('#'))
       tag && tag.teas
