@@ -14,57 +14,56 @@
         <%= render "public/users/sort_by_prefecture" %>
     </div>
     
-   <div class="col-lg-8"> 
-    <div class="table-responsive">
-      <table class="table table-inverse table-sm" >
-        <thead class="thead-light">
-          <th>ユーザー画像</th>
-          <th>ユーザーネーム</th>
-          <th>お住まいの地域</th>
-          <th>ハンター歴</th>
-          <th>見つけたトレチャーの数</th>
-        </thead>
-        <tbody>
-        <% if @users.count > 0 %>
-          <% @users.each do |user| %>
-          <tr>
-            <td>
-              <%= link_to user_path(user) do %>
-                <%= image_tag user.get_profile_image(60,60)%>
-              <% end %>
-            </td>
-            
-            <td>  
-              <%= link_to user_path(user), class: "link-dark" do %>
-                <%= user.name %>
-              <% end %>
-            </td>
-            
-            <td><%= user.prefecture.name %></td>
-            
-            <td class="text-lg-center text-md-end" ><%= (@d1 - (user.created_at).to_date).to_i %>日</td>
-            <td class="text-lg-center text-md-end"><%= user.teas.count %>個</td>
-          </tr>
+    <div class="col-lg-8"> 
+      <div class="table-responsive">
+        <table class="table table-inverse table-sm" >
+          <thead class="thead-light">
+            <th>ユーザー画像</th>
+            <th>ユーザーネーム</th>
+            <th>お住まいの地域</th>
+            <th>ハンター歴</th>
+            <th>見つけたトレチャーの数</th>
+          </thead>
+          <tbody>
+          <% if @users.count > 0 %>
+            <% @users.each do |user| %>
+            <tr>
+              <td>
+                <%= link_to user_path(user) do %>
+                  <%= image_tag user.get_profile_image(60,60)%>
+                <% end %>
+              </td>
+              
+              <td>  
+                <%= link_to user_path(user), class: "link-dark" do %>
+                  <%= user.name %>
+                <% end %>
+              </td>
+              
+              <td><%= user.prefecture.name %></td>
+              
+              <td class="text-lg-center text-md-end" ><%= (@d1 - (user.created_at).to_date).to_i %>日</td>
+              <td class="text-lg-center text-md-end"><%= user.teas.count %>個</td>
+            </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <td colspan="5" class="text-center borderless">ユーザーはいません</td>
+            </tr>
           <% end %>
-        <% else %>
-          <tr>
-            <td colspan="5" class="text-center borderless">ユーザーはいません</td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
-    </div>
-    
-    <div class="row justify-content-center mt-3">
-      <% if @users %>
-      <%= paginate @users, theme: 'bootstrap-5', class: "d-flex, justify-content-center" %>
-      <% end %>
-    </div>
-    
-  </div>  
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="row mt-3"> 
+        <div class="d-flex justify-content-center">
+          <% if @users %>
+          <%= paginate @users, theme: 'bootstrap-5' %>
+          <% end %>
+        </div>
+      </div>
+    </div>  
 
-
-    
 
   </div>
 </div>
