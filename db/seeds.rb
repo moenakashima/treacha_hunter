@@ -75,25 +75,27 @@
 # TeaType.create(name: 'その他')
 
 # サンプルユーザー
-users = [
-  {id: 2, name: 'りんか', email: 'treacha02@xxx.xxx', password: 'password', prefecture_id: 2, is_active: true, introduction: 'よろしくお願いします！' },
-  {id: 3, name: 'りんごま', email: 'treacha03@xxx.xxx', password: 'password', prefecture_id: 3, is_active: true, introduction: 'よろしくお願いします！' },
-  {id: 4, name: '大福', email: 'treacha04@xxx.xxx', password: 'password', prefecture_id: 4, is_active: true, introduction: 'よろしくお願いします！' },
-  {id: 5, name: 'トマト', email: 'treacha05@xxx.xxx', password: 'password', prefecture_id: 5, is_active: true, introduction: 'よろしくお願いします！' },
-  {id: 6, name: '太郎', email: 'treacha06@xxx.xxx', password: 'password', prefecture_id: 6, is_active: true, introduction: 'よろしくお願いします！' },
-  {id: 7, name: '花子', email: 'treacha07@xxx.xxx', password: 'password', prefecture_id: 7, is_active: true, introduction: 'よろしくお願いします！' },
-  {id: 8, name: 'まめ子', email: 'treacha08@xxx.xxx', password: 'password', prefecture_id: 8, is_active: true, introduction: 'よろしくお願いします！' },
-  {id: 9, name: 'お茶大好き', email: 'treacha09@xxx.xxx', password: 'password', prefecture_id: 9, is_active: true, introduction: 'よろしくお願いします！' },
-  {id: 10, name: 'せんちゃ', email: 'treacha10@xxx.xxx', password: 'password', prefecture_id: 10, is_active: true, introduction: 'よろしくお願いします！' },
-  {id: 11, name: '喫茶去', email: 'treacha11@xxx.xxx', password: 'password', prefecture_id: 11, is_active: true, introduction: 'よろしくお願いします！' },
-  {id: 12, name: 'ほうじちゃ', email: 'treacha12@xxx.xxx', password: 'password', prefecture_id: 12, is_active: true, introduction: 'よろしくお願いします！' },
-  {id: 13, name: 'てんちゃん', email: 'treacha13@xxx.xxx', password: 'password', prefecture_id: 13, is_active: true, introduction: 'よろしくお願いします！' },
-  {id: 14, name: 'わこうちゃん', email: 'treacha14@xxx.xxx', password: 'password', prefecture_id: 14, is_active: true, introduction: 'よろしくお願いします！' },
-  {id: 15, name: 'トレチャン', email: 'treacha15@xxx.xxx', password: 'password', prefecture_id: 15, is_active: true, introduction: 'よろしくお願いします！' },
-  {id: 16, name: 'ティー', email: 'treacha16@xxx.xxx', password: 'password', prefecture_id: 16, is_active: true, introduction: 'よろしくお願いします！' },
-  {id: 17, name: 'カッパ', email: 'treacha17@xxx.xxx', password: 'password', prefecture_id: 17, is_active: true, introduction: 'よろしくお願いします！' },
-  {id: 18, name: 'れみ', email: 'treacha18@xxx.xxx', password: 'password', prefecture_id: 18, is_active: true, introduction: 'よろしくお願いします！' },
-  {id: 19, name: 'まるこ', email: 'treacha19@xxx.xxx', password: 'password', prefecture_id: 19, is_active: true, introduction: 'よろしくお願いします！' },
-  {id: 20, name: 'momo', email: 'treacha20@xxx.xxx', password: 'password', prefecture_id: 20, is_active: true, introduction: 'よろしくお願いします！' },
-  {id: 21, name: 'teahappy', email: 'treacha21@xxx.xxx', password: 'password', prefecture_id: 21, is_active: true, introduction: 'よろしくお願いします！' }
-]
+User.create!(
+  [
+    {id: 2, name: 'りんか', email: 'treacha02@xxx.xxx', password: 'password', prefecture_id: 2, is_active: true, introduction: 'よろしくお願いします！' },
+    {id: 3, name: 'りんごま', email: 'treacha03@xxx.xxx', password: 'password', prefecture_id: 3, is_active: true, introduction: 'よろしくお願いします！' },
+    {id: 4, name: '大福', email: 'treacha04@xxx.xxx', password: 'password', prefecture_id: 4, is_active: true, introduction: 'よろしくお願いします！' },
+    {id: 5, name: 'トマト', email: 'treacha05@xxx.xxx', password: 'password', prefecture_id: 5, is_active: true, introduction: 'よろしくお願いします！' },
+    {id: 6, name: '太郎', email: 'treacha06@xxx.xxx', password: 'password', prefecture_id: 6, is_active: true, introduction: 'よろしくお願いします！' },
+    {id: 7, name: '花子', email: 'treacha07@xxx.xxx', password: 'password', prefecture_id: 7, is_active: true, introduction: 'よろしくお願いします！' },
+    {id: 8, name: 'まめ子', email: 'treacha08@xxx.xxx', password: 'password', prefecture_id: 8, is_active: true, introduction: 'よろしくお願いします！' },
+    {id: 9, name: 'お茶大好き', email: 'treacha09@xxx.xxx', password: 'password', prefecture_id: 9, is_active: true, introduction: 'よろしくお願いします！' },
+    {id: 10, name: 'せんちゃ', email: 'treacha10@xxx.xxx', password: 'password', prefecture_id: 10, is_active: true, introduction: 'よろしくお願いします！' },
+    {id: 11, name: '喫茶去', email: 'treacha11@xxx.xxx', password: 'password', prefecture_id: 11, is_active: true, introduction: 'よろしくお願いします！' },
+    {id: 12, name: 'ほうじちゃ', email: 'treacha12@xxx.xxx', password: 'password', prefecture_id: 12, is_active: true, introduction: 'よろしくお願いします！' },
+    {id: 13, name: 'てんちゃん', email: 'treacha13@xxx.xxx', password: 'password', prefecture_id: 13, is_active: true, introduction: 'よろしくお願いします！' },
+    {id: 14, name: 'わこうちゃん', email: 'treacha14@xxx.xxx', password: 'password', prefecture_id: 14, is_active: true, introduction: 'よろしくお願いします！' },
+    {id: 15, name: 'トレチャン', email: 'treacha15@xxx.xxx', password: 'password', prefecture_id: 15, is_active: true, introduction: 'よろしくお願いします！' },
+    {id: 16, name: 'ティー', email: 'treacha16@xxx.xxx', password: 'password', prefecture_id: 16, is_active: true, introduction: 'よろしくお願いします！' },
+    {id: 17, name: 'カッパ', email: 'treacha17@xxx.xxx', password: 'password', prefecture_id: 17, is_active: true, introduction: 'よろしくお願いします！' },
+    {id: 18, name: 'れみ', email: 'treacha18@xxx.xxx', password: 'password', prefecture_id: 18, is_active: true, introduction: 'よろしくお願いします！' },
+    {id: 19, name: 'まるこ', email: 'treacha19@xxx.xxx', password: 'password', prefecture_id: 19, is_active: true, introduction: 'よろしくお願いします！' },
+    {id: 20, name: 'momo', email: 'treacha20@xxx.xxx', password: 'password', prefecture_id: 20, is_active: true, introduction: 'よろしくお願いします！' },
+    {id: 21, name: 'teahappy', email: 'treacha21@xxx.xxx', password: 'password', prefecture_id: 21, is_active: true, introduction: 'よろしくお願いします！' }
+  ]
+)
