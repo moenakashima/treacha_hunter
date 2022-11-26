@@ -7,10 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # 管理者追加用の記述
-Admin.create!(
-    email: 'admin@test.com',
-    password: 'password',
-)
+# Admin.create!(
+#     email: 'admin@test.com',
+#     password: 'password',
+# )
 
 # 都道府県データ追加用の記述
 Prefecture.create(name: '北海道')
