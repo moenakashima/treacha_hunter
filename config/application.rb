@@ -2,9 +2,6 @@ require_relative "boot"
 
 require "rails/all"
 
-# 追記(再deploy時のNameError: uninitialized constant Uglifierのため）
-require 'uglifier'
-
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
