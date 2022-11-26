@@ -54,7 +54,9 @@
     </div>
     
     <div class="col-lg-7 col-10 table-responsive">
+      <% if @teas %> 
       <%= render "admin/teas/teas", teas: @teas %>
+      <% end %>
     </div>
           
   </div>
