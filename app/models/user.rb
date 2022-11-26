@@ -20,7 +20,21 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :prefecture_id, presence: true
   validates :introduction, length: { maximum: 50 }
-
+  
+  # 画像の拡張子バリデーション追加
+  validate :image_content_type, if: :was_attached?
+  # 拡張子の確認を行う
+  def image_content_type
+    extension = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif', 'image/pjpeg', 'image/tiff', 'image/bmp', 'image/vnd.adobe.photoshop', 'image/vnd.microsoft.icon', 'image/webp']
+    errors.add(:profile_image, "に利用できない拡張子が選択されています。jpg/jpeg/pngで投稿してください。") unless profile_image.content_type.in?(extension)
+  end
+  # 画像が添付されてない時は拡張子の確認をしない
+  def was_attached?
+    self.profile_image.attached?
+  end
+  
+  
+  
   # プロフィール画像が設定されていない場合にデフォルト画像を表示させる
   def get_profile_image(width, height)
     unless profile_image.attached?

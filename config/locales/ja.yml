@@ -5,6 +5,7 @@ ja:
         prefecture: お住まいの地域
         introduction: 自己紹介
         is_active: 会員ステータス
+        profile_image: プロフィール画像
         
       admin:
         email: メールアドレス
