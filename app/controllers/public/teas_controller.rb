@@ -1,5 +1,7 @@
 class Public::TeasController < ApplicationController
   
+  before_action :ensure_correct_user, only: [:update]
+  
   def create
     @tea = Tea.new(tea_params)
     @tea.user_id = current_user.id
@@ -17,6 +19,9 @@ class Public::TeasController < ApplicationController
 
   def new
     @tea = Tea.new
+    if current_user.name == "guestuser"
+      redirect_to root_path, notice: 'ゲストユーザーは閲覧のみ可能です' 
+    end
   end
 
   def edit
@@ -88,5 +93,11 @@ class Public::TeasController < ApplicationController
     params.require(:tea).permit(:product_name, :prefecture_id, :tea_image, :seller, :tea_type_id, :parchased_at, :opinion)
   end
   
-
+  
+  def ensure_correct_user
+    @user = User.find(params[:id])
+    unless @user == current_user
+      redirect_to user_path(current_user)
+    end
+  end
 end

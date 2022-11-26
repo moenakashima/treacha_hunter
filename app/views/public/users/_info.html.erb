@@ -23,12 +23,13 @@
                 <i class="far fa-heart me-3"></i>お気に入り
               <% end %>
             </li>
-            
+            <% if current_user.name != "guestuser" %>
             <li class="dropdown-item">
               <%= link_to edit_user_path(user), class: "link-dark text-decoration-none" do %>
                 <i class="far fa-edit me-3"></i>登録情報編集
               <% end %>
             </li>
+            <% end %>
             
             <li class="dropdown-item">
               <%= link_to destroy_user_session_path, class: "link-dark text-decoration-none" do %>
@@ -56,13 +57,13 @@
     <tr>
       <td><i class="far fa-comment me-1"></i><%= user.introduction %></td>
     </tr>
-    
+    <% if current_user.name != "guestuser" %>
     <tr>
       <td>
         <%= link_to "投稿する", new_tea_path, class: "btn d-grid btn-outline-dark" %>
       </td>
     </tr>
-    
+    <% end %>
     <tr>
       <td><%= link_to "投稿一覧に戻る", root_path, class: "mb-2 btn d-grid btn-outline-dark" %></td>
     </tr>
