@@ -117,8 +117,4 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
-  # 追記
-  # rails5系の使用では動くが6
-  #config.assets.js_compressor = Uglifier.new(harmony: true)
-
 end
