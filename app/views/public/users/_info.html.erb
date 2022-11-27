@@ -11,19 +11,21 @@
         <%= link_to user_path(user), class: "link-dark" do%>
           <i class="fas fa-user me-2"></i><%= user.name %>
         <% end %>
-        
+        <!--自分のinfoが表示された時のみドロップダウンを表示させる条件分岐-->
+        <% if current_user.id == user.id %>
         <div class="dropdown">
           <a class="me-2 dropdown-toggle link-secondary text-decoration-none" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fas fa-cog"></i>
           </a>
           
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+           <% if current_user.name != "guestuser" %>
             <li class="dropdown-item">
               <%= link_to user_favorites_path(user), class: "link-dark text-decoration-none" do %>
                 <i class="far fa-heart me-3"></i>お気に入り
               <% end %>
             </li>
-            <% if current_user.name != "guestuser" %>
+
             <li class="dropdown-item">
               <%= link_to edit_user_path(user), class: "link-dark text-decoration-none" do %>
                 <i class="far fa-edit me-3"></i>登録情報編集
@@ -38,7 +40,8 @@
             </li>
           </ul>
         </div>
-        
+        <% else %>
+        <% end %>
       </td>
     </tr>
     
