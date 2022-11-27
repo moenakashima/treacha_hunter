@@ -14,7 +14,7 @@
       <% if @favorite_tea_list.present? %>
         <%= render "public/teas/teas", teas: @favorite_tea_list %>
       <% else %>
-        <div><%= @user.name %>さんのお気に入りのお茶はありません。</div>
+        <div class="col-7 offset-md-2 text-nowrap"><%= @user.name %>さんのお気に入りのお茶はありません。</div>
       <% end %>
       
       <div class="row"> 
