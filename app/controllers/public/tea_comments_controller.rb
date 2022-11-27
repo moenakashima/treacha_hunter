@@ -1,5 +1,7 @@
 class Public::TeaCommentsController < ApplicationController
   
+  before_action :authenticate_user!
+  
   def create
     @tea = Tea.find(params[:tea_id])
     @tea_comment = current_user.tea_comments.new(comment_params)

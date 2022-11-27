@@ -1,5 +1,7 @@
 class Public::TeasController < ApplicationController
   
+  before_action :authenticate_user!
+  
   def create
     @tea = Tea.new(tea_params)
     @tea.user_id = current_user.id
@@ -9,7 +11,7 @@ class Public::TeasController < ApplicationController
 
     if @tea.save
       @tea.save_tag(tag_list)
-      redirect_to root_path, notice: '投稿完了しました!'
+      redirect_to top_path, notice: '投稿完了しました!'
     else
       render :new
     end
@@ -18,7 +20,7 @@ class Public::TeasController < ApplicationController
   def new
     @tea = Tea.new
     if current_user.name == "guestuser"
-      redirect_to root_path, notice: 'ゲストユーザーは閲覧のみ可能です' 
+      redirect_to top_path, notice: 'ゲストユーザーは閲覧のみ可能です' 
     end
   end
 
@@ -26,7 +28,7 @@ class Public::TeasController < ApplicationController
     @tea = Tea.find(params[:id])
     @tag_list = @tea.tags.pluck(:name).join(',')
     if @tea.user_id != current_user.id
-      redirect_to root_path
+      redirect_to top_path
     end
   end
 

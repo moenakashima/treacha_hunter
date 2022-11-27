@@ -1,5 +1,7 @@
 class Public::SearchesController < ApplicationController
   
+  before_action :authenticate_user!
+  
   def search
     #『#』が先頭に着いたら、タグで検索をする
     if (params[:keyword])[0] == '#'
