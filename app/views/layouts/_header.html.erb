@@ -4,7 +4,7 @@
       
       <nav class="col-xl-9 navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="/about"><%= image_tag 'logo.jpg', size: '100x100', class: 'ml-5 ' %></a>
+          <a class="navbar-brand" href="/top"><%= image_tag 'logo.jpg', size: '100x100', class: 'ml-5 ' %></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -38,7 +38,7 @@
                 <% end %>
               </li>
               <li>
-                <%=  link_to root_path,class: 'nav-link text-dark' do %>
+                <%=  link_to top_path,class: 'nav-link text-dark' do %>
                 <i class="fas fa-coffee me-1"></i>投稿一覧
                 <% end %>
               </li>
@@ -58,7 +58,7 @@
               </li>
             <% else %>
               <li>
-                <%= link_to about_path,class: 'nav-link text-dark' do %>
+                <%= link_to root_path,class: 'nav-link text-dark' do %>
                   <i class="fas fa-coffee me-1"></i>About
                 <% end %>
               </li>
