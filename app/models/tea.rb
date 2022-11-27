@@ -53,7 +53,7 @@ class Tea < ApplicationRecord
   
     # 古いタグを消す
     old_tags.each do |old|
-      self.tags.delete　Tag.find_by(name: old)
+      self.tags.delete Tag.find_by(name: old)
     end
   
     # 新しいタグを保存
