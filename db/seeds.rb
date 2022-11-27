@@ -7,9 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # 管理者ログイン用データ.envに記載
-admins = [
-  {email: ENV["SECRET_EMAIL"], password: ENV["SECRET_PASSWORD"]}
-]
+Admin.create(email: ENV["SECRET_EMAIL"], password: ENV["SECRET_PASSWORD"])
 
 # 都道府県データ追加用の記述
 # Prefecture.create(name: '北海道')
