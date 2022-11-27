@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
 # ルートパス
-root :to =>"public/homes#top"
+root :to =>"public/homes#about"
 
-get "/about" => "public/homes#about"
+get "/top" => "public/homes#top"
 
 
 # ユーザー用devise
