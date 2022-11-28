@@ -15,6 +15,7 @@ class Admin::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @user.update(user_params)
+    @teas = @user.teas.page(params[:page]).per(10).order('created_at DESC')
     render :show
   
   end
