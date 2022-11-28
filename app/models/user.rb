@@ -38,8 +38,8 @@ class User < ApplicationRecord
   # プロフィール画像が設定されていない場合にデフォルト画像を表示させる
   def get_profile_image(width, height)
     unless profile_image.attached?
-    file_path = Rails.root.join('app/assets/images/default-image.jpg')
-    profile_image.attach(io:File.open(file_path),filename:'default-image.jpg',content_type:'image/jpeg')
+    file_path = Rails.root.join('app/assets/images/login-image.png')
+    profile_image.attach(io:File.open(file_path),filename:'login-image.png',content_type:'image/png')
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
