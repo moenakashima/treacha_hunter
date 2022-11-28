@@ -1,6 +1,6 @@
 class Public::TeaCommentsController < ApplicationController
   
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only:[:create]
   
   def create
     @tea = Tea.find(params[:tea_id])
