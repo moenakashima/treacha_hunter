@@ -1,7 +1,9 @@
 <%- if controller_name != 'sessions' %>
-  <%= link_to "すでに登録済みの方はこちら", new_session_path(resource_name) %><br />
+  <div class="mb-2"><%= link_to "すでに登録済みの方はこちら", new_session_path(resource_name)%></div>
+  <div><%= link_to "ゲストログインはこちら", users_guest_sign_in_path, method: :post %></div>
 <% end %>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "会員登録がお済みでない方はこちら", new_registration_path(resource_name) %><br />
+  <div class="mb-2"><%= link_to "新規登録はこちら", new_registration_path(resource_name) %></div>
+  <div><%= link_to "ゲストログインはこちら", users_guest_sign_in_path, method: :post %></div>
 <% end %>
