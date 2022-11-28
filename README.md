@@ -25,7 +25,12 @@
 - お茶好きの人との交流を深めたい時
 
 ## 設計書
-
+- ER図、ワイヤーフレーム、画面遷移図
+https://drive.google.com/file/d/1zb-tBkPYCDpg8ppX2-Aqa351V0axsMrC/view?usp=sharing
+- テーブル定義書
+https://docs.google.com/spreadsheets/d/1E1aFmjPq_uuv6KXcu1V3jtJOlVNGVEwEi_MlaA9KVCI/edit?usp=sharing
+- アプリケーション詳細設計
+https://docs.google.com/spreadsheets/d/1bojb1C0_8idAqeMeH74BK7MFD8nmKBdyS4JPQ9cCLw8/edit?usp=sharing
 
 ## 開発環境
 - OS：Linux(CentOS)
@@ -34,5 +39,3 @@
 - JSライブラリ：jQuery
 - IDE：Cloud9
 
-## 使用素材
-現在検討中です。
