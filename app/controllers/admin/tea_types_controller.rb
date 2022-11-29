@@ -33,8 +33,12 @@ class Admin::TeaTypesController < ApplicationController
 
   def destroy
     @tea_type = TeaType.find(params[:id])
-    @tea_type.destroy
-    redirect_to request.referer
+    if Tea.find_by(tea_type_id: @tea_type.id).present?
+      redirect_to admin_tea_types_path, notice: 'この種類名は投稿に紐づいているため削除できません'
+    else
+      @tea_type.destroy
+      redirect_to request.referer
+    end
   end
 
   private
