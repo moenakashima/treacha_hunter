@@ -19,7 +19,7 @@ class Tea < ApplicationRecord
   
   has_one_attached :tea_image
   
-  # 投稿画像、感想、商品名、お茶の種類にバリデーションを設定
+  # 投稿画像、感想、商品名にバリデーションを設定
   validates :opinion, length: { maximum: 500 }
   validates :product_name, presence: true
   validates :tea_image, presence: true
