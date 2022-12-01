@@ -5,7 +5,7 @@ class Public::TeasController < ApplicationController
   def create
     @tea = Tea.new(tea_params)
     @tea.user_id = current_user.id
-
+    
     # 受け取った値を,で区切って配列にする
     tag_list = params[:tea][:name].split(',')
 
@@ -56,6 +56,8 @@ class Public::TeasController < ApplicationController
     @tea_comment = TeaComment.new
     @user = @tea.user
     
+    # api_tags
+    @api_tags = Vision.get_image_data(@tea.tea_image)
     # 参加して何日経ったのかを’ハンター歴’として表示するための日付計算       
     @d1 = Date.today
     @d2 = (@user.created_at).to_date
