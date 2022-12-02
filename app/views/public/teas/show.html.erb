@@ -17,8 +17,8 @@
               </tr>
               <tr>
                 <td class="text-center">
-                    <% @api_tags.each do |api_tag| %>
-                    <snap class="badge bg-success text-white"><%= api_tag %></snap>
+                    <% @tea.api_tags.each do |api_tag| %>
+                    <snap class="badge bg-success text-white"><%= api_tag.name %></snap>
                     <% end %>
                 </td>
               </tr>

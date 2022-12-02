@@ -10,6 +10,13 @@ class Public::TeasController < ApplicationController
     tag_list = params[:tea][:name].split(',')
 
     if @tea.save
+      # APIを用いて自動タグ実装ここから
+      api_tags = Vision.get_image_data(@tea.tea_image)
+      api_tags.each do |api_tag|
+      @tea.api_tags.create(name: api_tag)
+      end
+      # APIを用いて自動タグ実装ここまで
+    
       @tea.save_tag(tag_list)
       redirect_to top_path, notice: '投稿完了しました!'
     else
@@ -56,8 +63,6 @@ class Public::TeasController < ApplicationController
     @tea_comment = TeaComment.new
     @user = @tea.user
     
-    # api_tags
-    @api_tags = Vision.get_image_data(@tea.tea_image)
     # 参加して何日経ったのかを’ハンター歴’として表示するための日付計算       
     @d1 = Date.today
     @d2 = (@user.created_at).to_date
