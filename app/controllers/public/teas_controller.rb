@@ -5,11 +5,18 @@ class Public::TeasController < ApplicationController
   def create
     @tea = Tea.new(tea_params)
     @tea.user_id = current_user.id
-
+    
     # 受け取った値を,で区切って配列にする
     tag_list = params[:tea][:name].split(',')
 
     if @tea.save
+      # APIを用いて自動タグ実装ここから
+      api_tags = Vision.get_image_data(@tea.tea_image)
+      api_tags.each do |api_tag|
+      @tea.api_tags.create(name: api_tag)
+      end
+      # APIを用いて自動タグ実装ここまで
+    
       @tea.save_tag(tag_list)
       redirect_to top_path, notice: '投稿完了しました!'
     else
