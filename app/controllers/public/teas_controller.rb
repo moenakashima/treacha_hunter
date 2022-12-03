@@ -13,7 +13,7 @@ class Public::TeasController < ApplicationController
       # APIを用いて自動タグ実装ここから
       api_tags = Vision.get_image_data(@tea.tea_image)
       api_tags.each do |api_tag|
-      @tea.api_tags.create(name: api_tag)
+        @tea.api_tags.create(name: api_tag)
       end
       # APIを用いて自動タグ実装ここまで
     
