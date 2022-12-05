@@ -56,8 +56,9 @@ scope module: :public do
   get '/search' => "searches#search"
   get '/sort_by_prefecture' => "users#sort_by_prefecture"
   
-  # ランキング機能
-  get '/teas/ranking' => "rankings#ranking"
+  # 投稿確認画面
+  post '/teas/confirm' => 'teas#confirm'
+  
 
 end
 
