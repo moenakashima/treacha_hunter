@@ -31,6 +31,13 @@ class Public::TeasController < ApplicationController
     end
   end
 
+  def confirm
+    @tea = Tea.new(tea_params)
+    # APIを用いて自動タグ実装ここから
+    @tags = Vision.get_image_data(@tea.tea_image)
+    # APIを用いて自動タグ実装ここまで
+  end
+
   def edit
     @tea = Tea.find(params[:id])
     @tag_list = @tea.tags.pluck(:name).join(',')
