@@ -57,7 +57,7 @@ scope module: :public do
   get '/sort_by_prefecture' => "users#sort_by_prefecture"
   
   # 投稿確認画面
-  post '/teas/confirm' => 'teas#confirm'
+  get '/teas/:id/confirm' => 'teas#confirm', as: 'teas_confirm'
   
 
 end

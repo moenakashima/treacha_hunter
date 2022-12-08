@@ -7,18 +7,17 @@ class Public::TeasController < ApplicationController
     @tea.user_id = current_user.id
     
     # 受け取った値を,で区切って配列にする
-    tag_list = params[:tea][:name].split(',')
+    @tag_list = params[:tea][:name].split(',')
 
     if @tea.save
       # APIを用いて自動タグ実装ここから
-      api_tags = Vision.get_image_data(@tea.tea_image)
-      api_tags.each do |api_tag|
-        @tea.api_tags.create(name: api_tag)
-      end
+      # api_tags = Vision.get_image_data(@tea.tea_image)
+      # api_tags.each do |api_tag|
+      #   @tea.api_tags.create(name: api_tag)
+      # end
       # APIを用いて自動タグ実装ここまで
-    
-      @tea.save_tag(tag_list)
-      redirect_to top_path, notice: '投稿完了しました!'
+      @tea.save_tag(@tag_list)
+      redirect_to  teas_confirm_path(id: @tea.id)
     else
       render :new
     end
@@ -32,10 +31,12 @@ class Public::TeasController < ApplicationController
   end
 
   def confirm
-    @tea = Tea.new(tea_params)
+    @tea = Tea.find(params[:id])
     # APIを用いて自動タグ実装ここから
     @tags = Vision.get_image_data(@tea.tea_image)
     # APIを用いて自動タグ実装ここまで
+    
+    @tag_list = @tea.tags
   end
 
   def edit
@@ -48,20 +49,39 @@ class Public::TeasController < ApplicationController
 
   def update
     @tea = Tea.find(params[:id])
-    if @tea.update(tea_params)
-      tag_list = params[:tea][:name].split(',')
-      # このtea_idに紐づいていたタグを@old_tagsに入れる
-      @old_tags = TeaTag.where(tea_id: @tea.id)
-      # それらを取り出し、消す。終わる
-      @old_tags.each do |relation|
-      relation.delete
-      end
-
-      @tea.save_tag(tag_list)
+   
+    if request.referer == teas_confirm_path
+      # @old_tags = TeaTag.where(tea_id: @tea.id)
+      # # それらを取り出し、消す。終わる
+      # @old_tags.each do |relation|
+      # relation.create
+      # end  
+      # チェックボックスから送信されたデータを受け取る
+      tags = params.select { |key, value| key.start_with?("tag") }
+    
+      # 特定の項目のみを取り出す
+      selected_tags = tags.select { |key, value| value == "1" }
+      selected_tags_array = selected_tags.keys
+      @tea.save_tag(selected_tags_array)
       redirect_to tea_path(@tea)
     else
-      render :edit
+     
+      if @tea.update(tea_params)
+        tag_list = params[:tea][:name].split(',')
+        # このtea_idに紐づいていたタグを@old_tagsに入れる
+        @old_tags = TeaTag.where(tea_id: @tea.id)
+        # それらを取り出し、消す。終わる
+        @old_tags.each do |relation|
+        relation.delete
+        end
+  
+        @tea.save_tag(tag_list)
+        redirect_to tea_path(@tea)
+      else
+        render :edit
+      end
     end
+    
   end
 
   def show

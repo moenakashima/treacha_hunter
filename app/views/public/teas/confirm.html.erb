@@ -36,25 +36,33 @@
               <td><%= @tea.parchased_at  %></td>
             </tr>  
             <tr class="form-group">
+            <td>タグ</td>
+            <td>
+              <% @tag_list.each do |tea_tags| %>
+              <%= tea_tags.name %>
+              <% end %>
+            </td>
+            </tr>  
+            <tr class="form-group">
               <td>投稿文</td>
               <td><%= @tea.opinion %></td>
             </tr>  
           </tbody>
         </table>
       </div>
-      <div>
-       <%= @tags.each do |tag| %>
-          <%= @tea.tags %>
+      <div class="actions d-flex justify-content-evenly mb-5">
+        <%= form_with model: @tea, url: tea_path(@tea.id), local: true do |form| %>
+          <% @tags.each do |tag| %>
+            <%= check_box_tag "tags[]", tag %>
+            <%= label_tag tag %>
+          <% end %>
+          <%= form.submit "投稿する", class: "btn btn-outline-success" %>
+          <%= link_to new_tea_path(current_user), class: "btn btn-outline-secondary" do %>
+          入力画面へ戻る
+          <% end %> 
+      
         <% end %>
       </div>
-      <div class="actions d-flex justify-content-evenly mb-5">
-        <%= form.submit "投稿する", class: "btn btn-outline-success" %>
-        <%= link_to new_tea_path(current_user), class: "btn btn-outline-secondary" do %>
-          入力画面へ戻る
-        <% end %> 
-      </div>
-      <% end %>
-      
     </div>
   </div>
 </div>

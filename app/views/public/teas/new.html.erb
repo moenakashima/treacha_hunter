@@ -7,7 +7,7 @@
   <div class="row d-flex justify-content-center">
     <div class="col-12 col-lg-9">
   
-      <%= form_with model: @tea, url: teas_confirm_path, method: :post do |form| %>
+      <%= form_with model: @tea, method: :post do |form| %>
       <div class="table-responsive">
         <table class="table table-light align-middle table-borderless">
           <tbody>
@@ -35,6 +35,10 @@
             <tr class="form-group">
               <td><%= form.label:"購入場所" %></td>
               <td><%= form.text_field :parchased_at, class: "form-control"  %></td>
+            </tr>  
+            <tr class="form-group">
+              <td><%= form.label:"タグ" %><br><%= form.label:"(半角カンマ「, 」で区切ると複数タグ登録できます)" %></td>
+              <td><%= form.text_area :name, value: @tag_list, :placeholder => "例）新茶2022,八女茶,深蒸し茶", class: "form-control"  %></td>
             </tr>  
             <tr class="form-group">
               <td><%= form.label:"投稿文(500文字まで)" %></td>
