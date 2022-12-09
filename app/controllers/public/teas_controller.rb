@@ -48,17 +48,23 @@ class Public::TeasController < ApplicationController
   end
 
   def update
-    @tea = Tea.find(params[:id])
-   
-    if request.referer == teas_confirm_path
+
+  path = Rails.application.routes.recognize_path(request.referer)
+  
+  @tea = Tea.find(params[:id])
+  
+    # path[:controller]で遷移元コントローラーを取得し、path[:action]でアクションを取得
+    if path[:controller] == "public/teas" && path[:action] == "confirm"
+    # if request.referer == teas_confirm_path
       # @old_tags = TeaTag.where(tea_id: @tea.id)
       # # それらを取り出し、消す。終わる
       # @old_tags.each do |relation|
       # relation.create
-      # end  
+      # end 
+      @tea.update(tea_params)
       # チェックボックスから送信されたデータを受け取る
       tags = params.select { |key, value| key.start_with?("tag") }
-    
+      
       # 特定の項目のみを取り出す
       selected_tags = tags.select { |key, value| value == "1" }
       selected_tags_array = selected_tags.keys
@@ -68,14 +74,16 @@ class Public::TeasController < ApplicationController
      
       if @tea.update(tea_params)
         tag_list = params[:tea][:name].split(',')
+        # 重複したデータがある場合は一方を削除
+        uniq_tag_list = tag_list.uniq
         # このtea_idに紐づいていたタグを@old_tagsに入れる
         @old_tags = TeaTag.where(tea_id: @tea.id)
         # それらを取り出し、消す。終わる
         @old_tags.each do |relation|
         relation.delete
         end
-  
-        @tea.save_tag(tag_list)
+        
+        @tea.save_tag(uniq_tag_list)
         redirect_to tea_path(@tea)
       else
         render :edit
