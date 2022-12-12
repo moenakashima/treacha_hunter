@@ -10,12 +10,6 @@ class Public::TeasController < ApplicationController
     @tag_list = params[:tea][:name].split(',')
 
     if @tea.save
-      # APIを用いて自動タグ実装ここから
-      # api_tags = Vision.get_image_data(@tea.tea_image)
-      # api_tags.each do |api_tag|
-      #   @tea.api_tags.create(name: api_tag)
-      # end
-      # APIを用いて自動タグ実装ここまで
       @tea.save_tag(@tag_list)
       redirect_to  teas_confirm_path(id: @tea.id)
     else
@@ -32,9 +26,8 @@ class Public::TeasController < ApplicationController
 
   def confirm
     @tea = Tea.find(params[:id])
-    # APIを用いて自動タグ実装ここから
+    # APIを用いて自動タグ実装を追加
     @tags = Vision.get_image_data(@tea.tea_image)
-    # APIを用いて自動タグ実装ここまで
     
     @tag_list = @tea.tags
   end
@@ -48,48 +41,15 @@ class Public::TeasController < ApplicationController
   end
 
   def update
-
-  path = Rails.application.routes.recognize_path(request.referer)
-  
-  @tea = Tea.find(params[:id])
-  
-    # path[:controller]で遷移元コントローラーを取得し、path[:action]でアクションを取得
+    @tea = Tea.find(params[:id])
+    path = Rails.application.routes.recognize_path(request.referer)
+    #遷移元のURLで条件分岐を追加
     if path[:controller] == "public/teas" && path[:action] == "confirm"
-    # if request.referer == teas_confirm_path
-      # @old_tags = TeaTag.where(tea_id: @tea.id)
-      # # それらを取り出し、消す。終わる
-      # @old_tags.each do |relation|
-      # relation.create
-      # end 
-      @tea.update(tea_params)
-      # チェックボックスから送信されたデータを受け取る
-      tags = params.select { |key, value| key.start_with?("tag") }
-      
-      # 特定の項目のみを取り出す
-      selected_tags = tags.select { |key, value| value == "1" }
-      selected_tags_array = selected_tags.keys
-      @tea.save_tag(selected_tags_array)
+      update_confirm
       redirect_to tea_path(@tea)
     else
-     
-      if @tea.update(tea_params)
-        tag_list = params[:tea][:name].split(',')
-        # 重複したデータがある場合は一方を削除
-        uniq_tag_list = tag_list.uniq
-        # このtea_idに紐づいていたタグを@old_tagsに入れる
-        @old_tags = TeaTag.where(tea_id: @tea.id)
-        # それらを取り出し、消す。終わる
-        @old_tags.each do |relation|
-        relation.delete
-        end
-        
-        @tea.save_tag(uniq_tag_list)
-        redirect_to tea_path(@tea)
-      else
-        render :edit
-      end
+      update_edit
     end
-    
   end
 
   def show
@@ -133,6 +93,32 @@ class Public::TeasController < ApplicationController
   private
   def tea_params
     params.require(:tea).permit(:product_name, :prefecture_id, :tea_image, :seller, :tea_type_id, :parchased_at, :opinion)
+  end
+  
+  def update_confirm
+    @tea.update(tea_params)
+    if params[:tags].present? && params[:tags].any?
+    @tea.save_tag(params[:tags])
+    end
+  end
+  
+  def update_edit
+    if @tea.update(tea_params)
+      tag_list = params[:tea][:name].split(',')
+      # 重複したデータがある場合は一方を削除
+      uniq_tag_list = tag_list.uniq
+      # このtea_idに紐づいていたタグを@old_tagsに入れる
+      @old_tags = TeaTag.where(tea_id: @tea.id)
+      # それらを取り出し、消す。終わる
+      @old_tags.each do |relation|
+      relation.delete
+      end
+      
+      @tea.save_tag(uniq_tag_list)
+      redirect_to tea_path(@tea)
+    else
+      render :edit
+    end
   end
   
 end
