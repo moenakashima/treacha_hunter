@@ -1,0 +1,94 @@
+<div class="container">
+  
+  <div class="row">
+    <h5 class="text-center mb-5">確認画面</h5>
+  </div>
+
+  <div class="row d-flex justify-content-center">
+    <div class="col-10 col-lg-7">
+      <h5 class="mb-3">①入力内容の確認</h5>
+      <div class="table-responsive">
+        <table class="table table-light text-center align-middle text-nowrap">
+          <tbody>
+            <tr><td class="text-danger">※は入力必須項目です</td><td></td></tr>
+            <tr class="form-group">
+              <td>投稿画像<span class="text-danger">※</span></td>
+              <td><%= image_tag @tea.get_tea_image(100,100) %></td>
+            </tr>
+            <tr class="form-group">
+              <td>商品名<span class="text-danger">※</span></td>
+              <td><%= @tea.product_name %></td>
+            </tr>  
+            <tr class="form-group">
+              <td>お茶の種類</td>
+              <td><%= @tea.tea_type.name %></td>
+            </tr>  
+            <tr class="form-group">
+              <td>産地</td>
+              <td><%= @tea.prefecture.name %></td>
+            </tr>  
+            <tr class="form-group">
+              <td>販売者</td>
+              <td><%= @tea.seller %></td>
+            </tr>  
+            <tr class="form-group">
+              <td>購入場所</td>
+              <td><%= @tea.parchased_at  %></td>
+            </tr>  
+            <tr class="form-group">
+            <td>タグ</td>
+            <td>
+              <% @tag_list.each do |tea_tags| %>
+              #<%= tea_tags.name %>
+              <% end %>
+            </td>
+            </tr>  
+            <tr class="form-group">
+              <td>投稿文</td>
+              <td style="white-space: pre-wrap;"><%= @tea.opinion %></td>
+            </tr>  
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+      
+  <div class="row d-flex justify-content-center">
+      <div class="col-12 col-lg-7">
+      <h5 class="my-3">②自動生成タグの追加</h5>
+      <%= form_with model: @tea, method: :patch, local: true do |form| %>
+      <div class="row text-nowrap text-center">
+        <div class="col-lg-6 col-12">
+          AIによる自動生成タグを追加しますか？</br>追加する場合はチェックを入れてください。
+        </div>
+        <div class="col-lg-6 col-12 text-center">
+          <% @tags.each do |tag| %>
+            <%= check_box_tag "tags[]", tag %>
+            <%= label_tag tag %>
+          <% end %>
+          <%= form.hidden_field :product_name %>
+          <%= form.hidden_field :prefecture_id %>
+          <%= form.hidden_field :seller %>
+          <%= form.hidden_field :tea_type_id %>
+          <%= form.hidden_field :parchased_at %>
+          <%= form.hidden_field :opinion %>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+      
+  <div class="row d-flex justify-content-center">
+    <div class="col-10 col-lg-7">
+        <div class="d-flex justify-content-around my-5">
+          <%= form.submit "投稿する", class: " btn btn-outline-success" %>
+          <%= link_to new_tea_path(current_user), class: "btn btn-outline-secondary" do %>
+          入力画面へ戻る
+          <% end %> 
+        </div>
+      <% end %>
+    </div>
+  </div>
+  
+
+</div>
