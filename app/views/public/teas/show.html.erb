@@ -16,13 +16,6 @@
                 <td><%= image_tag @tea.get_tea_image(350,300), class: "tea-image-w" %></td>
               </tr>
               <tr>
-                <td class="text-center">
-                    <% @tea.api_tags.each do |api_tag| %>
-                    <snap class="badge bg-success text-white"><%= api_tag.name %></snap>
-                    <% end %>
-                </td>
-              </tr>
-              <tr>
                 <td class="d-flex justify-content-evenly">
                   <snap><%= @tea.created_at.strftime('%Y/%m/%d') %></snap>
                   <snap id="favorite-<%= @tea.id %>">
