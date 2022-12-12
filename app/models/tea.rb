@@ -17,9 +17,6 @@ class Tea < ApplicationRecord
   # コメント機能(新着順に表示)
   has_many :tea_comments, -> { order(created_at: :desc) }, dependent: :destroy
   
-  # google_apiのタグ
-  has_many :api_tags, dependent: :destroy
-  
   has_one_attached :tea_image
   
   # 投稿画像、感想、商品名にバリデーションを設定
