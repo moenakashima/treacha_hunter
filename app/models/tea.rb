@@ -51,7 +51,10 @@ class Tea < ApplicationRecord
     new_tags = sent_tags - self.tags.pluck(:name)
     # 新しいタグを保存
     new_tags.each do |new|
-      self.tags << Tag.find_or_create_by(name: new)
+      name = new.strip() # スペースを除去する
+      if !name.empty? # 空白でないことを確認する
+        self.tags << Tag.find_or_create_by(name: name)
+      end
     end
   end
   
