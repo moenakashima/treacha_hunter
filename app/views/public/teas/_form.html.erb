@@ -8,16 +8,18 @@
           <tr><td colspan="2" class="text-danger">※は入力必須項目です</td></tr>
           <tr class="form-group">
             <td><%= form.label:"投稿画像", for: "formFile", class: "form-label"  %><%= form.label:"※", class: "text-danger" %><%= form.label:"（jpeg/png/jpgのみ投稿できます）", class: "text-danger" %></td>
-            <td><%= form.file_field :tea_image, accept: "image/*", class: "form-control", type: "file",  id: "formFile" %></td>
+            <td><%= form.file_field :tea_image, accept: "image/*", class: "form-control", type: "file",  id: "formFile", value: @tea.tea_image %></td>
           </tr>
           <tr class="form-group">
             <td><%= form.label:"商品名" %><%= form.label:"※", class: "text-danger" %></td>
-            <td><%= form.text_field :product_name, class: "form-control" %></td>
+            <td><%= form.text_field :product_name, class: "form-control", value: @tea.product_name %></td>
           </tr>  
           <tr class="form-group">
             <td><%= form.label:"お茶の種類" %></td>
-            <td><%= form.select :tea_type_id, TeaType.pluck(:name, :id) %></td>
+            <%#= form.select :tea_type_id, TeaType.pluck(:name, :id), value: @tea.tea_type_id %>
+            <td><%= form.select :tea_type_id, TeaType.pluck(:name, :id), selected: (@tea.tea_type_id if @tea), class:'text' %></td>
           </tr>  
+            
           <tr class="form-group">
             <td><%= form.label:"産地" %></td>
             <td><%= form.select :prefecture_id, Prefecture.pluck(:name, :id) %></td>
