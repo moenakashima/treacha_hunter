@@ -24,9 +24,6 @@ class Public::TeasController < ApplicationController
 
   def new_confirm
     @tea = Tea.last
-    # if current_user.name == "guestuser"
-    #   redirect_to top_path, notice: 'ゲストユーザーは閲覧のみ可能です' 
-    # end
   end
 
 
