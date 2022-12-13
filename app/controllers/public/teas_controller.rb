@@ -5,11 +5,9 @@ class Public::TeasController < ApplicationController
   def create
     @tea = Tea.new(tea_params)
     @tea.user_id = current_user.id
-    
-    # 受け取った値を,で区切って配列にする
-    @tag_list = params[:tea][:name].split(',')
-
     if @tea.save
+      # 受け取った値を,で区切って配列にする
+      @tag_list = params[:tea][:name].split(',')
       @tea.save_tag(@tag_list)
       redirect_to  teas_confirm_path(id: @tea.id)
     else
@@ -24,8 +22,14 @@ class Public::TeasController < ApplicationController
     end
   end
 
+  def new_confirm
+    @tea = Tea.last
+  end
+
+
   def confirm
     @tea = Tea.find(params[:id])
+    
     # APIを用いて自動タグ実装を追加
     @tags = Vision.get_image_data(@tea.tea_image)
     
