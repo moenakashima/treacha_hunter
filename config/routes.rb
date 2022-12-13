@@ -48,8 +48,11 @@ scope module: :public do
   resources :teas, only:[:show, :update, :edit, :destroy, :new, :create] do
     resource :favorites, only:[:create, :destroy]
     resources :tea_comments, only:[:create, :destroy]
+    collection do
+      get :new_confirm
+    end
   end
-  
+
   #検索機能
   get '/search_tea_tag', to: 'teas#search_tag'
   get '/search_tea_type', to: 'teas#search_tea_type'
@@ -58,7 +61,8 @@ scope module: :public do
   
   # 投稿確認画面
   get '/teas/:id/confirm' => 'teas#confirm', as: 'teas_confirm'
-  
+  # get '/teas/:id/new_confirm' => 'teas#new_confirm', as: 'teas_new_confirm'
+
 
 end
 
