@@ -43,8 +43,13 @@
     </div>
     <div class="actions d-flex justify-content-evenly mb-5">
       <%= form.submit class: "btn btn-outline-success" %>
+      
+      <% if current_page?(new_tea_path) %>
+        <%= form.submit '下書きに保存', :name => 'draft', class: "btn btn-outline-warning" %>
+      <% end %>
+      
       <%= link_to user_path(current_user), class: "btn btn-outline-secondary" do %>
-        投稿せずに戻る
+        登録せずに戻る
       <% end %> 
     </div>
     <% end %>
