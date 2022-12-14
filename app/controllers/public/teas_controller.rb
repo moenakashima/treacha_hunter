@@ -100,7 +100,7 @@ class Public::TeasController < ApplicationController
 
   private
   def tea_params
-    params.require(:tea).permit(:product_name, :prefecture_id, :tea_image, :seller, :tea_type_id, :parchased_at, :opinion)
+    params.require(:tea).permit(:product_name, :prefecture_id, :tea_image, :seller, :tea_type_id, :purchased_at, :opinion)
   end
   
   def update_confirm
