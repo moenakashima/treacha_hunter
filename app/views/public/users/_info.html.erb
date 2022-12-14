@@ -50,7 +50,7 @@
     </tr>
     
     <tr>
-      <td><i class="far fa-gem me-2"></i>集めたトレチャー：<%= user.teas.count %>個</td>
+      <td><i class="far fa-gem me-2"></i>集めたトレチャー：<%= user.teas.where(status: "published").count %>個</td>
     </tr>
     
     <tr>
