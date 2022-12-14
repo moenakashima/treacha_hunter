@@ -61,7 +61,6 @@ scope module: :public do
   
   # 投稿確認画面
   get '/teas/:id/confirm' => 'teas#confirm', as: 'teas_confirm'
-  # get '/teas/:id/new_confirm' => 'teas#new_confirm', as: 'teas_new_confirm'
 
 
 end

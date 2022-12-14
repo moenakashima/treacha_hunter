@@ -16,29 +16,27 @@
           </tr>  
           <tr class="form-group">
             <td><%= form.label:"お茶の種類" %></td>
-            <%#= form.select :tea_type_id, TeaType.pluck(:name, :id), value: @tea.tea_type_id %>
             <td><%= form.select :tea_type_id, TeaType.pluck(:name, :id), selected: (@tea.tea_type_id if @tea), class:'text' %></td>
           </tr>  
-            
           <tr class="form-group">
             <td><%= form.label:"産地" %></td>
-            <td><%= form.select :prefecture_id, Prefecture.pluck(:name, :id) %></td>
+            <td><%= form.select :prefecture_id, Prefecture.pluck(:name, :id), selected: (@tea.prefecture_id if @tea), class:'text' %></td>
           </tr>  
           <tr class="form-group">
             <td><%= form.label:"販売者" %></td>
-            <td><%= form.text_field :seller, class: "form-control"  %></td>
+            <td><%= form.text_field :seller, class: "form-control", value: @tea.seller  %></td>
           </tr>  
           <tr class="form-group">
             <td><%= form.label:"購入場所" %></td>
-            <td><%= form.text_field :parchased_at, class: "form-control"  %></td>
+            <td><%= form.text_field :parchased_at, class: "form-control", value: @tea.parchased_at  %></td>
           </tr>  
           <tr class="form-group">
             <td><%= form.label:"タグ" %><br><%= form.label:"(半角カンマ「, 」で区切ると複数タグ登録できます)" %></td>
-            <td><%= form.text_area :name, value: @tag_list, :placeholder => "例）新茶2022,八女茶,深蒸し茶", class: "form-control"  %></td>
+            <td><%= form.text_area :name, value: @tag_list, :placeholder => "例）新茶2022,八女茶,深蒸し茶", class: "form-control" %></td>
           </tr>  
           <tr class="form-group">
             <td><%= form.label:"投稿文(500文字まで)" %></td>
-            <td><%= form.text_area :opinion, :placeholder => "例）おすすめの淹れ方、味の感想、生産者について", class: "form-control", rows: "3" %></td>
+            <td><%= form.text_area :opinion, :placeholder => "例）おすすめの淹れ方、味の感想、生産者について", class: "form-control", rows: "3", value: @tea.opinion %></td>
           </tr>  
         </tbody>
       </table>

@@ -24,6 +24,7 @@ class Public::TeasController < ApplicationController
 
   def new_confirm
     @tea = Tea.last
+    @tag_list =  @tea.tags.pluck(:name).join(',')
   end
 
 
@@ -51,6 +52,9 @@ class Public::TeasController < ApplicationController
     if path[:controller] == "public/teas" && path[:action] == "confirm"
       update_confirm
       redirect_to tea_path(@tea)
+    elsif path[:controller] == "public/teas" && path[:action] == "new_confirm"
+      update_new_confirm
+      redirect_to teas_confirm_path(@tea)
     else
       update_edit
     end
@@ -102,8 +106,24 @@ class Public::TeasController < ApplicationController
   def update_confirm
     @tea.update(tea_params)
     if params[:tags].present? && params[:tags].any?
-    @tea.save_tag(params[:tags])
+      @tea.save_tag(params[:tags])
     end
+  end
+  
+  def update_new_confirm
+    @tea.update(tea_params)
+      tag_list = params[:tea][:name].split(',')
+      # 重複したデータがある場合は一方を削除
+      uniq_tag_list = tag_list.uniq
+      # このtea_idに紐づいていたタグを@old_tagsに入れる
+      @old_tags = TeaTag.where(tea_id: @tea.id)
+      # それらを取り出し、消す。終わる
+      @old_tags.each do |relation|
+      relation.delete
+      end
+
+      @tea.save_tag(uniq_tag_list)
+    
   end
   
   def update_edit
