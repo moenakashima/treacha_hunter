@@ -49,9 +49,10 @@
         </table>
       </div>
       <div class="actions d-flex justify-content-evenly mb-5">
-        <%= form.submit class: "btn btn-outline-success" %>
-        <%= link_to user_path(current_user), class: "btn btn-outline-secondary" do %>
-          投稿せずに戻る
+        <%= form.submit '登録する', class: "btn btn-outline-success" %>
+        <%= form.submit '下書きに保存', :name => 'draft', class: "btn btn-outline-warning" %>
+        <%= link_to tea_path(@tea.id), method: :delete, class: "btn btn-outline-secondary text-nowrap",data: {confirm: "投稿は保存されません。よろしいですか？"} do %>
+          登録せずに戻る
         <% end %> 
       </div>
       <% end %>
