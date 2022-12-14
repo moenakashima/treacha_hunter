@@ -9,9 +9,9 @@ class Public::TeasController < ApplicationController
       # 受け取った値を,で区切って配列にする
       @tag_list = params[:tea][:name].split(',')
       @tea.save_tag(@tag_list)
-      redirect_to  teas_confirm_path(id: @tea.id)
+      redirect_to  confirm_tea_path(id: @tea.id)
     else
-      render :new
+      redirect_to new_tea_path, flash: { error: @tea.errors.full_messages }
     end
   end
 
@@ -54,7 +54,7 @@ class Public::TeasController < ApplicationController
       redirect_to tea_path(@tea)
     elsif path[:controller] == "public/teas" && path[:action] == "new_confirm"
       update_new_confirm
-      redirect_to teas_confirm_path(@tea)
+      redirect_to confirm_tea_path(@tea)
     else
       update_edit
     end
@@ -84,13 +84,13 @@ class Public::TeasController < ApplicationController
     #検索されたタグを受け取る 
     @tag = Tag.find(params[:tag_id])
     #検索されたタグに紐づく投稿を表示
-    @teas = @tag.teas.order('teas.created_at DESC').page(params[:page])
+    @teas = @tag.teas.where(status: "published").order('teas.created_at DESC').page(params[:page])
     render "public/homes/top"
   end
   
   # お茶の種類絞り込み機能
   def search_tea_type
-    @teas = Tea.tea_search(params[:tea_type]).page(params[:page]).order('created_at DESC')
+    @teas = Tea.where(status: "published").tea_search(params[:tea_type]).page(params[:page]).order('created_at DESC')
     # 配列に空白がある場合は削除する
     @search_teas = params[:tea_type].reject(&:blank?)
     
@@ -100,7 +100,7 @@ class Public::TeasController < ApplicationController
 
   private
   def tea_params
-    params.require(:tea).permit(:product_name, :prefecture_id, :tea_image, :seller, :tea_type_id, :purchased_at, :opinion)
+    params.require(:tea).permit(:product_name, :prefecture_id, :tea_image, :seller, :tea_type_id, :purchased_at, :opinion, :status)
   end
   
   def update_confirm
