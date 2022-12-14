@@ -11,7 +11,7 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @teas = @user.teas.page(params[:page])
+    @teas = @user.teas.where(status: "published").page(params[:page])
        
   # 参加して何日経ったのかを’ハンター歴’として表示するための日付計算       
     @d1 = Date.today
