@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <h5 class="text-center mb-5"><%= @user.name %>さんの下書き一覧ページ</h5>
+    <h5 class="text-center mb-5"><%= @user.name %>さんの下書き一覧</h5>
   </div>
   
   <div class="row justify-content-center">
@@ -15,7 +15,7 @@
             <table class= "table table-hover table-inverse text-nowrap">
               <thead>
                 <tr>
-                  <th>保存日</th>
+                  <th>更新日</th>
                   <th>投稿画像</th>
                   <th>お茶の種類(産地)</th>
                   <th>購入場所</th>
@@ -24,15 +24,13 @@
                 </tr>
               </thead>
               <tbody>
-                <% @teas.reverse_each do |tea| %>
+                <% @teas.each do |tea| %>
                 <tr>
                   <td>
-                    <%= tea.created_at.strftime('%Y/%m/%d') %>
+                    <%= tea.updated_at.strftime('%Y/%m/%d') %>
                   </td>
                   <td>
-                    <% if tea.get_tea_image(50, 50).present? %>
-                      <%= image_tag tea.get_tea_image(50, 50) %>
-                    <% end %>
+                    <%#= image_tag tea.get_tea_image(50, 50) %>
                   </td>
                   <td>
                     <%= tea.tea_type.name %>(<%= tea.prefecture.name %>)
@@ -44,7 +42,7 @@
                     <%= tea.opinion.truncate(15) %>
                   </td>
                   <td>          
-                    <%= link_to edit_tea_path(tea.id), class: "btn btn-outline-success" do %>
+                    <%= link_to new_confirm_tea_path(tea.id), class: "btn btn-outline-success" do %>
                     編集する
                     <% end %>
                   </td>
