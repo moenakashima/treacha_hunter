@@ -5,13 +5,24 @@ class Public::TeasController < ApplicationController
   def create
     @tea = Tea.new(tea_params)
     @tea.user_id = current_user.id
-    if @tea.save
-      # 受け取った値を,で区切って配列にする
-      @tag_list = params[:tea][:name].split(',')
-      @tea.save_tag(@tag_list)
-      redirect_to  confirm_tea_path(id: @tea.id)
+    
+    # 登録ボタンを押した場合
+    if params[:post]
+      if @tea.save(context: :published)
+        # 受け取った値を,で区切って配列にする
+        @tag_list = params[:tea][:name].split(',')
+        @tea.save_tag(@tag_list)
+        redirect_to  confirm_tea_path(id: @tea.id)
+      else
+        redirect_to new_tea_path, flash: { error: @tea.errors.full_messages }
+      end
+    # 下書き保存ボタンを押した場合  
     else
-      redirect_to new_tea_path, flash: { error: @tea.errors.full_messages }
+      if @tea && @tea.save
+        redirect_to user_path(current_user), notice: "投稿内容を下書き保存しました！"
+      else
+        render :new, alert: "下書き保存できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+      end
     end
   end
 
