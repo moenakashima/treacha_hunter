@@ -45,12 +45,14 @@ scope module: :public do
   resources :users, only:[:index, :show, :edit, :update, :favorite] do
     get "/favorites" => "users#favorite"
   end
+  
   resources :teas, only:[:show, :update, :edit, :destroy, :new, :create] do
     resource :favorites, only:[:create, :destroy]
     resources :tea_comments, only:[:create, :destroy]
     member do
       get :confirm
       get :new_confirm
+      get :draft
     end
   end
 
