@@ -40,6 +40,7 @@ class Tea < ApplicationRecord
     extension = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif', 'image/pjpeg', 'image/tiff', 'image/bmp', 'image/vnd.adobe.photoshop', 'image/vnd.microsoft.icon', 'image/webp']
     errors.add(:tea_image, "に利用できない拡張子が選択されています。jpg/jpeg/pngで投稿してください。") unless tea_image.content_type.in?(extension)
   end
+  
   # 画像が添付されてない時は拡張子の確認をしない
   def was_attached?
     self.tea_image.attached?
