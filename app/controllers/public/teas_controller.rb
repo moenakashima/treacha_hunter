@@ -19,13 +19,21 @@ class Public::TeasController < ApplicationController
     # 下書き保存ボタンを押した場合  
     else
       if @tea && @tea.save
+        @tag_list = params[:tea][:name].split(',')
+        @tea.save_tag(@tag_list)
         redirect_to user_path(current_user), notice: "投稿内容を下書き保存しました！"
       else
         render :new, alert: "下書き保存できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
       end
     end
   end
-
+  
+  def draft
+    @user = User.find(params[:id])
+    @teas = @user.teas.where(status: "draft").page(params[:page])
+  end
+  
+  
   def new
     @tea = Tea.new
     if current_user.name == "guestuser"
@@ -55,6 +63,14 @@ class Public::TeasController < ApplicationController
       redirect_to top_path
     end
   end
+  
+  def draft_edit
+    @tea = Tea.find(params[:id])
+    @tag_list = @tea.tags.pluck(:name).join(',')
+    if @tea.user_id != current_user.id
+      redirect_to top_path
+    end
+  end
 
   def update
     @tea = Tea.find(params[:id])
@@ -66,6 +82,8 @@ class Public::TeasController < ApplicationController
     elsif path[:controller] == "public/teas" && path[:action] == "new_confirm"
       update_new_confirm
       redirect_to confirm_tea_path(@tea)
+    elsif path[:controller] == "public/teas" && path[:action] == "draft_edit"
+      update_draft_edit
     else
       update_edit
     end
@@ -136,9 +154,10 @@ class Public::TeasController < ApplicationController
       @tea.save_tag(uniq_tag_list)
     
   end
-  
+      
   def update_edit
-    if @tea.update(tea_params)
+    @tea.attributes = tea_params
+    if @tea.save(context: :published)
       tag_list = params[:tea][:name].split(',')
       # 重複したデータがある場合は一方を削除
       uniq_tag_list = tag_list.uniq
@@ -150,10 +169,46 @@ class Public::TeasController < ApplicationController
       end
       
       @tea.save_tag(uniq_tag_list)
-      redirect_to tea_path(@tea)
+      redirect_to tea_path(@tea), notice: "投稿を更新しました！"
     else
+      @tag_list = @tea.tags.pluck(:name).join(',')
       render :edit
     end
   end
   
+  def update_draft_edit
+    if params[:post]
+        # 公開時にバリデーションを実施
+        # updateメソッドにはcontextが使用できないため、公開処理にはattributesとsaveメソッドを使用する
+        @tea.attributes = tea_params.merge(status: "published")
+        if  @tea.save(context: :published)
+                
+            tag_list = params[:tea][:name].split(',')
+            # 重複したデータがある場合は一方を削除
+            uniq_tag_list = tag_list.uniq
+            # このtea_idに紐づいていたタグを@old_tagsに入れる
+            @old_tags = TeaTag.where(tea_id: @tea.id)
+            # それらを取り出し、消す。終わる
+            @old_tags.each do |relation|
+            relation.delete
+            end
+            
+            @tea.save_tag(uniq_tag_list)
+            redirect_to teas_path(@tea), notice: "投稿が完了しました！"
+        else
+          @tea.status = "draft"
+          render :edit, alert: "公開できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+        end
+    # ③下書きレシピの更新（非公開）の場合
+    else
+      if @post_recipe.update(post_recipe_params)
+        redirect_to post_recipe_path(@post_recipe.id), notice: "下書きレシピを更新しました！"
+      else
+        render :edit, alert: "更新できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+      end
+    end
+      
+  end
+  
 end
+
