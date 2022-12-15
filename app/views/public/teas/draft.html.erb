@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="row">
+    <h5 class="text-center mb-5"><%= @user.name %>さんの下書き一覧ページ</h5>
+  </div>
+  
+  <div class="row justify-content-center">
+    <div class="col-lg-3 col-10">
+      <%= render "public/users/info", user: @user %>
+    </div>
+    
+    <div class="col-lg-9 col-10">
+      <% if @teas.present? %>
+        <div class="row justify-content-center">
+          <div class="col-10 table-responsive-md">
+            <table class= "table table-hover table-inverse text-nowrap">
+              <thead>
+                <tr>
+                  <th>保存日</th>
+                  <th>投稿画像</th>
+                  <th>お茶の種類(産地)</th>
+                  <th>購入場所</th>
+                  <th>投稿文</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @teas.reverse_each do |tea| %>
+                <tr>
+                  <td>
+                    <%= tea.created_at.strftime('%Y/%m/%d') %>
+                  </td>
+                  <td>
+                    <% if tea.get_tea_image(50, 50).present? %>
+                      <%= image_tag tea.get_tea_image(50, 50) %>
+                    <% end %>
+                  </td>
+                  <td>
+                    <%= tea.tea_type.name %>(<%= tea.prefecture.name %>)
+                  </td>
+                  <td>
+                    <%= tea.purchased_at %>
+                  </td>
+                  <td>          
+                    <%= tea.opinion.truncate(15) %>
+                  </td>
+                  <td>          
+                    <%= link_to edit_tea_path(tea.id), class: "btn btn-outline-success" do %>
+                    編集する
+                    <% end %>
+                  </td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      
+        <div class="row"> 
+          <div class="d-flex justify-content-center mb-5">
+            <% if @teas %>
+            <%= paginate @teas, theme: 'bootstrap-5' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <div class="col-7 offset-md-2 text-nowrap"><%= @user.name %>さんの下書きはありません。</div>
+    <% end %>
+  </div>
+
+</div>
