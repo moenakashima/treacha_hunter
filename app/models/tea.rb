@@ -45,11 +45,11 @@ class Tea < ApplicationRecord
     self.tea_image.attached?
   end
   
-  # 画像のサイズ指定の可変化とデフォルト画像の設定
+  # 画像のサイズ指定の可変化の設定
   def get_tea_image(width, height)
     unless tea_image.attached?
     file_path = Rails.root.join('app/assets/images/default-image.jpg')
-    tea_image.attach(io:File.open(file_path), filename:'default-image.jpg', content_type:'image/jpg')
+    tea_image.attach(io:File.open(file_path),filename:'default-image.jpg',content_type:'image/jpg')
     end
     tea_image.variant(resize_to_limit: [width, height]).processed
   end
