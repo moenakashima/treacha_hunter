@@ -23,11 +23,14 @@ class Tea < ApplicationRecord
   enum status: {draft: 0, unpublished: 1, published: 2 }
   
   # 投稿画像、感想、商品名、購入場所にバリデーションを設定
-  validates :opinion, length: { maximum: 500 }, presence: true, on: :published
-  validates :product_name, presence: true, on: :ppublished
-  validates :tea_image, presence: true, on: :published
-  validates :purchased_at, presence: true, on: :published
-  validates :product_name, presence: true, on: :published
+  with_options presence: true, on: :published do
+    validates :opinion
+    validates :product_name
+    validates :tea_image
+    validates :purchased_at
+    validates :product_name
+  end
+    validates :opinion, length: { maximum: 500 }
 
   # 画像の拡張子バリデーション追加
   validate :image_content_type, if: :was_attached?
@@ -42,11 +45,15 @@ class Tea < ApplicationRecord
     self.tea_image.attached?
   end
   
-  # 画像のサイズ指定の可変化設定
+  # 画像のサイズ指定の可変化とデフォルト画像の設定
   def get_tea_image(width, height)
+    unless tea_image.attached?
+    file_path = Rails.root.join('app/assets/images/default-image.jpg')
+    tea_image.attach(io:File.open(file_path), filename:'default-image.jpg', content_type:'image/jpg')
+    end
     tea_image.variant(resize_to_limit: [width, height]).processed
   end
-  
+   
   #複数タグを保存するためのsave_tagを定義
   def save_tag(sent_tags)
     # 送信されてきたタグから現在存在するタグを除いたタグをnewとする
