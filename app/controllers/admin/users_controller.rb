@@ -4,7 +4,7 @@ class Admin::UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    @teas = @user.teas.page(params[:page]).per(10).order('created_at DESC')
+    @teas = @user.teas.where(status: "published").page(params[:page]).per(10).order('created_at DESC')
   end
   
   def edit
