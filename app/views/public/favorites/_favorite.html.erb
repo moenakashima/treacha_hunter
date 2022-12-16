@@ -3,7 +3,7 @@
 
   <%= form_with model: @favorite, url: tea_favorites_path(tea.id), method: :delete, local: false do |form| %>
     <%= form.hidden_field :tea_id, value: tea.id %>
-    <%= button_tag :type => "submit", :class => "btn btn-default btn-s-md" do %>
+    <%= button_tag :type => "submit", :class => "btn btn-default btn-s-md btn-extend" do %>
       <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
       <snap class="text-danger"><%= tea.favorites.count %></snap>
     <% end %>
@@ -15,12 +15,12 @@
     <%= form.hidden_field :tea_id, value: tea.id %>
       <!--ゲストユーザーはいいねできない条件分岐-->
       <% if current_user.name == "guestuser" %>
-        <%= button_tag :type => "submit", :class =>"btn btn-default btn-s-md", :disabled => true do %>
+        <%= button_tag :type => "submit", :class =>"btn btn-default btn-s-md btn-extend", :disabled => true do %>
           <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
           <snap class="text-danger"><%= tea.favorites.count %></snap>
         <% end %>
       <% else %>
-        <%= button_tag :type => "submit", :class =>"btn btn-default btn-s-md" do %>
+        <%= button_tag :type => "submit", :class =>"btn btn-default btn-s-md btn-extend" do %>
           <i class="fa fa-heart" aria-hidden="true" style="color: blue;"></i>
           <snap class="text-primary"><%= tea.favorites.count %></snap>
         <% end %>  
