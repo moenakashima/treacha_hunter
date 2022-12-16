@@ -14,14 +14,15 @@ class Public::TeasController < ApplicationController
         @tea.save_tag(@tag_list)
         redirect_to  confirm_tea_path(id: @tea.id)
       else
-        redirect_to new_tea_path, flash: { error: @tea.errors.full_messages }
+        @tag_list = params[:tea][:name]
+        render :new
       end
     # 下書き保存ボタンを押した場合  
     else
       if @tea && @tea.save
         @tag_list = params[:tea][:name].split(',')
         @tea.save_tag(@tag_list)
-        redirect_to user_path(current_user), notice: "投稿内容を下書き保存しました！"
+        redirect_to draft_tea_path(current_user), notice: "投稿内容を下書き保存しました！"
       else
         render :new, alert: "下書き保存できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
       end
@@ -30,6 +31,9 @@ class Public::TeasController < ApplicationController
   
   def draft
     @user = User.find(params[:id])
+    if current_user.id !=  @user.id
+      redirect_to top_path
+    end
     @teas = Kaminari.paginate_array(@user.teas.where(status: "draft").order('teas.updated_at DESC')).page(params[:page])
   end
   
@@ -43,6 +47,11 @@ class Public::TeasController < ApplicationController
 
   def new_confirm
     @tea = Tea.find(params[:id])
+    
+    if @tea.user_id != current_user.id
+      redirect_to top_path
+    end
+    
     @tag_list = @tea.tags.pluck(:name).join(',')
   end
 
@@ -50,18 +59,25 @@ class Public::TeasController < ApplicationController
   def confirm
     @tea = Tea.find(params[:id])
     
+    if @tea.user_id != current_user.id
+      redirect_to top_path
+    end
+    
     # APIを用いて自動タグ実装を追加
     @tags = Vision.get_image_data(@tea.tea_image)
     
     @tag_list = @tea.tags
+
   end
 
   def edit
     @tea = Tea.find(params[:id])
-    @tag_list = @tea.tags.pluck(:name).join(',')
+
     if @tea.user_id != current_user.id
       redirect_to top_path
     end
+    
+    @tag_list = @tea.tags.pluck(:name).join(',')
   end
 
   def update
@@ -80,6 +96,9 @@ class Public::TeasController < ApplicationController
 
   def show
     @tea = Tea.find(params[:id])
+    if @tea.status != "published"
+      redirect_to top_path
+    end
     @tea_tags = @tea.tags
     @tea_comment = TeaComment.new
     @user = @tea.user
