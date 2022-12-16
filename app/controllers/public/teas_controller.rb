@@ -30,7 +30,7 @@ class Public::TeasController < ApplicationController
   
   def draft
     @user = User.find(params[:id])
-    @teas = @user.teas.where(status: "draft").order('teas.updated_at DESC').page(params[:page])
+    @teas = Kaminari.paginate_array(@user.teas.where(status: "draft").order('teas.updated_at DESC')).page(params[:page])
   end
   
   
