@@ -6,11 +6,11 @@
     <div class="card-body">
     
       <div class="row">
-        <div class="col-4">
+        <div class="col-3">
           <%= link_to user_path(tea.user) do %>
           <%= image_tag tea.user.get_profile_image(100,100), class: "w-80 mt-3 rounded-circle" %>     
           <% end %><br>
-          <snap style="font-size: 50%;"><i class="fas fa-user me-2"></i><%= tea.user.name %></snap>
+          <snap style="font-size: 50%;" class="text-wrap"><i class="fas fa-user me-2"></i><%= tea.user.name %></snap>
         </div>
         <div class="col-6">
           
@@ -28,8 +28,11 @@
             <% end %>
           </p>
         </div> 
-        <div id="favorite-<%= tea.id %>" class="col-1">
+        <div id="favorite-<%= tea.id %>" class="col-1 me-1">
           <%= render "public/favorites/favorite", tea: tea %>
+        </div>
+        <div class="col-1">
+          <i class="far fa-comment-dots"></i></br><snap><%= tea.tea_comments.count %></snap>
         </div>
       </div> 
       
