@@ -5,16 +5,39 @@ class Public::TeasController < ApplicationController
   def create
     @tea = Tea.new(tea_params)
     @tea.user_id = current_user.id
-    if @tea.save
-      # 受け取った値を,で区切って配列にする
-      @tag_list = params[:tea][:name].split(',')
-      @tea.save_tag(@tag_list)
-      redirect_to  teas_confirm_path(id: @tea.id)
+    
+    # 登録ボタンを押した場合
+    if params[:post]
+      if @tea.save(context: :published)
+        # 受け取った値を,で区切って配列にする
+        @tag_list = params[:tea][:name].split(',')
+        @tea.save_tag(@tag_list)
+        redirect_to  confirm_tea_path(id: @tea.id)
+      else
+        @tag_list = params[:tea][:name]
+        render :new
+      end
+    # 下書き保存ボタンを押した場合  
     else
-      render :new
+      if @tea && @tea.save
+        @tag_list = params[:tea][:name].split(',')
+        @tea.save_tag(@tag_list)
+        redirect_to draft_tea_path(current_user), notice: "投稿内容を下書き保存しました！"
+      else
+        render :new, alert: "下書き保存できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+      end
     end
   end
-
+  
+  def draft
+    @user = User.find(params[:id])
+    if current_user.id !=  @user.id
+      redirect_to top_path
+    end
+    @teas = Kaminari.paginate_array(@user.teas.where(status: "draft").order('teas.updated_at DESC')).page(params[:page])
+  end
+  
+  
   def new
     @tea = Tea.new
     if current_user.name == "guestuser"
@@ -23,26 +46,38 @@ class Public::TeasController < ApplicationController
   end
 
   def new_confirm
-    @tea = Tea.last
-    @tag_list =  @tea.tags.pluck(:name).join(',')
+    @tea = Tea.find(params[:id])
+    
+    if @tea.user_id != current_user.id
+      redirect_to top_path
+    end
+    
+    @tag_list = @tea.tags.pluck(:name).join(',')
   end
 
 
   def confirm
     @tea = Tea.find(params[:id])
     
+    if @tea.user_id != current_user.id
+      redirect_to top_path
+    end
+    
     # APIを用いて自動タグ実装を追加
     @tags = Vision.get_image_data(@tea.tea_image)
     
     @tag_list = @tea.tags
+
   end
 
   def edit
     @tea = Tea.find(params[:id])
-    @tag_list = @tea.tags.pluck(:name).join(',')
+
     if @tea.user_id != current_user.id
       redirect_to top_path
     end
+    
+    @tag_list = @tea.tags.pluck(:name).join(',')
   end
 
   def update
@@ -54,7 +89,6 @@ class Public::TeasController < ApplicationController
       redirect_to tea_path(@tea)
     elsif path[:controller] == "public/teas" && path[:action] == "new_confirm"
       update_new_confirm
-      redirect_to teas_confirm_path(@tea)
     else
       update_edit
     end
@@ -62,6 +96,9 @@ class Public::TeasController < ApplicationController
 
   def show
     @tea = Tea.find(params[:id])
+    if @tea.status != "published"
+      redirect_to top_path
+    end
     @tea_tags = @tea.tags
     @tea_comment = TeaComment.new
     @user = @tea.user
@@ -84,13 +121,13 @@ class Public::TeasController < ApplicationController
     #検索されたタグを受け取る 
     @tag = Tag.find(params[:tag_id])
     #検索されたタグに紐づく投稿を表示
-    @teas = @tag.teas.order('teas.created_at DESC').page(params[:page])
+    @teas = @tag.teas.where(status: "published").order('teas.created_at DESC').page(params[:page])
     render "public/homes/top"
   end
   
   # お茶の種類絞り込み機能
   def search_tea_type
-    @teas = Tea.tea_search(params[:tea_type]).page(params[:page]).order('created_at DESC')
+    @teas = Tea.where(status: "published").tea_search(params[:tea_type]).page(params[:page]).order('created_at DESC')
     # 配列に空白がある場合は削除する
     @search_teas = params[:tea_type].reject(&:blank?)
     
@@ -99,8 +136,9 @@ class Public::TeasController < ApplicationController
 
 
   private
+  
   def tea_params
-    params.require(:tea).permit(:product_name, :prefecture_id, :tea_image, :seller, :tea_type_id, :parchased_at, :opinion)
+    params.require(:tea).permit(:product_name, :prefecture_id, :tea_image, :seller, :tea_type_id, :purchased_at, :opinion, :status)
   end
   
   def update_confirm
@@ -111,7 +149,28 @@ class Public::TeasController < ApplicationController
   end
   
   def update_new_confirm
-    @tea.update(tea_params)
+    # ①下書きを更新して登録する場合
+    if params[:post]
+      if @tea.save(context: :published)
+        tag_list = params[:tea][:name].split(',')
+        # 重複したデータがある場合は一方を削除
+        uniq_tag_list = tag_list.uniq
+        # このtea_idに紐づいていたタグを@old_tagsに入れる
+        @old_tags = TeaTag.where(tea_id: @tea.id)
+        # それらを取り出し、消す。終わる
+        @old_tags.each do |relation|
+        relation.delete
+        end
+        
+        @tea.save_tag(uniq_tag_list)
+        redirect_to confirm_tea_path(@tea)
+      else
+        @tag_list = @tea.tags.pluck(:name).join(',')
+        render :new_confirm
+      end
+     # ②下書きの更新（下書きのまま保存）の場合（バリデーションチェックは行わない）
+    else
+      @tea.update(tea_params)
       tag_list = params[:tea][:name].split(',')
       # 重複したデータがある場合は一方を削除
       uniq_tag_list = tag_list.uniq
@@ -123,11 +182,13 @@ class Public::TeasController < ApplicationController
       end
 
       @tea.save_tag(uniq_tag_list)
-    
+      redirect_to draft_tea_path(@tea.user_id), notice: "下書きを更新しました！"
+    end
   end
-  
+      
   def update_edit
-    if @tea.update(tea_params)
+    @tea.attributes = tea_params
+    if @tea.save(context: :published)
       tag_list = params[:tea][:name].split(',')
       # 重複したデータがある場合は一方を削除
       uniq_tag_list = tag_list.uniq
@@ -139,8 +200,9 @@ class Public::TeasController < ApplicationController
       end
       
       @tea.save_tag(uniq_tag_list)
-      redirect_to tea_path(@tea)
+      redirect_to tea_path(@tea), notice: "投稿を更新しました！"
     else
+      @tag_list = @tea.tags.pluck(:name).join(',')
       render :edit
     end
   end

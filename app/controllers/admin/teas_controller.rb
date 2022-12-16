@@ -2,11 +2,16 @@ class Admin::TeasController < ApplicationController
   before_action :authenticate_admin!
   
   def index
-    @teas = Tea.page(params[:page]).per(10).order('created_at DESC')
+    @teas = Tea.where(status: "published").page(params[:page]).per(10).order('created_at DESC')
   end
   
   def show
     @tea = Tea.find(params[:id])
+    
+    if @tea.status != "published"
+      redirect_to admin_root_path
+    end
+    
     @tea_tags = @tea.tags
     @user = @tea.user
     

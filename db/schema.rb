@@ -96,13 +96,14 @@ ActiveRecord::Schema.define(version: 2022_11_10_130459) do
   end
 
   create_table "teas", force: :cascade do |t|
-    t.integer "tea_type_id"
-    t.integer "user_id"
-    t.integer "prefecture_id"
+    t.integer "tea_type_id", null: false
+    t.integer "user_id", null: false
+    t.integer "prefecture_id", null: false
     t.string "product_name"
     t.string "seller"
-    t.string "parchased_at"
-    t.text "opinion"
+    t.string "purchased_at"
+    t.text "opinion", null: false
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

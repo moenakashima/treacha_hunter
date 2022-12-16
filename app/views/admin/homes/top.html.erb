@@ -23,7 +23,7 @@
             <td><%= user.created_at.strftime('%Y/%m/%d')%></td>
             <td><%= user.id %></td>
             <td><%= user.name %></td>
-            <td><%= user.teas.count %></td>
+            <td><%= user.teas.where(status: "published").count %></td>
             <td><%= user.is_active ? '有効' : '停止中' %></td>
             <td><%= link_to "詳細表示", admin_user_path(user), class: "btn btn-secondary" %></td>
             <td></td>

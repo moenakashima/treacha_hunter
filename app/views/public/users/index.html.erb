@@ -43,7 +43,7 @@
               <td><%= user.prefecture.name %></td>
               
               <td class="text-lg-center text-md-end" ><%= (@d1 - (user.created_at).to_date).to_i %>日</td>
-              <td class="text-lg-center text-md-end"><%= user.teas.count %>個</td>
+              <td class="text-lg-center text-md-end"><%= user.teas.where(status: "published").count %>個</td>
             </tr>
             <% end %>
           <% else %>

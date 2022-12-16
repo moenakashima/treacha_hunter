@@ -15,7 +15,7 @@ ja:
         user: ユーザーネーム
         product_name: 商品名
         prefecture: 産地
-        parchased_at: 購入場所
+        purchased_at: 購入場所
         seller: 販売者
         opinion: 投稿文
         tea_image: 投稿画像
