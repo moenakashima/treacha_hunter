@@ -44,13 +44,20 @@
     <div class="actions d-flex justify-content-evenly mb-5">
       <%= form.submit :name => 'post', class: "btn btn-outline-success" %>
       
-      <% if current_page?(new_tea_path) %>
+      <% if current_page?(new_tea_path) || (action_name == "create") %>
         <%= form.submit '下書きに保存', :name => 'draft', class: "btn btn-outline-warning" %>
       <% end %>
       
-      <%= link_to user_path(current_user), class: "btn btn-outline-secondary" do %>
-        登録せずに戻る
-      <% end %> 
+      <% if (action_name == "edit") %>
+        <%= link_to tea_path(@tea.id), class: "btn btn-outline-secondary" do %>
+          更新せずに戻る
+        <% end %>
+      <% else %>
+        <%= link_to user_path(current_user), class: "btn btn-outline-secondary" do %>
+          登録せずに戻る
+        <% end %>      
+      <% end %>
+      
     </div>
     <% end %>
     
