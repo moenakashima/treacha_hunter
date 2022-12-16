@@ -10,13 +10,14 @@
     
     <div class="col-lg-9 col-10">
       <% if @teas.present? %>
-        <div class="row justify-content-center">
-          <div class="col-10 table-responsive-md">
+        <div class="row">
+          <div class="table-responsive">
             <table class= "table table-hover table-inverse text-nowrap">
               <thead>
                 <tr>
                   <th>更新日</th>
                   <th>投稿画像</th>
+                  <th>商品名</th>
                   <th>お茶の種類(産地)</th>
                   <th>購入場所</th>
                   <th>投稿文</th>
@@ -30,7 +31,10 @@
                     <%= tea.updated_at.strftime('%Y/%m/%d') %>
                   </td>
                   <td>
-                    <%#= image_tag tea.get_tea_image(50, 50) %>
+                    <%= image_tag tea.get_tea_image(50, 50) %>
+                  </td>
+                  <td>
+                    <%= tea.product_name %>
                   </td>
                   <td>
                     <%= tea.tea_type.name %>(<%= tea.prefecture.name %>)
@@ -39,11 +43,11 @@
                     <%= tea.purchased_at %>
                   </td>
                   <td>          
-                    <%= tea.opinion.truncate(15) %>
+                    <%= tea.opinion.truncate(8) %>
                   </td>
                   <td>          
-                    <%= link_to "編集する", new_confirm_tea_path(tea.id), class: "btn btn-outline-success" %>
-                    <%= link_to "削除する", tea_path(tea), method: :delete, class: "btn btn-outline-danger text-nowrap",data: {confirm: "本当に削除しますか？"} %> 
+                    <%= link_to "編集する", new_confirm_tea_path(tea.id), class: "btn btn-sm btn-outline-success" %>
+                    <%= link_to "削除する", tea_path(tea), method: :delete, class: "btn btn-sm btn-outline-danger text-nowrap ms-3",data: {confirm: "本当に削除しますか？"} %> 
                   </td>
                 </tr>
                 <% end %>
