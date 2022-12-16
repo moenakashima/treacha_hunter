@@ -9,12 +9,15 @@
           <%= tea.tea_type.name %>
           (<%= tea.prefecture.name %>)
           &nbsp;
-          <%= link_to user_path(tea.user), class: "link-dark" do %>
+          <%= link_to user_path(tea.user), class: "link-dark text-wrap" do %>
             <%= tea.user.name %>
           <% end %>
         </div>
-        <div id="favorite-<%= tea.id %>" class="col-3">
+        <div id="favorite-<%= tea.id %>" class="col-1">
           <%= render "public/favorites/favorite", tea: tea %>
+        </div>
+        <div class="col-1">
+          <i class="far fa-comment-dots"></i></br><snap><%= tea.tea_comments.count %></snap>
         </div>
       </div>
       <%= tea.created_at.strftime('%Y/%m/%d') %>
