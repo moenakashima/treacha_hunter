@@ -42,9 +42,8 @@
                     <%= tea.opinion.truncate(15) %>
                   </td>
                   <td>          
-                    <%= link_to new_confirm_tea_path(tea.id), class: "btn btn-outline-success" do %>
-                    編集する
-                    <% end %>
+                    <%= link_to "編集する", new_confirm_tea_path(tea.id), class: "btn btn-outline-success" %>
+                    <%= link_to "削除する", tea_path(tea), method: :delete, class: "btn btn-outline-danger text-nowrap",data: {confirm: "本当に削除しますか？"} %> 
                   </td>
                 </tr>
                 <% end %>
