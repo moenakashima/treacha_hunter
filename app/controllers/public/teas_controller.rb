@@ -82,13 +82,17 @@ class Public::TeasController < ApplicationController
 
   def update
     @tea = Tea.find(params[:id])
-    # path = Rails.application.routes.recognize_path(request.referer)
-    #遷移元のURLで条件分岐を追加
+    #submitのnameをparamsにして条件分岐を追加
     if params[:confirm]
       update_confirm
-      redirect_to tea_path(@tea)
-    elsif params[:post]
+
+      
+    elsif params[:new_confirm]
       update_new_confirm
+      
+    elsif params[:draft]
+      save_draft
+      
     else
       update_edit
     end
@@ -149,34 +153,46 @@ class Public::TeasController < ApplicationController
     params.require(:tea).permit(:product_name, :prefecture_id, :tea_image, :seller, :tea_type_id, :purchased_at, :opinion, :status)
   end
   
+  # ①確認画面からの登録（status更新）とAIタグの追加
   def update_confirm
     @tea.update(tea_params)
     if params[:tags].present? && params[:tags].any?
       @tea.save_tag(params[:tags])
     end
+    redirect_to tea_path(@tea)
   end
   
+  # ②下書きからの登録または、confirm画面より再度入力画面に戻ってからの登録（バリデーションチェックあり）
   def update_new_confirm
-    # ①下書きを更新して登録する場合
-    if params[:post]
-      if @tea.update(tea_params) && @tea.valid?(:published)
-        tag_list = params[:tea][:name].split(',')
-        # 重複したデータがある場合は一方を削除
-        uniq_tag_list = tag_list.uniq
-        # このtea_idに紐づいていたタグを@old_tagsに入れる
-        @old_tags = TeaTag.where(tea_id: @tea.id)
-        # それらを取り出し、消す。終わる
-        @old_tags.each do |relation|
-        relation.delete
-        end
-        
-        @tea.save_tag(uniq_tag_list)
-        redirect_to confirm_tea_path(@tea)
-      else
-        @tag_list = @tea.tags.pluck(:name).join(',')
-        render :new_confirm
+    if @tea.update(tea_params) && @tea.valid?(:published)
+      tag_list = params[:tea][:name].split(',')
+      # 重複したデータがある場合は一方を削除
+      uniq_tag_list = tag_list.uniq
+      # このtea_idに紐づいていたタグを@old_tagsに入れる
+      @old_tags = TeaTag.where(tea_id: @tea.id)
+      # それらを取り出し、消す。終わる
+      @old_tags.each do |relation|
+      relation.delete
       end
-        
+      
+      @tea.save_tag(uniq_tag_list)
+      redirect_to confirm_tea_path(@tea)
+    else  
+      tag_list = params[:tea][:name].split(',')
+      # 重複したデータがある場合は一方を削除
+      uniq_tag_list = tag_list.uniq
+      # このtea_idに紐づいていたタグを@old_tagsに入れる
+      @old_tags = TeaTag.where(tea_id: @tea.id)
+      # それらを取り出し、消す。終わる
+      @old_tags.each do |relation|
+      relation.delete
+      end
+      
+      @tea.save_tag(uniq_tag_list)
+      @tag_list = @tea.tags.pluck(:name).join(',')
+      render :new_confirm
+    end
+  end
         
       # if @tea.save(context: :published)
       #   @tea.update(tea_params)
@@ -196,27 +212,26 @@ class Public::TeasController < ApplicationController
       #   @tag_list = @tea.tags.pluck(:name).join(',')
       #   render :new_confirm
       # end
-     # ②下書きの更新（下書きのまま保存）の場合（バリデーションチェックは行わない）
-    else
-      @tea.update(tea_params)
-      tag_list = params[:tea][:name].split(',')
-      # 重複したデータがある場合は一方を削除
-      uniq_tag_list = tag_list.uniq
-      # このtea_idに紐づいていたタグを@old_tagsに入れる
-      @old_tags = TeaTag.where(tea_id: @tea.id)
-      # それらを取り出し、消す。終わる
-      @old_tags.each do |relation|
-      relation.delete
-      end
-
-      @tea.save_tag(uniq_tag_list)
-      redirect_to draft_tea_path(@tea.user_id), notice: "下書きを更新しました！"
+  # ③下書きの更新（下書きのまま保存）の場合（バリデーションチェックは行わない）
+  def save_draft
+    @tea.update(tea_params)
+    tag_list = params[:tea][:name].split(',')
+    # 重複したデータがある場合は一方を削除
+    uniq_tag_list = tag_list.uniq
+    # このtea_idに紐づいていたタグを@old_tagsに入れる
+    @old_tags = TeaTag.where(tea_id: @tea.id)
+    # それらを取り出し、消す。終わる
+    @old_tags.each do |relation|
+    relation.delete
     end
+
+    @tea.save_tag(uniq_tag_list)
+    redirect_to draft_tea_path(@tea.user_id), notice: "下書きを更新しました！"
   end
-      
+  
+  # ④投稿後の編集（バリデーションチェックあり）   
   def update_edit
-    @tea.attributes = tea_params
-    if @tea.save(context: :published)
+    if @tea.update(tea_params) && @tea.valid?(:published)
       tag_list = params[:tea][:name].split(',')
       # 重複したデータがある場合は一方を削除
       uniq_tag_list = tag_list.uniq
@@ -228,8 +243,19 @@ class Public::TeasController < ApplicationController
       end
       
       @tea.save_tag(uniq_tag_list)
-      redirect_to tea_path(@tea), notice: "投稿を更新しました！"
-    else
+     redirect_to tea_path(@tea), notice: "投稿を更新しました！"
+    else  
+      tag_list = params[:tea][:name].split(',')
+      # 重複したデータがある場合は一方を削除
+      uniq_tag_list = tag_list.uniq
+      # このtea_idに紐づいていたタグを@old_tagsに入れる
+      @old_tags = TeaTag.where(tea_id: @tea.id)
+      # それらを取り出し、消す。終わる
+      @old_tags.each do |relation|
+      relation.delete
+      end
+      
+      @tea.save_tag(uniq_tag_list)
       @tag_list = @tea.tags.pluck(:name).join(',')
       render :edit
     end
