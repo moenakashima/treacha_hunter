@@ -82,16 +82,24 @@ class Public::TeasController < ApplicationController
 
   def update
     @tea = Tea.find(params[:id])
-    path = Rails.application.routes.recognize_path(request.referer)
+    # path = Rails.application.routes.recognize_path(request.referer)
     #遷移元のURLで条件分岐を追加
-    if path[:controller] == "public/teas" && path[:action] == "confirm"
+    if params[:confirm]
       update_confirm
       redirect_to tea_path(@tea)
-    elsif path[:controller] == "public/teas" && path[:action] == "new_confirm"
+    elsif params[:post]
       update_new_confirm
     else
       update_edit
     end
+    # if path[:controller] == "public/teas" && path[:action] == "confirm"
+    #   update_confirm
+    #   redirect_to tea_path(@tea)
+    # elsif path[:controller] == "public/teas" && path[:action] == "new_confirm"
+    #   update_new_confirm
+    # else
+    #   update_edit
+    # end
   end
 
   def show
@@ -151,7 +159,7 @@ class Public::TeasController < ApplicationController
   def update_new_confirm
     # ①下書きを更新して登録する場合
     if params[:post]
-      if @tea.save(context: :published)
+      if @tea.update(tea_params) && @tea.valid?(:published)
         tag_list = params[:tea][:name].split(',')
         # 重複したデータがある場合は一方を削除
         uniq_tag_list = tag_list.uniq
@@ -168,6 +176,26 @@ class Public::TeasController < ApplicationController
         @tag_list = @tea.tags.pluck(:name).join(',')
         render :new_confirm
       end
+        
+        
+      # if @tea.save(context: :published)
+      #   @tea.update(tea_params)
+      #   tag_list = params[:tea][:name].split(',')
+      #   # 重複したデータがある場合は一方を削除
+      #   uniq_tag_list = tag_list.uniq
+      #   # このtea_idに紐づいていたタグを@old_tagsに入れる
+      #   @old_tags = TeaTag.where(tea_id: @tea.id)
+      #   # それらを取り出し、消す。終わる
+      #   @old_tags.each do |relation|
+      #   relation.delete
+      #   end
+        
+      #   @tea.save_tag(uniq_tag_list)
+      #   redirect_to confirm_tea_path(@tea)
+      # else
+      #   @tag_list = @tea.tags.pluck(:name).join(',')
+      #   render :new_confirm
+      # end
      # ②下書きの更新（下書きのまま保存）の場合（バリデーションチェックは行わない）
     else
       @tea.update(tea_params)
