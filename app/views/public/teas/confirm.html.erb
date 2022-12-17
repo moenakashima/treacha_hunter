@@ -73,6 +73,7 @@
           <%= form.hidden_field :purchased_at %>
           <%= form.hidden_field :opinion %>
           <%= form.hidden_field :status, :value => "published" %>
+          <%= form.hidden_field :created_at, :value => DateTime.current %>
         </div>
       </div>
       
