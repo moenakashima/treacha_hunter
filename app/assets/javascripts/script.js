@@ -64,4 +64,8 @@ window.onload = function() {
       img.setAttributeNode(src);
     }
   })();
+  
+  var fileInput = document.getElementById('file-image');
+  // input要素のchangeイベントを発生させる
+  fileInput.dispatchEvent(new Event('change'));
 }
