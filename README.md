@@ -27,7 +27,7 @@
 
 ## 設計書
 - ER図<br>
-[トレチャーハンターER図.pdf](https://github.com/moenakashima/treacha_hunter/files/10253523/ER.pdf)
+![トレチャーハンター_設計図-ER図](https://user-images.githubusercontent.com/111489156/208291479-69653cf0-cb5b-4187-b675-4430fae25b03.jpg)
 - テーブル定義書<br>
 https://docs.google.com/spreadsheets/d/1E1aFmjPq_uuv6KXcu1V3jtJOlVNGVEwEi_MlaA9KVCI/edit?usp=sharing
 - アプリケーション詳細設計<br>
