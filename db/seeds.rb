@@ -79,7 +79,7 @@ TeaType.create(name: '烏龍茶')
 TeaType.create(name: '白茶')
 TeaType.create(name: 'その他')
 
-サンプルユーザー
+#サンプルユーザー
 User.create!(
   [
     {id: 1, name: 'トレチャー', email: 'user@test.example', password: 'password', prefecture_id: 21, is_active: true, introduction: 'よろしくお願いします！' },
