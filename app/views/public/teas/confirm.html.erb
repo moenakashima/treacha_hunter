@@ -13,18 +13,18 @@
             <tr><td class="text-danger">※は入力必須項目です</td><td></td></tr>
             <tr class="form-group">
               <td>投稿画像<span class="text-danger">※</span></td>
-              <td><%= image_tag @tea.get_tea_image(100,100) %></td>
+              <td><%= image_tag @tea.get_tea_image(100,100), class: "img-print-confirm"%></td>
             </tr>
             <tr class="form-group">
               <td>商品名<span class="text-danger">※</span></td>
               <td><%= @tea.product_name %></td>
             </tr>  
             <tr class="form-group">
-              <td>お茶の種類</td>
+              <td>お茶の種類<span class="text-danger">※</span></td>
               <td><%= @tea.tea_type.name %></td>
             </tr>  
             <tr class="form-group">
-              <td>産地</td>
+              <td>産地<span class="text-danger">※</span></td>
               <td><%= @tea.prefecture.name %></td>
             </tr>  
             <tr class="form-group">
@@ -32,8 +32,8 @@
               <td><%= @tea.seller %></td>
             </tr>  
             <tr class="form-group">
-              <td>購入場所</td>
-              <td><%= @tea.parchased_at  %></td>
+              <td>購入場所<span class="text-danger">※</span></td>
+              <td><%= @tea.purchased_at  %></td>
             </tr>  
             <tr class="form-group">
             <td>タグ</td>
@@ -44,7 +44,7 @@
             </td>
             </tr>  
             <tr class="form-group">
-              <td>投稿文</td>
+              <td>投稿文<span class="text-danger">※</span></td>
               <td style="white-space: pre-wrap;"><%= @tea.opinion %></td>
             </tr>  
           </tbody>
@@ -70,8 +70,10 @@
           <%= form.hidden_field :prefecture_id %>
           <%= form.hidden_field :seller %>
           <%= form.hidden_field :tea_type_id %>
-          <%= form.hidden_field :parchased_at %>
+          <%= form.hidden_field :purchased_at %>
           <%= form.hidden_field :opinion %>
+          <%= form.hidden_field :status, :value => "published" %>
+          <%= form.hidden_field :created_at, :value => DateTime.current %>
         </div>
       </div>
       
@@ -81,8 +83,8 @@
   <div class="row d-flex justify-content-center">
     <div class="col-10 col-lg-7">
         <div class="d-flex justify-content-around my-5">
-          <%= form.submit "投稿する", class: " btn btn-outline-success" %>
-          <%= link_to new_confirm_teas_path, class: "btn btn-outline-secondary" do %>
+          <%= form.submit "投稿する", :name => 'confirm', class: " btn btn-outline-success" %>
+          <%= link_to new_confirm_tea_path(@tea.id), class: "btn btn-outline-secondary" do %>
           入力画面へ戻る
           <% end %> 
         </div>

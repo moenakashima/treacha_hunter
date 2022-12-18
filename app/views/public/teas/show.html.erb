@@ -48,7 +48,7 @@
               </tr>
               <tr>
                 <td>購入場所</td>
-                <td><%= @tea.parchased_at %></td>
+                <td><%= @tea.purchased_at %></td>
               </tr>
               <tr>
                 <td>#タグ</td>
@@ -57,7 +57,7 @@
                     <%= link_to search_tea_tag_path(tag_id: tag.id), class: "link-dark" do %>
                     <%= "#" %><%= tag.name %>
                     <% end %>
-                    <%= "" %>
+                    &nbsp;
                   <% end %>
                 </td>
               </tr>

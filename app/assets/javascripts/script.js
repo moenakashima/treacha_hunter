@@ -19,17 +19,17 @@ $(function(){
 });
 
 function isCheck(){
-    let B = document.getElementsByName('tea_type[]');
-    let count = 0;
-    for (let i = 0; i < B.length; i++) {
-        if (B[i].checked) {
-            count++;
-        }
-    }
-    if (count > 0){
-        $('#submit-button').prop("disabled", false);
-    } else {
-        $('#submit-button').prop("disabled", true);
-    };
+  let B = document.getElementsByName('tea_type[]');
+  let count = 0;
+  for (let i = 0; i < B.length; i++) {
+      if (B[i].checked) {
+          count++;
+      }
+  }
+  if (count > 0){
+      $('#submit-button').prop("disabled", false);
+  } else {
+      $('#submit-button').prop("disabled", true);
+  };
  
 };

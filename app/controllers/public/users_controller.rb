@@ -11,7 +11,7 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @teas = @user.teas.page(params[:page])
+    @teas = @user.teas.where(status: "published").order('teas.created_at DESC').page(params[:page])
        
   # 参加して何日経ったのかを’ハンター歴’として表示するための日付計算       
     @d1 = Date.today
@@ -43,7 +43,7 @@ class Public::UsersController < ApplicationController
     if @user.id != current_user.id
       redirect_to user_path(current_user.id)
     else
-      favorite_teas = Favorite.where(user_id: current_user.id).pluck(:tea_id)
+      favorite_teas = Favorite.where(user_id: current_user.id).order('favorites.created_at DESC').pluck(:tea_id)
       @favorite_tea_list = Kaminari.paginate_array(Tea.find(favorite_teas)).page(params[:page])
     end
     # 参加して何日経ったのかを’ハンター歴’として表示するための日付計算       
