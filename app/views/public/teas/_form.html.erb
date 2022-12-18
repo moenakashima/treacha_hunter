@@ -5,10 +5,18 @@
     <div class="table-responsive">
       <table class="table table-light align-middle table-borderless">
         <tbody>
-          <tr><td colspan="2" class="text-danger">※は入力必須項目です</td></tr>
+          <tr><td class="text-danger">※は入力必須項目です</td></tr>
           <tr class="form-group">
             <td><%= form.label:"投稿画像", for: "formFile", class: "form-label"  %><%= form.label:"※", class: "text-danger" %><%= form.label:"（jpeg/png/jpgのみ投稿できます）", class: "text-danger" %></td>
-            <td><%= form.file_field :tea_image, accept: "image/*", class: "form-control", type: "file",  id: "formFile", value: @tea.tea_image %></td>
+            <td>
+              <% if tea.tea_image.attached? && !(['new', 'create'].include?(action_name)) %>
+            　   <%= image_tag tea.get_tea_image(350,300), class: "mb-2 img-print",id:"preview" %>
+            　<% else %>
+　              <snap class="text-overlay">画像プレビュー</snap>
+                <img id="preview" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" class="img-print">
+              <% end %>
+              <%= form.file_field :tea_image, accept: "image/*", class: "form-control", type: "file", value: @tea.tea_image, onchange: 'previewImage(this);' %>
+            </td>
           </tr>
           <tr class="form-group">
             <td><%= form.label:"商品名" %><%= form.label:"※", class: "text-danger" %></td>
@@ -63,3 +71,14 @@
     
   </div>
 </div>
+
+<script>
+function previewImage(obj)
+{
+	var fileReader = new FileReader();
+	fileReader.onload = (function() {
+		document.getElementById('preview').src = fileReader.result;
+	});
+	fileReader.readAsDataURL(obj.files[0]);
+}
+</script>

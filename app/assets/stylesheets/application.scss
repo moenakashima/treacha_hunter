@@ -37,8 +37,8 @@
 .login-container::before,.login-container::after{
   content: "";
   position: absolute;
-  width: 100%;height: 100%;
-  top: 3.5px;left: 0;
+  width: 100%; height: 100%;
+  top: 3.5px; left: 0;
   background: #fff;
   z-index: -1;
   -webkit-transform: rotateZ(4deg);
@@ -48,7 +48,7 @@
 }
 
 .avatar{
-  width: 100px;height: 100px;
+  width: 100px; height: 100px;
   margin: 10px auto 30px;
   border-radius: 100%;
   border: 2px solid #aaa;
@@ -78,8 +78,9 @@
 // showページ投稿画像の大きさを要素幅に対する％で指定
 .tea-image-w{
   height: 200px;
-  max-width: 90%;
+  max-width: 100%;
   object-fit: cover;
+  aspect-ratio: 4 / 3;
 }
 
 // 画像サイズをトリミングしてアスペクト比は固定(_tea_card)
@@ -90,9 +91,9 @@
 
 // 画像サイズをトリミングしてアスペクト比は固定(_tea)
 .img-size{
-height: 180px;
-width: 260px;
-object-fit: cover;
+  height: 180px;
+  width: 260px;
+  object-fit: cover;
 }
 
 // 都道府県リストパディング削除
@@ -111,9 +112,11 @@ ul.prefecture-list li{
 .pagination a{
   color: #606060;
 }
+
 .pagination a:hover{
   color: #606060;
 }
+
 .pagination .active .page-link{
   background-color: #909090;
   border-color: #909090;
@@ -125,6 +128,39 @@ ul.prefecture-list li{
 
 }
 
+
+// 画像プレビュー
+.img-print {
+  width: 300px; 
+  margin-bottom: 5px;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+  -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+}
+
+.img-print-confirm{
+  width: 100px; 
+  margin-bottom: 5px;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  -webkit-box-shadow: none;
+  
+}
+
+.img-print-draft{
+  width: 50px; 
+  margin-bottom: 5px;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  -webkit-box-shadow: none;
+  
+}
+
+.text-overlay {
+  position: absolute;
+  color:#8f9091 ;
+  }
 /*ここからレスポンシブデザインの設定*/
 
 /* タブレット横置きサイズ（1024px）以下の際に適用される設定 */
@@ -164,5 +200,17 @@ ul.prefecture-list li{
 @media screen and (max-width:425px) {
  .card-w{
    width: 90%;
- } 
+ }
+ 
+   // 画像プレビュー
+  .img-print {
+    width: 150px; 
+    margin-bottom: 5px;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+    -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+  }
+
 }
+

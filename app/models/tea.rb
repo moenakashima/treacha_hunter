@@ -28,7 +28,6 @@ class Tea < ApplicationRecord
     validates :product_name
     validates :tea_image
     validates :purchased_at
-    validates :product_name
   end
     validates :opinion, length: { maximum: 500 }
 
