@@ -6,7 +6,7 @@ class Public::TeasController < ApplicationController
     @tea = Tea.new(tea_params)
     @tea.user_id = current_user.id
     
-    # 登録ボタンを押した場合
+    # 登録ボタンを押した場合(バリデーションチェックあり)
     if params[:post]
       if @tea.save(context: :published)
         # 受け取った値を,で区切って配列にする
@@ -17,7 +17,7 @@ class Public::TeasController < ApplicationController
         @tag_list = params[:tea][:name]
         render :new
       end
-    # 下書き保存ボタンを押した場合  
+    # 下書き保存ボタンを押した場合(バリデーションチェックなし)
     else
       if @tea && @tea.save
         @tag_list = params[:tea][:name].split(',')

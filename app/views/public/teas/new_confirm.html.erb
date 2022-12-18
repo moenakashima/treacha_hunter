@@ -17,11 +17,12 @@
               <td><%= form.label:"投稿画像", for: "formFile", class: "form-label"  %><%= form.label:"※", class: "text-danger" %><%= form.label:"（jpeg/png/jpgのみ投稿できます）", class: "text-danger" %></td>
               <td>
               <% if @tea.tea_image.attached? %>
-            　  <%= image_tag @tea.get_tea_image(350,300), class: "mb-2 img-print",id:"preview" %>
+               <snap class="text-overlay ps-4">画像プレビュー</snap>
+            　  <%= image_tag @tea.get_tea_image(350,300), class: "img-print",id:"preview" %>
             　<% else %>
-            　  <img id="preview" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="max-width: 350px; max-height: 300px;">
+            　  <img id="preview" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" class="img-print">
               <% end %>
-                <%= form.file_field :tea_image, accept: "image/*", class: "form-control", type: "file",  id: "file-image", value: @tea.tea_image, onchange: 'previewImage(this);' %>
+                <%= form.file_field :tea_image, accept: "image/*", class: "form-control", type: "file", value: @tea.tea_image, onchange: 'previewImage(this);' %>
               </td>
             </tr>
             <tr class="form-group">
