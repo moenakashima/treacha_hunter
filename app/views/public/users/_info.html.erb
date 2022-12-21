@@ -21,6 +21,11 @@
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
            <% if current_user.name != "guestuser" %>
             <li class="dropdown-item">
+              <%= link_to user_path(user), class: "link-dark text-decoration-none" do %>
+               <i class="fas fa-house-user me-3"></i>マイページ
+              <% end %>
+            </li>
+            <li class="dropdown-item">
               <%= link_to user_favorites_path(user), class: "link-dark text-decoration-none" do %>
                 <i class="far fa-heart me-3"></i>お気に入り
               <% end %>
