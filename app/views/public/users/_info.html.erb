@@ -71,7 +71,7 @@
     <tr>
       <td><i class="far fa-comment me-1"></i><%= user.introduction %></td>
     </tr>
-    <% if current_user.name != "guestuser" %>
+    <% if current_user.name != "guestuser" &&  current_user.id == user.id %>
     <tr>
       <td>
         <%= link_to "投稿する", new_tea_path, class: "btn d-grid btn-outline-dark" %>
