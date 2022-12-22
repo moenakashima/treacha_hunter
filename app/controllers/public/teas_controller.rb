@@ -117,7 +117,9 @@ class Public::TeasController < ApplicationController
 
   def destroy
     @tea = Tea.find(params[:id])
-    @tea.destroy
+    if @tea.user == current_user
+      @tea.destroy
+    end
     redirect_to user_path(@tea.user)
   end
   
