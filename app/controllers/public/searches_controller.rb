@@ -6,7 +6,7 @@ class Public::SearchesController < ApplicationController
     #『#』が先頭に着いたら、タグで検索をする
     if (params[:keyword])[0] == '#'
       @taged_tea = Tag.search(params[:keyword])&.order('teas.created_at DESC')&.page(params[:page])
-      unless @taged_tea =! nil
+      if @taged_tea != nil
         @teas = @taged_tea.where(status: "published")
       end
       render "public/homes/top"
