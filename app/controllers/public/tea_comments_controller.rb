@@ -12,10 +12,11 @@ class Public::TeaCommentsController < ApplicationController
   def destroy
     @tea = Tea.find(params[:tea_id])
     @tea_comment = TeaComment.find(params[:id])
+    if @tea_comment.user == current_user || admin_signed_in?
     @tea_comment.destroy
+    end  
   end
-
-
+  
   private
 
   def comment_params
